@@ -19,5 +19,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:12-ea+5" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:12-ea+5" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:12-ea+5" level="project" />
+    <orderEntry type="library" name="Maven: com.microsoft.sqlserver:mssql-jdbc:8.4.1.jre14" level="project" />
   </component>
 </module>
