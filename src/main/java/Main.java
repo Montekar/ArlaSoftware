@@ -13,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/AdminPage.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -30,7 +30,6 @@ public class Main extends Application {
             }
         });
         primaryStage.setScene(new Scene (root));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 

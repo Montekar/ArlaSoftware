@@ -35,12 +35,15 @@ public class AdminPageController {
 
     public void hideWindow(MouseEvent mouseEvent) {
         Stage stage = (Stage) hideButton.getScene().getWindow();
-        stage.close();
+        stage.setIconified(true);
     }
 
     public void minMaxWindow(MouseEvent mouseEvent) {
         Stage stage = (Stage) minMaxButton.getScene().getWindow();
-        stage.close();
+        if (stage.isMaximized() == false)
+            stage.setMaximized(true);
+        else
+            stage.setMaximized(false);
     }
 
     public void closeWindow(MouseEvent mouseEvent) {
