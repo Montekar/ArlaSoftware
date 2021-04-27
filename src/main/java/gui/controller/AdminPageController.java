@@ -1,5 +1,6 @@
 package gui.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -45,5 +46,32 @@ public class AdminPageController {
     public void closeWindow(MouseEvent mouseEvent) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void openStarbucksDepartment(ActionEvent actionEvent) {
+    }
+
+    public void openCocioDepartment(ActionEvent actionEvent) {
+    }
+
+    public void openTruckDepartment(ActionEvent actionEvent) {
+    }
+
+    public void addImage(ActionEvent actionEvent) {
+    }
+
+    public void addTable(ActionEvent actionEvent) {
+    }
+
+    public void addChart(ActionEvent actionEvent) {
+    }
+
+    public void updateScreen(ActionEvent actionEvent) {
+    }
+
+    public void editItem(ActionEvent actionEvent) {
+    }
+
+    public void deleteItem(ActionEvent actionEvent) {
     }
 }
