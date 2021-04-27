@@ -4,15 +4,22 @@
 
 
 .input{
-    -fx-padding: 5px 10px;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
+    -fx-padding: 5px 0px;
+    -fx-border-color: rgba(21, 230, 188,0.3);
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-background-color: inherit;
+    -fx-border-width: 2px;
+}
+
+.input:focused{
+    -fx-border-color: rgba(21, 230, 188,1);
 }
 
 #loginButton{
-    -fx-background-color: lightgreen;
-    -fx-text-fill: black;
+    -fx-text-fill: rgb(110, 50, 41);
+    -fx-background-color: rgba(41, 135, 116, 0.5);
     -fx-padding: 5px 8px;
+    -fx-background-radius: 25%;
 }
 
 #errorMessage{
@@ -20,6 +27,9 @@
 }
 
 #loginButton:hover{
-    -fx-background-color: darkgreen;
-    -fx-text-fill: white;
+    -fx-background-color: rgba(41, 135, 116, 1);
+}
+
+#welcomeText{
+    -fx-fill:linear-gradient(rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
 }
