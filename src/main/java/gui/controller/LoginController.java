@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
     }
 
     public void animateMessage(){
-        new Shake(errorMessage).setCycleCount(2).play();
+        new Shake(errorMessage).setCycleCount(1).play();
     }
 
 }
