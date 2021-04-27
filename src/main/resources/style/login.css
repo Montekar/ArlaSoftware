@@ -1,0 +1,25 @@
+#loginImage{
+    -fx-fill: url("images/login-bg.jpg");
+}
+
+
+.input{
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+#loginButton{
+    -fx-background-color: lightgreen;
+    -fx-text-fill: black;
+    -fx-padding: 5px 8px;
+}
+
+#errorMessage{
+    -fx-text-alignment: center;
+}
+
+#loginButton:hover{
+    -fx-background-color: darkgreen;
+    -fx-text-fill: white;
+}
