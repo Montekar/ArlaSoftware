@@ -1,5 +1,5 @@
 #loginImage{
-    -fx-fill: url("../images/login-bg.jpg");
+    -fx-fill: url("/images/login-bg.jpg");
 }
 
 
