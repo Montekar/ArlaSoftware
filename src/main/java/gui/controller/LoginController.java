@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -94,7 +96,6 @@ public class LoginController {
     }
 
     public void goToAdminPage(Stage stage, User user) {
-        //session.startSession(user, stage);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
@@ -105,7 +106,6 @@ public class LoginController {
     }
 
     public void goToClientPage(Stage stage, User user) {
-        //session.startSession(user, stage);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
@@ -114,6 +114,37 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+    //login using ENTER button on the keyboard instead of pressing login button
+    @FXML
+    void onEnter(KeyEvent enter) {
+        if (enter.getCode().equals(KeyCode.ENTER)){
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            message.setText("Please wait ...");
+            message.setTextFill(orangeColor);
+
+            if (username.isEmpty() || password.isEmpty()) {
+                if(username.isEmpty() && password.isEmpty()){
+                    message.setText("Fill the blank fields");
+                    message.setTextFill(redColor);
+                }else if(username.isEmpty()){
+                    message.setText("Fill in the username");
+                    message.setTextFill(redColor);
+                }else{
+                    message.setText("Fill in the password");
+                    message.setTextFill(redColor);
+                }
+
+            }else{
+                message.setText("Please wait ...");
+                message.setTextFill(orangeColor);
+                authenticateUser(username,password);
+            }
+        }
+    }
+
+
 
 
 }

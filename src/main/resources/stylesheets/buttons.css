@@ -44,3 +44,7 @@
     -fx-pref-width: 107px;
 }
 
+
+#barButton {
+    -fx-cursor: hand;
+}

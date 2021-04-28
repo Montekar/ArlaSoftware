@@ -87,17 +87,17 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="162.0">
                      <children>
-                        <ImageView fx:id="hideButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#hideWindow" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="barButton" fx:id="hideButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#hideWindow" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/hideButton.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="minMaxButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#minMaxWindow" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="barButton" fx:id="minMaxButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#minMaxWindow" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/minMaxButton.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="closeButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="barButton" fx:id="closeButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/closeButton.png" />
                            </image>
