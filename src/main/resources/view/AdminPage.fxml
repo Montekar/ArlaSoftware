@@ -10,11 +10,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="890.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="890.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox style="-fx-background-color: #3D4956;" BorderPane.alignment="CENTER">
          <children>
@@ -74,7 +73,7 @@
          <children>
             <HBox style="-fx-background-color: #ebeced;">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="621.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="621.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Administrator ">
                            <font>
@@ -86,28 +85,12 @@
                         <Insets left="30.0" />
                      </padding>
                   </HBox>
-                  <Region maxHeight="70.0" minHeight="50.0" prefHeight="70.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="162.0">
+                  <HBox alignment="CENTER" prefHeight="68.0" prefWidth="244.0" HBox.hgrow="NEVER">
                      <children>
-                        <ImageView id="barButton" fx:id="hideButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#hideWindow" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/hideButton.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView id="barButton" fx:id="minMaxButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#minMaxWindow" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/minMaxButton.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView id="barButton" fx:id="closeButton" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/closeButton.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
+                        <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
+                        <Button fx:id="closeButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="50.0" prefWidth="50.0" styleClass="close" />
                      </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
                   </HBox>
                </children>
             </HBox>
@@ -120,7 +103,7 @@
                   </Label>
                </children>
             </HBox>
-            <FlowPane prefHeight="576.0" prefWidth="708.0" style="-fx-background-color: green;" VBox.vgrow="ALWAYS" />
+            <FlowPane prefHeight="576.0" prefWidth="708.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </center>
