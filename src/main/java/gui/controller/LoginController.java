@@ -1,79 +1,119 @@
 package gui.controller;
 
-import animatefx.animation.*;
-import com.jfoenix.controls.JFXButton;
-import gui.model.LoginModel;
+import be.users.Admin;
+import be.users.Client;
+import be.users.User;
+import bll.AuthenticationManager;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-public class LoginController implements Initializable {
+public class LoginController {
     @FXML
-    private TextField usernameInput;
+    private ImageView closeButton;
 
     @FXML
-    private TextField passwordInput;
+    private JFXTextField usernameField;
 
     @FXML
-    private JFXButton loginButton;
+    private JFXPasswordField passwordField;
 
     @FXML
-    private Label errorMessage;
+    private Label message;
 
     @FXML
-    private Text welcomeText;
+    private Button logInButton;
 
-    private LoginModel loginModel;
+    private Color greenColor = Color.GREEN;
+    private Color redColor = Color.RED;
+    private Color orangeColor = Color.ORANGE;
 
-    private Color red = Color.RED;
-    private Color green = Color.GREEN;
+    private AuthenticationManager authenticationManager;
 
-    public LoginController(){
-        loginModel = new LoginModel();
+    public LoginController() {
+        authenticationManager = new AuthenticationManager();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        new JackInTheBox(welcomeText).play();
-    }
+    @FXML
+    void closeWindow(MouseEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
 
+    }
     public void login(ActionEvent actionEvent) {
-        errorMessage.setText("Please wait");
-        errorMessage.setTextFill(green);
-        if ((usernameInput.getText().isEmpty()) && (passwordInput.getText().isEmpty())) {
-            errorMessage.setText("Fill in all fields");
-            errorMessage.setTextFill(red);
-            animateMessage();
-        }else{
-            if(!loginModel.authenticateUser(usernameInput.getText(),passwordInput.getText()).isEmpty()){
-                goToView();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        message.setText("Please wait ...");
+        message.setTextFill(orangeColor);
+
+        if (username.isEmpty() || password.isEmpty()) {
+            if(username.isEmpty() && password.isEmpty()){
+                message.setText("Fill the blank fields");
+                message.setTextFill(redColor);
+            }else if(username.isEmpty()){
+                message.setText("Fill in the username");
+                message.setTextFill(redColor);
             }else{
-                errorMessage.setText("Incorrect credintials");
-                errorMessage.setTextFill(red);
-                animateMessage();
+                message.setText("Fill in the password");
+                message.setTextFill(redColor);
             }
+
+        }else{
+            message.setText("Please wait ...");
+            message.setTextFill(orangeColor);
+            authenticateUser(username,password);
         }
     }
 
-    private void goToView() {
-        System.out.println("View");
+    private void authenticateUser(String username, String password) {
+        User user = (User) authenticationManager.checkCredentials(username, password);
+        if (user != null) {
+            Stage stage = (Stage) logInButton.getScene().getWindow();
+
+            if (user instanceof Admin) {
+                goToAdminPage(stage, user);
+            } else if (user instanceof Client) {
+                goToClientPage(stage, user);
+            }
+        } else {
+            message.setText("Account not found!");
+            message.setTextFill(redColor);
+        }
     }
 
-    public void buttonHover(MouseEvent mouseEvent) {
-        new Pulse(loginButton).play();
+    public void goToAdminPage(Stage stage, User user) {
+        //session.startSession(user, stage);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
+            Parent root = fxmlLoader.load();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void animateMessage(){
-        new Shake(errorMessage).play();
+    public void goToClientPage(Stage stage, User user) {
+        //session.startSession(user, stage);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
+            Parent root = fxmlLoader.load();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 }

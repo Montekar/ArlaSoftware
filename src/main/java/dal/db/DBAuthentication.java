@@ -1,7 +1,7 @@
 package dal.db;
 
 import be.users.Admin;
-import be.users.User;
+import be.users.Client;
 import dal.IAuthentication;
 import error.ErrorHandler;
 
@@ -25,7 +25,7 @@ public class DBAuthentication implements IAuthentication {
         if (authenticateAdmin(username, password)){
             return getAdminWithCredentials(username, password);
         }else if(authenticateUser(username, password)){
-            return getUserWithCredentials(username, password);
+            return getClientWithCredentials(username, password);
         }
         return null;
     }
@@ -92,7 +92,7 @@ public class DBAuthentication implements IAuthentication {
         return null;
     }
 
-    public User getUserWithCredentials(String username, String password){
+    public Client getClientWithCredentials(String username, String password){
         try (Connection con = connection.getConnection()) {
             String sql = "SELECT * FROM User WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class DBAuthentication implements IAuthentication {
             if (statement.execute()) {
                 ResultSet resultSet = statement.getResultSet();
                 if (resultSet.next()) {
-                    return new User(
+                    return new Client(
                             resultSet.getString("Username"),
                             resultSet.getInt("ID"));
                 }
