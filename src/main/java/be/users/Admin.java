@@ -1,7 +1,7 @@
 package be.users;
 
 public class Admin extends User {
-    public Admin(String username, int id) {
-        super(username, id);
+    public Admin(int id, String username) {
+        super(id, username);
     }
 }

@@ -40,10 +40,11 @@ public class AdminPageController {
 
     public void minMaxWindow(MouseEvent mouseEvent) {
         Stage stage = (Stage) minMaxButton.getScene().getWindow();
-        if (stage.isMaximized() == false)
+        if (!stage.isMaximized()) {
             stage.setMaximized(true);
-        else
+        } else {
             stage.setMaximized(false);
+        }
     }
 
     public void closeWindow(MouseEvent mouseEvent) {
