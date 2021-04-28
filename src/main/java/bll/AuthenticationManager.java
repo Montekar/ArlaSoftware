@@ -1,5 +1,6 @@
 package bll;
 
+import be.users.User;
 import dal.IAuthentication;
 import dal.db.DBAuthentication;
 
@@ -8,7 +9,7 @@ public class AuthenticationManager {
 
     public AuthenticationManager() { authentication = new DBAuthentication(); }
 
-    public Object checkCredentials(String username, String password){
+    public User authenticateUser(String username, String password){
         return authentication.getAuthentication(username, password);
     }
 }

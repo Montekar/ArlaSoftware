@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>8.4.1.jre14</version>
+            <version>9.2.1.jre15</version>
         </dependency>
         <dependency>
             <groupId>io.github.typhon0</groupId>

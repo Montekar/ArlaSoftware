@@ -27,7 +27,7 @@
             <JFXTextField fx:id="usernameField" layoutX="98.0" layoutY="223.0" onKeyPressed="#onEnter" promptText="Username" />
             <JFXPasswordField fx:id="passwordField" layoutX="98.0" layoutY="273.0" onKeyPressed="#onEnter" promptText="Password" />
             <Label fx:id="message" layoutX="98.0" layoutY="191.0" prefHeight="17.0" prefWidth="135.0" text="Welcome to Arla Foods" />
-            <Button fx:id="logInButton" layoutX="105.0" layoutY="326.0" mnemonicParsing="false" onAction="#login" text="Log in" />
+            <Button fx:id="logInButton" layoutX="105.0" layoutY="326.0" mnemonicParsing="false" onAction="#loginClickAction" text="Log in" />
          </children>
          <effect>
             <DropShadow color="#518f38" />
