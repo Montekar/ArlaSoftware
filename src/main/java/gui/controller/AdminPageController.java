@@ -25,20 +25,20 @@ public class AdminPageController {
     private Button settingsButton;
 
     @FXML
-    private ImageView hideButton;
+    private Button hideButton;
 
     @FXML
-    private ImageView minMaxButton;
+    private Button minMaxButton;
 
     @FXML
-    private ImageView closeButton;
+    private Button closeButton;
 
-    public void hideWindow(MouseEvent mouseEvent) {
+    public void hideWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) hideButton.getScene().getWindow();
         stage.setIconified(true);
     }
 
-    public void minMaxWindow(MouseEvent mouseEvent) {
+    public void minMaxWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) minMaxButton.getScene().getWindow();
         if (!stage.isMaximized()) {
             stage.setMaximized(true);
@@ -47,7 +47,7 @@ public class AdminPageController {
         }
     }
 
-    public void closeWindow(MouseEvent mouseEvent) {
+    public void closeWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
