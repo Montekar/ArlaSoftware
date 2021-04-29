@@ -89,7 +89,7 @@
                      <children>
                         <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
                         <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
-                        <Button fx:id="closeButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="50.0" prefWidth="50.0" styleClass="close" />
+                        <Button alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="50.0" prefWidth="50.0" styleClass="close" />
                      </children>
                   </HBox>
                </children>

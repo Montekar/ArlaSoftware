@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginController {
+public class LoginPageController {
 
     @FXML
     private JFXTextField usernameField;
@@ -37,7 +37,7 @@ public class LoginController {
     private final Color colorRed = Color.RED;
     private final Color colorOrange = Color.ORANGE;
 
-    public LoginController() {
+    public LoginPageController() {
         authenticationManager = new AuthenticationManager();
     }
 
@@ -45,6 +45,8 @@ public class LoginController {
     void closeWindow(ActionEvent event) {
         Stage stage = (Stage) message.getScene().getWindow();
         stage.close();
+        Platform.exit();
+        System.exit(0);
     }
 
     public void loginClickAction(ActionEvent actionEvent) {
@@ -100,7 +102,7 @@ public class LoginController {
 
     private void authenticateUser(String username, String password) {
         new Thread(() -> {
-            User user = authenticationManager.authenticateUser(username, password);
+            User user = authenticationManager.getAuthenticatedUser(username, password);
             Platform.runLater(() -> {
                 if (user != null) {
                     Stage stage = (Stage) message.getScene().getWindow();

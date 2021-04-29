@@ -1,5 +1,6 @@
 package gui.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,28 +11,10 @@ import javafx.stage.Stage;
 
 public class AdminPageController {
     @FXML
-    private Button dashboardButton;
-
-    @FXML
-    private MenuItem starbucksButton;
-
-    @FXML
-    private MenuItem cocioButton;
-
-    @FXML
-    private MenuItem truckButton;
-
-    @FXML
-    private Button settingsButton;
-
-    @FXML
     private Button hideButton;
 
     @FXML
     private Button minMaxButton;
-
-    @FXML
-    private Button closeButton;
 
     public void hideWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) hideButton.getScene().getWindow();
@@ -48,8 +31,10 @@ public class AdminPageController {
     }
 
     public void closeWindow(ActionEvent actionEvent) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) hideButton.getScene().getWindow();
         stage.close();
+        Platform.exit();
+        System.exit(0);
     }
 
     public void openStarbucksDepartment(ActionEvent actionEvent) {
