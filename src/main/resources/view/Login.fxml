@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginController">
+<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginPageController">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: white;">
          <children>

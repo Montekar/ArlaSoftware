@@ -9,7 +9,7 @@ public class AuthenticationManager {
 
     public AuthenticationManager() { authentication = new DBAuthentication(); }
 
-    public User authenticateUser(String username, String password){
-        return authentication.getAuthentication(username, password);
+    public User getAuthenticatedUser(String username, String password){
+        return authentication.getAuthenticatedUser(username, password);
     }
 }

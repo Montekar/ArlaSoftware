@@ -21,7 +21,7 @@ public class DBAuthentication implements IAuthentication {
     }
 
     @Override
-    public User getAuthentication(String username, String password) {
+    public User getAuthenticatedUser(String username, String password) {
         if (authenticateAdmin(username, password) != null) {
             return authenticateAdmin(username, password);
         } else {
