@@ -80,4 +80,43 @@ public class DBClientRepository implements IClientRepository {
         }
         return null;
     }
+
+    @Override
+    public void changeClientDepartment(int clientID, int departmentID) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "UPDATE Client SET DepartmentID = ? WHERE ID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, departmentID);
+            statement.setInt(2, clientID);
+            statement.execute();
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue changing client's department", ex);
+        }
+    }
+
+    @Override
+    public void createClient(String username, String password, int departmentID) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "INSERT INTO Client Values(?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setInt(3, departmentID);
+            statement.execute();
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue registering a client", ex);
+        }
+    }
+
+    @Override
+    public void deleteClient(int clientID) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "DELETE FROM Client WHERE ID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1,clientID);
+            statement.execute();
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue deleting a client", ex);
+        }
+    }
 }

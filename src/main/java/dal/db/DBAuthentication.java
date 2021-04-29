@@ -29,7 +29,7 @@ public class DBAuthentication implements IAuthentication {
         }
     }
 
-    public Admin authenticateAdmin(String username, String password) {
+    private Admin authenticateAdmin(String username, String password) {
         try (Connection con = connection.getConnection()) {
             String sql = "SELECT * FROM Admin WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class DBAuthentication implements IAuthentication {
         return null;
     }
 
-    public Client authenticateClient(String username, String password) {
+    private Client authenticateClient(String username, String password) {
         try (Connection con = connection.getConnection()) {
             String sql = "SELECT * FROM Client WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);

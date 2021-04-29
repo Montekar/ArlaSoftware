@@ -45,6 +45,8 @@ public class LoginPageController {
     void closeWindow(ActionEvent event) {
         Stage stage = (Stage) message.getScene().getWindow();
         stage.close();
+        Platform.exit();
+        System.exit(0);
     }
 
     public void loginClickAction(ActionEvent actionEvent) {
