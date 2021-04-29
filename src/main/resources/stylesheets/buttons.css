@@ -10,7 +10,7 @@
 }
 
 .button:hover {
-
+    -fx-background-color: #56c44f;
 }
 
 .menu-button{
@@ -26,8 +26,6 @@
 .menu-button:hover {
     -fx-background-color: #56c44f;
 }
-
-
 
 .menu-item.label {
     -fx-text-fill: black;
@@ -67,6 +65,7 @@
 .minmax:hover{
     -fx-background-image: url("../images/minMaxHoverButton.jpg");
 }
+
 .hide:hover{
     -fx-background-image: url("../images/hideHoverButton.jpg");
 }
