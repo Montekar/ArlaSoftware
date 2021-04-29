@@ -1,6 +1,7 @@
 package dal.db;
 
 import be.users.Admin;
+import be.users.Client;
 import be.users.User;
 import dal.IAuthentication;
 import error.ErrorHandler;
@@ -20,59 +21,15 @@ public class DBAuthentication implements IAuthentication {
     }
 
     @Override
-    public Object getAuthentication(String username, String password) {
-
-        if (authenticateAdmin(username, password)){
-            return getAdminWithCredentials(username, password);
-        }else if(authenticateUser(username, password)){
-            return getUserWithCredentials(username, password);
+    public User getAuthenticatedUser(String username, String password) {
+        if (authenticateAdmin(username, password) != null) {
+            return authenticateAdmin(username, password);
+        } else {
+            return authenticateClient(username, password);
         }
-        return null;
     }
 
-    @Override
-    public boolean authenticateAdmin(String username, String password) {
-        try (Connection con = connection.getConnection()) {
-            String sql = "SELECT Username, Password " +  "FROM Admin WHERE Username = ? AND Password = ?";
-            PreparedStatement statement = con.prepareStatement(sql);
-
-            statement.setString(1, username);
-            statement.setString(2, password);
-
-            if (statement.execute()) {
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    return true;
-                }
-            }
-        } catch (SQLException ex) {
-            errorHandler.errorDevelopmentInfo("Issue in Dao DB Authentication. ", ex);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean authenticateUser(String username, String password) {
-        try (Connection con = connection.getConnection()) {
-            String sql = "SELECT Username, Password " +  "FROM User WHERE Username = ? AND Password = ?";
-            PreparedStatement statement = con.prepareStatement(sql);
-
-            statement.setString(1, username);
-            statement.setString(2, password);
-
-            if (statement.execute()) {
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    return true;
-                }
-            }
-        } catch (SQLException ex) {
-            errorHandler.errorDevelopmentInfo("Issue in Dao DB Authentication. ", ex);
-        }
-        return false;
-    }
-
-    public Admin getAdminWithCredentials(String username, String password){
+    private Admin authenticateAdmin(String username, String password) {
         try (Connection con = connection.getConnection()) {
             String sql = "SELECT * FROM Admin WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -82,8 +39,7 @@ public class DBAuthentication implements IAuthentication {
                 ResultSet resultSet = statement.getResultSet();
                 if (resultSet.next()) {
                     return new Admin(
-                            resultSet.getString("Username"),
-                            resultSet.getInt("ID"));
+                            resultSet.getInt("ID"), resultSet.getString("Username"));
                 }
             }
         } catch (SQLException ex) {
@@ -92,18 +48,17 @@ public class DBAuthentication implements IAuthentication {
         return null;
     }
 
-    public User getUserWithCredentials(String username, String password){
+    private Client authenticateClient(String username, String password) {
         try (Connection con = connection.getConnection()) {
-            String sql = "SELECT * FROM User WHERE Username = ? AND Password = ?";
+            String sql = "SELECT * FROM Client WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             if (statement.execute()) {
                 ResultSet resultSet = statement.getResultSet();
                 if (resultSet.next()) {
-                    return new User(
-                            resultSet.getString("Username"),
-                            resultSet.getInt("ID"));
+                    return new Client(
+                            resultSet.getInt("ID"), resultSet.getString("Username"));
                 }
             }
         } catch (SQLException ex) {

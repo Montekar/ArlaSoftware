@@ -1,0 +1,72 @@
+.button{
+    -fx-background-color:  #5ed656;
+    -fx-cursor: hand;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 120px;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+
+}
+
+.menu-button{
+    -fx-background-color:  #5ed656;
+    -fx-cursor: hand;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 120px;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.menu-button:hover {
+    -fx-background-color: #56c44f;
+}
+
+
+
+.menu-item.label {
+    -fx-text-fill: black;
+    -fx-pref-width: 107px;
+}
+
+.menu-item:focused {
+    -fx-background-color: grey;
+    -fx-pref-width: 107px;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: white;
+    -fx-pref-width: 107px;
+}
+
+.hide{
+    -fx-background-image: url("../images/hideButton.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: #11ffee00;
+}
+.minmax{
+    -fx-background-image: url("../images/minMaxButton.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: #11ffee00;
+}
+.close{
+    -fx-background-image: url("../images/closeButton.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: #11ffee00;
+}
+
+.close:hover{
+    -fx-background-image: url("../images/closeHoverButton.jpg");
+}
+
+.minmax:hover{
+    -fx-background-image: url("../images/minMaxHoverButton.jpg");
+}
+.hide:hover{
+    -fx-background-image: url("../images/hideHoverButton.jpg");
+}

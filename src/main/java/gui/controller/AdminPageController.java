@@ -1,0 +1,66 @@
+package gui.controller;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+public class AdminPageController {
+    @FXML
+    private Button hideButton;
+
+    @FXML
+    private Button minMaxButton;
+
+    public void hideWindow(ActionEvent actionEvent) {
+        Stage stage = (Stage) hideButton.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void minMaxWindow(ActionEvent actionEvent) {
+        Stage stage = (Stage) minMaxButton.getScene().getWindow();
+        if (!stage.isMaximized()) {
+            stage.setMaximized(true);
+        } else {
+            stage.setMaximized(false);
+        }
+    }
+
+    public void closeWindow(ActionEvent actionEvent) {
+        Stage stage = (Stage) hideButton.getScene().getWindow();
+        stage.close();
+        Platform.exit();
+        System.exit(0);
+    }
+
+    public void openStarbucksDepartment(ActionEvent actionEvent) {
+    }
+
+    public void openCocioDepartment(ActionEvent actionEvent) {
+    }
+
+    public void openTruckDepartment(ActionEvent actionEvent) {
+    }
+
+    public void addImage(ActionEvent actionEvent) {
+    }
+
+    public void addTable(ActionEvent actionEvent) {
+    }
+
+    public void addChart(ActionEvent actionEvent) {
+    }
+
+    public void updateScreen(ActionEvent actionEvent) {
+    }
+
+    public void editItem(ActionEvent actionEvent) {
+    }
+
+    public void deleteItem(ActionEvent actionEvent) {
+    }
+}
