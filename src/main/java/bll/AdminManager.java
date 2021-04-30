@@ -7,7 +7,7 @@ import dal.db.DBAdminRepository;
 import java.util.List;
 
 public class AdminManager {
-    private IAdminRepository adminRepository;
+    private final IAdminRepository adminRepository;
 
     public AdminManager() {
         adminRepository = new DBAdminRepository();

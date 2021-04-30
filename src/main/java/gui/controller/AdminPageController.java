@@ -1,20 +1,34 @@
 package gui.controller;
 
+import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class AdminPageController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AdminPageController implements Initializable {
     @FXML
     private Button hideButton;
 
     @FXML
     private Button minMaxButton;
+
+    private DepartmentModel departmentModel;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        departmentModel = new DepartmentModel();
+
+
+    }
 
     public void hideWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) hideButton.getScene().getWindow();

@@ -6,4 +6,7 @@ import be.users.User;
 
 public interface IAuthentication {
     User getAuthenticatedUser(String username, String password);
+
+    Admin authenticateAdmin(String username, String password);
+    Client authenticateClient(String username, String password);
 }

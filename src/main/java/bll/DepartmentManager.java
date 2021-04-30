@@ -7,29 +7,29 @@ import dal.db.DBDepartmentRepository;
 import java.util.List;
 
 public class DepartmentManager {
-    private IDepartmentRepository departmentRepository;
+    private final IDepartmentRepository departmentRepository;
 
     public DepartmentManager() {
         departmentRepository = new DBDepartmentRepository();
     }
 
-    Department getDepartment(int departmentID) {
+    public Department getDepartment(int departmentID) {
         return departmentRepository.getDepartment(departmentID);
     }
 
-    List<Department> getAllDepartments() {
+    public List<Department> getAllDepartments() {
         return departmentRepository.getAllDepartments();
     }
 
-    void createDepartment(String name) {
+    public void createDepartment(String name) {
         departmentRepository.createDepartment(name);
     }
 
-    void editDepartment(int departmentID, String name) {
+    public void editDepartment(int departmentID, String name) {
         departmentRepository.editDepartment(departmentID, name);
     }
 
-    void deleteDepartment(int departmentID) {
+    public void deleteDepartment(int departmentID) {
         departmentRepository.deleteDepartment(departmentID);
     }
 }
