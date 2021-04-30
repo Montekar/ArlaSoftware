@@ -1,11 +1,13 @@
 package gui.controller;
 
+import be.Department;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,14 +22,15 @@ public class AdminPageController implements Initializable {
 
     @FXML
     private Button minMaxButton;
+    @FXML
+    private ChoiceBox<Department> choiceDepartment;
 
-    private DepartmentModel departmentModel;
+    private final DepartmentModel departmentModel = new DepartmentModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        departmentModel = new DepartmentModel();
-
-
+        choiceDepartment.setItems(departmentModel.getDepartmentsOverview());
+        choiceDepartment.getSelectionModel().selectFirst();
     }
 
     public void hideWindow(ActionEvent actionEvent) {
