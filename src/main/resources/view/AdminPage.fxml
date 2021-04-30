@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -33,6 +34,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="182.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
+                  <ChoiceBox fx:id="choiceDepartment" prefWidth="150.0" />
                   <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
@@ -41,13 +43,6 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="  Department" textFill="WHITE" textOverrun="CLIP">
-                    <items>
-                      <MenuItem fx:id="starbucksButton" mnemonicParsing="false" onAction="#openStarbucksDepartment" text="Starbucks" />
-                      <MenuItem fx:id="cocioButton" mnemonicParsing="false" onAction="#openCocioDepartment" text="Cocio" />
-                        <MenuItem fx:id="truckButton" mnemonicParsing="false" onAction="#openTruckDepartment" text="Trucks" />
-                    </items>
-                  </MenuButton>
                   <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="  Add to screen" textFill="WHITE">
                      <items>
                         <MenuItem fx:id="addImageButton" mnemonicParsing="false" onAction="#addImage" text="Image" />
