@@ -5,7 +5,7 @@ import dal.IAuthentication;
 import dal.db.DBAuthentication;
 
 public class AuthenticationManager {
-    private IAuthentication authentication;
+    private final IAuthentication authentication;
 
     public AuthenticationManager() {
         authentication = new DBAuthentication();

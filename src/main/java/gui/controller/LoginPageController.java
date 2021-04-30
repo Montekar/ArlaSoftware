@@ -6,6 +6,7 @@ import be.users.User;
 import bll.AuthenticationManager;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import gui.model.SessionModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +15,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPageController {
 
@@ -33,6 +37,7 @@ public class LoginPageController {
     private Label message;
 
     private final AuthenticationManager authenticationManager;
+    private final SessionModel sessionModel = SessionModel.getInstance();
 
     private final Color colorRed = Color.RED;
     private final Color colorOrange = Color.ORANGE;
@@ -65,6 +70,7 @@ public class LoginPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
+            sessionModel.setUser(user);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,6 +81,7 @@ public class LoginPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
+            sessionModel.setUser(user);
         } catch (IOException e) {
             e.printStackTrace();
         }
