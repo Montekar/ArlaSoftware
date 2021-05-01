@@ -2,6 +2,7 @@ package gui.controller;
 
 import bll.ViewLoader;
 import bll.WebViewLoader;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -11,7 +12,10 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javafx.scene.control.ListView;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.transform.Scale;
 import javafx.scene.web.WebView;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -36,12 +40,43 @@ public class UserMockController implements Initializable {
 
     private ViewLoader viewLoader;
 
+    private ListView csvData = new ListView();
+
+    private final int zoomIn = 107;
+    private final int zoomOut = 109;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadWeb("https://www.google.com");
         loadPdf("test");
         loadExcel("src/main/resources/mockFiles/MOCK_DATA.xls");
         loadCsv("src/main/resources/mockFiles/MOCK_DATA.csv");
+
+        csvFile.setOnKeyPressed(keyEvent -> {
+            double zoom = 1;
+            if (keyEvent.getCode().getCode() == zoomIn && zoom < 2){
+                System.out.println("Plus has been entered");
+                System.out.println(keyEvent);
+                Scale scale = new Scale();
+                csvData.setScaleX(zoom);
+                csvData.setScaleY(zoom);
+                zoom += 0.1;
+                System.out.println(zoom);
+                csvData.setMinWidth(100);
+
+            }else if(keyEvent.getCode().getCode() == zoomOut && zoom > 0.5){
+                System.out.println("Minus has been pressed");
+                System.out.println(keyEvent);
+                csvData.setScaleX(zoom);
+                csvData.setScaleY(zoom);
+                zoom -= 0.1;
+                System.out.println(zoom);
+                csvData.setMinWidth(400);
+            }else {
+                System.out.println(keyEvent);
+            }
+        });
+
     }
 
     //reads and loads excel file
@@ -91,7 +126,6 @@ public class UserMockController implements Initializable {
 
     //reads and outputs data from CSV file
     public void loadCsv(String path){
-        ListView csvData = new ListView();
         try {
             Scanner csvScanner = new Scanner(new File(path));
             //csvScanner.useDelimiter(",");
