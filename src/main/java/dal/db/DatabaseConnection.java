@@ -15,7 +15,6 @@ public class DatabaseConnection {
 
     public DatabaseConnection() {
         try {
-
             Properties databaseProperties = new Properties();
             databaseProperties.load(new FileInputStream(PROP_FILE));
             ds.setServerName(databaseProperties.getProperty("Server"));

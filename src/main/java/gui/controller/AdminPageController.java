@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,14 +24,14 @@ public class AdminPageController implements Initializable {
     @FXML
     private Button minMaxButton;
     @FXML
-    private ChoiceBox<Department> choiceDepartment;
+    private ChoiceBox<Department> chooseDepartment;
 
     private final DepartmentModel departmentModel = new DepartmentModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceDepartment.setItems(departmentModel.getDepartmentsOverview());
-        choiceDepartment.getSelectionModel().selectFirst();
+        chooseDepartment.setItems(departmentModel.getDepartmentsOverview());
+        chooseDepartment.getSelectionModel().selectFirst();
     }
 
     public void hideWindow(ActionEvent actionEvent) {

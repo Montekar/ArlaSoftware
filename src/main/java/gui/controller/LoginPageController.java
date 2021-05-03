@@ -95,7 +95,7 @@ public class LoginPageController {
             message.setText("Please wait ...");
             message.setTextFill(colorOrange);
             authenticateUser(username, password);
-        } else if (username.isBlank() && password.isBlank()) {
+        } else if (username.isBlank() && password.isBlank()){
             message.setText("Fill the blank fields");
             message.setTextFill(colorRed);
         } else if (username.isEmpty()) {
