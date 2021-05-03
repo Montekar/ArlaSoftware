@@ -34,6 +34,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="182.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
+                  <Label id="label" text="Main" />
                   <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
@@ -42,7 +43,8 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <ChoiceBox fx:id="chooseDepartment" prefWidth="150.0" />
+                  <Label id="label" text="Department screens" />
+                  <ChoiceBox id="label" fx:id="chooseDepartment" prefWidth="150.0" />
                   <MenuButton alignment="CENTER" mnemonicParsing="false" text="Add to screen" textFill="WHITE">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Image" />
@@ -53,13 +55,14 @@
                   <Button fx:id="updateScreenButton" mnemonicParsing="false" onAction="#updateScreen" prefHeight="26.0" prefWidth="110.0" text="Update" />
                   <Button fx:id="editButtton" mnemonicParsing="false" onAction="#editItem" prefHeight="26.0" prefWidth="110.0" text="Edit" />
                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteItem" prefHeight="26.0" prefWidth="110.0" text="Delete" />
+                  <Label id="label" text="Settings" />
                   <Button fx:id="settingsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Settings" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
-                  <Insets top="30.0" />
+                  <Insets top="20.0" />
                </padding>
             </VBox>
          </children>
@@ -70,9 +73,9 @@
          <children>
             <HBox style="-fx-background-color: #ebeced;">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="621.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="601.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Administrator ">
+                        <Label prefHeight="46.0" prefWidth="235.0" text="Administrator ">
                            <font>
                               <Font size="30.0" />
                            </font>
