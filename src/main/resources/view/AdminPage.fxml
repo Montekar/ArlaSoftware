@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="890.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="890.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox style="-fx-background-color: #3D4956;" BorderPane.alignment="CENTER">
          <children>
@@ -34,7 +34,6 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="182.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <ChoiceBox fx:id="choiceDepartment" prefWidth="150.0" />
                   <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
@@ -43,12 +42,13 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="  Add to screen" textFill="WHITE">
-                     <items>
-                        <MenuItem fx:id="addImageButton" mnemonicParsing="false" onAction="#addImage" text="Image" />
-                        <MenuItem fx:id="addTableButton" mnemonicParsing="false" onAction="#addTable" text="Table" />
-                        <MenuItem fx:id="addChartButton" mnemonicParsing="false" onAction="#addChart" text="Chart" />
-                     </items>
+                  <ChoiceBox fx:id="chooseDepartment" prefWidth="150.0" />
+                  <MenuButton alignment="CENTER" mnemonicParsing="false" text="Add to screen" textFill="WHITE">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Image" />
+                      <MenuItem mnemonicParsing="false" text="Chart" />
+                        <MenuItem mnemonicParsing="false" text="Table" />
+                    </items>
                   </MenuButton>
                   <Button fx:id="updateScreenButton" mnemonicParsing="false" onAction="#updateScreen" prefHeight="26.0" prefWidth="110.0" text="Update" />
                   <Button fx:id="editButtton" mnemonicParsing="false" onAction="#editItem" prefHeight="26.0" prefWidth="110.0" text="Edit" />
