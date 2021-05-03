@@ -56,7 +56,7 @@
                   <Button fx:id="editButtton" mnemonicParsing="false" onAction="#editItem" prefHeight="26.0" prefWidth="110.0" text="Edit" />
                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteItem" prefHeight="26.0" prefWidth="110.0" text="Delete" />
                   <Label id="label" text="Settings" />
-                  <Button fx:id="settingsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Settings" />
+                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" prefHeight="26.0" prefWidth="110.0" text="Settings" />
                </children>
                <opaqueInsets>
                   <Insets />
