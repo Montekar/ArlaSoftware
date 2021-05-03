@@ -1,3 +1,8 @@
+#label{
+    -fx-pref-width: 120px;
+    -fx-text-fill: white;
+}
+
 .button{
     -fx-background-color:  #5ed656;
     -fx-cursor: hand;
@@ -74,6 +79,7 @@
 
 .choice-box:focused .label {
     -fx-pref-width: 88px;
+    -fx-text-fill: black;
 }
 
 
