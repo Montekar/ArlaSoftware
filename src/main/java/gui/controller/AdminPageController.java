@@ -1,11 +1,15 @@
 package gui.controller;
 
 import be.Department;
+import be.users.User;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -13,7 +17,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,6 +60,12 @@ public class AdminPageController implements Initializable {
         Platform.exit();
         System.exit(0);
     }
+
+    @FXML
+    public void openSettings(ActionEvent event){
+
+    }
+
 
     public void openStarbucksDepartment(ActionEvent actionEvent) {
     }
