@@ -17,7 +17,7 @@ public class DepartmentModel {
 
     public DepartmentModel() {
         departmentManager = new DepartmentManager();
-        departments = FXCollections.observableArrayList(departmentManager.getAllDepartments());
+        departments = FXCollections.observableArrayList(new ArrayList<>());
     }
 
     public void createDepartment(String name) {
