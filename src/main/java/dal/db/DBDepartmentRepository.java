@@ -1,8 +1,7 @@
 package dal.db;
 
-import be.Department;
 import be.users.Admin;
-import be.users.Client;
+import be.users.Department;
 import dal.IDepartmentRepository;
 import error.ErrorHandler;
 
@@ -20,15 +19,17 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public Department getDepartment(int departmentId) {
+    public Department getDepartment(int departmentID) {
         try (Connection con = connection.getConnection()) {
-            String sql = "SELECT * FROM Department WHERE ID = ?";
+            String sql = "Select * From Department WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1, departmentId);
+            statement.setInt(1, departmentID);
             if (statement.execute()) {
                 ResultSet resultSet = statement.getResultSet();
                 if (resultSet.next()) {
-                    return new Department(resultSet.getInt("ID"), resultSet.getString("Name"));
+                    return new Department(
+                            resultSet.getInt("ID"),
+                            resultSet.getString("Username"));
                 }
             }
         } catch (SQLException ex) {
@@ -47,7 +48,9 @@ public class DBDepartmentRepository implements IDepartmentRepository {
             if (statement.execute(sql)) {
                 ResultSet resultSet = statement.getResultSet();
                 while (resultSet.next()) {
-                    departments.add(new Department(resultSet.getInt("ID"), resultSet.getString("Name")));
+                    departments.add(new Department(
+                            resultSet.getInt("ID"),
+                            resultSet.getString("Username")));
                 }
                 return departments;
             }
@@ -58,27 +61,28 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public void createDepartment(String name) {
+    public void editDepartment(int departmentID, String username) {
         try (Connection con = connection.getConnection()) {
-            String sql = "INSERT INTO Department Values(?)";
+            String sql = "UPDATE Department SET Username = ? WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, name);
+            statement.setString(1, username);
+            statement.setInt(2, departmentID);
             statement.execute();
         } catch (SQLException ex) {
-            errorHandler.errorDevelopmentInfo("Issue creating a department", ex);
+            errorHandler.errorDevelopmentInfo("Issue changing department's name", ex);
         }
     }
 
     @Override
-    public void editDepartment(int id, String name) {
+    public void createDepartment(String username, String password) {
         try (Connection con = connection.getConnection()) {
-            String sql = "UPDATE Department SET Name = ? WHERE ID = ?";
+            String sql = "INSERT INTO Department Values(?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, name);
-            statement.setInt(2, id);
+            statement.setString(1, username);
+            statement.setString(2, password);
             statement.execute();
         } catch (SQLException ex) {
-            errorHandler.errorDevelopmentInfo("Issue changing department's name", ex);
+            errorHandler.errorDevelopmentInfo("Issue creating a department", ex);
         }
     }
 
@@ -93,4 +97,4 @@ public class DBDepartmentRepository implements IDepartmentRepository {
             errorHandler.errorDevelopmentInfo("Issue deleting a department", ex);
         }
     }
-}
+    }

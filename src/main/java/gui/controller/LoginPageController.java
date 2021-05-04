@@ -1,7 +1,7 @@
 package gui.controller;
 
 import be.users.Admin;
-import be.users.Client;
+import be.users.Department;
 import be.users.User;
 import bll.AuthenticationManager;
 import com.jfoenix.controls.JFXPasswordField;
@@ -13,17 +13,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginPageController {
 
@@ -117,7 +113,7 @@ public class LoginPageController {
                     Stage stage = (Stage) message.getScene().getWindow();
                     if (user instanceof Admin) {
                         goToAdminPage(stage, user);
-                    } else if (user instanceof Client) {
+                    } else if (user instanceof Department) {
                         goToClientPage(stage, user);
                     }
                 } else {

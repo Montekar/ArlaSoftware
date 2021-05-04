@@ -1,12 +1,11 @@
 package dal;
 
 import be.users.Admin;
-import be.users.Client;
+import be.users.Department;
 import be.users.User;
 
 public interface IAuthentication {
     User getAuthenticatedUser(String username, String password);
-
     Admin authenticateAdmin(String username, String password);
-    Client authenticateClient(String username, String password);
+    Department authenticateDepartment(String username, String password);
 }

@@ -1,6 +1,6 @@
 package dal;
 
-import be.Department;
+import be.users.Department;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public interface IDepartmentRepository {
     Department getDepartment(int departmentID);
     List<Department> getAllDepartments();
 
-    void createDepartment(String name);
-    void editDepartment(int departmentID, String name);
+    void editDepartment(int departmentID, String username);
+    void createDepartment(String username, String password);
     void deleteDepartment(int departmentID);
 }

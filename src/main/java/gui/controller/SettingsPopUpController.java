@@ -1,8 +1,6 @@
 package gui.controller;
 
-import be.Department;
 import bll.DepartmentManager;
-import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -31,9 +28,6 @@ public class SettingsPopUpController implements Initializable {
     private Button editDepartmentButton;
     @FXML
     private Button deleteDepartmentButton;
-
-    @FXML
-    private ChoiceBox<Department> chooseDepartment;
 
     //private final DepartmentModel departmentModel = new DepartmentModel();
 

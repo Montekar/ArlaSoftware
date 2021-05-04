@@ -43,7 +43,7 @@
                      </opaqueInsets>
                   </Button>
                   <Label id="label" text="Department screens" />
-                  <ChoiceBox id="label" fx:id="chooseDepartment" prefWidth="150.0" />
+                  <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
                   <MenuButton alignment="CENTER" mnemonicParsing="false" text="Add to screen" textFill="WHITE">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Image" />

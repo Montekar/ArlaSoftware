@@ -1,13 +1,13 @@
 package bll;
 
-import be.Department;
+import be.users.Department;
 import dal.IDepartmentRepository;
 import dal.db.DBDepartmentRepository;
 
 import java.util.List;
 
 public class DepartmentManager {
-    private final IDepartmentRepository departmentRepository;
+    IDepartmentRepository departmentRepository;
 
     public DepartmentManager() {
         departmentRepository = new DBDepartmentRepository();
@@ -21,12 +21,12 @@ public class DepartmentManager {
         return departmentRepository.getAllDepartments();
     }
 
-    public void createDepartment(String name) {
-        departmentRepository.createDepartment(name);
+    public void editDepartment(int departmentID, String username) {
+        departmentRepository.editDepartment(departmentID, username);
     }
 
-    public void editDepartment(int departmentID, String name) {
-        departmentRepository.editDepartment(departmentID, name);
+    public void createDepartment(String username, String password) {
+        departmentRepository.createDepartment(username, password);
     }
 
     public void deleteDepartment(int departmentID) {
