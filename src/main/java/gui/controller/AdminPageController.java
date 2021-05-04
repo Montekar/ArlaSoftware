@@ -1,6 +1,6 @@
 package gui.controller;
 
-import be.Department;
+import be.users.Department;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,9 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,16 +27,20 @@ public class AdminPageController implements Initializable {
     @FXML
     private Button minMaxButton;
     @FXML
-    private ChoiceBox<Department> chooseDepartment;
+    private ChoiceBox<Department> choiceDepartment;
 
-    //private final DepartmentModel departmentModel = new DepartmentModel();
+    private final DepartmentModel departmentModel;
     @FXML
     private FlowPane departmentScreens;
 
+    public AdminPageController(){
+        departmentModel = new DepartmentModel();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //chooseDepartment.setItems(departmentModel.getDepartments());
-        //chooseDepartment.getSelectionModel().selectFirst();
+        choiceDepartment.setItems(departmentModel.getDepartments());
+        choiceDepartment.getSelectionModel().selectFirst();
     }
 
     public void hideWindow(ActionEvent actionEvent) {

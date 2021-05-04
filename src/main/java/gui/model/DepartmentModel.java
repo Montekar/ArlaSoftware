@@ -1,7 +1,6 @@
 package gui.model;
 
-import be.Department;
-import be.Screen;
+import be.users.Department;
 import bll.DepartmentManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,23 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentModel {
-    private ObservableList<Department> departments;
-    private ObservableList<Screen> departmentScreens;
-
     private final DepartmentManager departmentManager;
+    private ObservableList<Department> departmentsOverview;
 
     public DepartmentModel() {
         departmentManager = new DepartmentManager();
-        departments = FXCollections.observableArrayList(new ArrayList<>());
+        departmentsOverview = FXCollections.observableArrayList(departmentManager.getAllDepartments());
     }
 
-    public void createDepartment(String name) {
-        departmentManager.createDepartment(name);
+    public void EditDepartment(int departmentID, String username) {
+        departmentManager.editDepartment(departmentID, username);
         updateDepartments();
     }
 
-    public void editDepartment(int departmentID, String name) {
-        departmentManager.editDepartment(departmentID, name);
+    public void createDepartment(String username, String password) {
+        departmentManager.createDepartment(username, password);
         updateDepartments();
     }
 
@@ -35,25 +32,20 @@ public class DepartmentModel {
         updateDepartments();
     }
 
-    public List<Department> getAllDepartments() {
-        return departmentManager.getAllDepartments();
+    private void updateDepartments() {
+        departmentsOverview.clear();
+        departmentsOverview.addAll(departmentManager.getAllDepartments());
     }
 
     public Department getDepartment(int departmentID) {
         return departmentManager.getDepartment(departmentID);
     }
 
+    public List<Department> getAllDepartments() {
+        return getAllDepartments();
+    }
+
     public ObservableList<Department> getDepartments() {
-        return departments;
-    }
-
-    public void updateDepartmentScreens() {
-        departmentScreens.clear();
-        departmentScreens.addAll(new ArrayList<>()); //TODO
-    }
-
-    public void updateDepartments() {
-        departments.clear();
-        departments.addAll(departmentManager.getAllDepartments());
+        return departmentsOverview;
     }
 }

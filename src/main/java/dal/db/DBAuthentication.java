@@ -1,7 +1,7 @@
 package dal.db;
 
 import be.users.Admin;
-import be.users.Client;
+import be.users.Department;
 import be.users.User;
 import dal.IAuthentication;
 import error.ErrorHandler;
@@ -22,7 +22,7 @@ public class DBAuthentication implements IAuthentication {
 
     @Override
     public User getAuthenticatedUser(String username, String password) {
-        return authenticateAdmin(username, password) != null ? authenticateAdmin(username, password) : authenticateClient(username, password);
+        return authenticateAdmin(username, password) != null ? authenticateAdmin(username, password) : authenticateDepartment(username, password);
     }
 
     public Admin authenticateAdmin(String username, String password) {
@@ -44,16 +44,16 @@ public class DBAuthentication implements IAuthentication {
         return null;
     }
 
-    public Client authenticateClient(String username, String password) {
+    public Department authenticateDepartment(String username, String password) {
         try (Connection con = connection.getConnection()) {
-            String sql = "SELECT * FROM Client WHERE Username = ? AND Password = ?";
+            String sql = "SELECT * FROM Department WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             if (statement.execute()) {
                 ResultSet resultSet = statement.getResultSet();
                 if (resultSet.next()) {
-                    return new Client(
+                    return new Department(
                             resultSet.getInt("ID"), resultSet.getString("Username"));
                 }
             }
