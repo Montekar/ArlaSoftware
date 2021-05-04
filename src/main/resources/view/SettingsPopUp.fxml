@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,18 +14,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/buttons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingsPopUpController">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: white;">
          <children>
             <Button layoutX="291.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/buttons.css" text="Button" />
-            <VBox alignment="TOP_CENTER" layoutX="12.0" layoutY="85.0" prefHeight="304.0" prefWidth="306.0" spacing="5.0">
+            <VBox alignment="TOP_CENTER" layoutX="12.0" layoutY="61.0" prefHeight="334.0" prefWidth="306.0" spacing="5.0">
                <children>
-                  <VBox style="-fx-border-color: black; -fx-border-width: 1;">
+                  <VBox prefHeight="174.0" prefWidth="306.0" style="-fx-border-color: black; -fx-border-width: 1;">
                      <children>
-                        <VBox alignment="CENTER" spacing="10.0">
+                        <VBox alignment="CENTER" prefHeight="73.0" prefWidth="305.0" spacing="10.0">
                            <children>
                               <Label text="Edit/delete department:">
                                  <font>
@@ -31,22 +33,28 @@
                               </Label>
                               <ChoiceBox fx:id="chooseDepartment" prefWidth="150.0" />
                            </children>
+                           <padding>
+                              <Insets bottom="7.0" />
+                           </padding>
                         </VBox>
-                        <HBox alignment="CENTER" prefHeight="49.0" prefWidth="305.0" spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="305.0" spacing="10.0">
                            <children>
-                              <Label text="New name:">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Text fx:id="editDepartmentNameField" strokeType="OUTSIDE" strokeWidth="0.0" text="___________________" wrappingWidth="128.5367395877838">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
+                              <VBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label prefHeight="18.0" prefWidth="102.0" text="Department name:" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefWidth="162.0">
+                                 <children>
+                                    <TextField fx:id="editDepartmentNameField" />
+                                 </children>
+                              </VBox>
                            </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="306.0" spacing="10.0">
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="305.0" spacing="10.0">
                            <children>
                               <Button fx:id="editDepartmentButton" mnemonicParsing="false" onAction="#editDepartment" text="Edit" />
                               <Button fx:id="deleteDepartmentButton" mnemonicParsing="false" onAction="#deleteDepartment" text="Delete" />
@@ -54,9 +62,9 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1;">
+                  <VBox alignment="CENTER" prefHeight="166.0" prefWidth="306.0" style="-fx-border-color: black; -fx-border-width: 1;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="306.0">
+                        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="305.0">
                            <children>
                               <Label text="Create deparment">
                                  <font>
@@ -65,30 +73,38 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="305.0" spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="305.0">
                            <children>
-                              <Label text="Department name:">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Label>
-                              <Text fx:id="newDepartmentNameField" strokeType="OUTSIDE" strokeWidth="0.0" text="___________________" wrappingWidth="128.5367395877838">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
+                              <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="114.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Departmnet name:" />
+                                    <Label text="Password:" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="162.0" spacing="3.0">
+                                 <children>
+                                    <TextField fx:id="newDepartmentNameField" />
+                                    <PasswordField fx:id="newDepartmentPasswordField" />
+                                 </children>
+                              </VBox>
                            </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="305.0">
                            <children>
                               <Button fx:id="createDepartmentButton" mnemonicParsing="false" onAction="#createDepartment" text="Create" />
                            </children>
+                           <padding>
+                              <Insets bottom="4.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </VBox>
                </children>
             </VBox>
-            <HBox layoutX="67.0" layoutY="14.0" prefHeight="54.0" prefWidth="196.0" spacing="10.0">
+            <HBox layoutX="67.0" prefHeight="54.0" prefWidth="196.0" spacing="10.0">
                <children>
                   <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                      <image>
