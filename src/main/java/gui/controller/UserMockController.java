@@ -1,6 +1,7 @@
 package gui.controller;
 
 import bll.*;
+import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,34 +54,29 @@ public class UserMockController implements Initializable {
         csvPane.getChildren().add(csvView.loadView("src/main/resources/mockFiles/MOCK_DATA.csv"));
         excelPane.getChildren().add( excelView.loadView("src/main/resources/mockFiles/MOCK_DATA.xls"));
         zoomLevel.put(csvPane,1);
-
         mainPane.getChildren().addAll(webPane,csvPane,excelPane,refreshButton);
-       // idr
-       /* csvFile.setOnKeyPressed(keyEvent -> {
-           // int zoom = zoomLevel.get(csvFile);
-            int zoom = csvFile.getZoom();
-            if (keyEvent.getCode().getCode() == zoomIn && zoom < 2){
-                System.out.println("Plus has been entered");
-                System.out.println(keyEvent);
-                Scale scale = new Scale();
-                csvData.setScaleX(zoom);
-                csvData.setScaleY(zoom);
-               // zoom += 0.1; csvFile.setZoom(csvFile.getZoom()+0.1);
-                System.out.println(zoom);
-                csvData.setMinWidth(100);
 
-            }else if(keyEvent.getCode().getCode() == zoomOut && zoom > 0.5){
-                System.out.println("Minus has been pressed");
-                System.out.println(keyEvent);
-                csvData.setScaleX(zoom);
-                csvData.setScaleY(zoom);
-                zoom -= 0.1;
-                System.out.println(zoom);
-                csvData.setMinWidth(400);
-            }else {
-                System.out.println(keyEvent);
-            }
-        });*/
+        csvPane.setOnKeyPressed(keyEvent -> {
+            zoomNode(csvPane, keyEvent.getCode().getCode());
+        });
 
+        excelPane.setOnKeyPressed(keyEvent -> {
+            zoomNode(excelPane, keyEvent.getCode().getCode());
+        });
+
+
+    }
+
+    private void zoomNode(ZoomPane selectedPane, int keyCode) {
+        double zoom = selectedPane.getZoom();
+        if (keyCode == zoomIn && zoom < 2){
+            selectedPane.setScaleX(zoom);
+            selectedPane.setScaleY(zoom);
+            selectedPane.setZoom(selectedPane.getZoom()+0.1);
+        }else if(keyCode == zoomOut && zoom > 0.5){
+            selectedPane.setScaleX(zoom);
+            selectedPane.setScaleY(zoom);
+            selectedPane.setZoom(selectedPane.getZoom()-0.1);
+        }
     }
 }

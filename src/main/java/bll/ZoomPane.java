@@ -3,13 +3,13 @@ package bll;
 import javafx.scene.layout.Pane;
 
 public class ZoomPane extends Pane {
-    private int zoom = 1;
+    private double zoom = 1;
 
-    public int getZoom() {
+    public double getZoom() {
         return zoom;
     }
 
-    public void setZoom(int zoom) {
+    public void setZoom(double zoom) {
         this.zoom = zoom;
     }
 }
