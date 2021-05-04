@@ -13,6 +13,10 @@ public class Department {
         return name;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return getName();

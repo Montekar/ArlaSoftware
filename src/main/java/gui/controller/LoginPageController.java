@@ -70,6 +70,7 @@ public class LoginPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
+            stage.setFullScreen(true);
             sessionModel.setUser(user);
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,6 +82,7 @@ public class LoginPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
+            stage.setFullScreen(true);
             sessionModel.setUser(user);
         } catch (IOException e) {
             e.printStackTrace();

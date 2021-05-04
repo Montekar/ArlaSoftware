@@ -1,26 +1,18 @@
 package gui.controller;
 
 import be.Department;
-import be.users.User;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
@@ -33,10 +25,12 @@ public class AdminPageController implements Initializable {
     private ChoiceBox<Department> chooseDepartment;
 
     private final DepartmentModel departmentModel = new DepartmentModel();
+    @FXML
+    private FlowPane departmentScreens;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        chooseDepartment.setItems(departmentModel.getDepartmentsOverview());
+        chooseDepartment.setItems(departmentModel.getDepartments());
         chooseDepartment.getSelectionModel().selectFirst();
     }
 
@@ -61,8 +55,17 @@ public class AdminPageController implements Initializable {
         System.exit(0);
     }
 
+    //Load nodes to the flowpane
+    public void loadWindows(List<Node> nodes) {
+        departmentScreens.getChildren().removeAll();
+
+        for (Node n : nodes) {
+            departmentScreens.getChildren().add(n);
+        }
+    }
+
     @FXML
-    public void openSettings(ActionEvent event){
+    public void openSettings(ActionEvent event) {
 
     }
 
