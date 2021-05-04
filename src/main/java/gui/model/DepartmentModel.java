@@ -17,7 +17,7 @@ public class DepartmentModel {
         departmentsOverview = FXCollections.observableArrayList(departmentManager.getAllDepartments());
     }
 
-    public void EditDepartment(int departmentID, String username) {
+    public void editDepartment(int departmentID, String username) {
         departmentManager.editDepartment(departmentID, username);
         updateDepartments();
     }
