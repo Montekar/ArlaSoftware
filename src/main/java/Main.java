@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/UserMockView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
         primaryStage.sceneProperty().addListener((observableValue, oldScene, newScene) -> {
