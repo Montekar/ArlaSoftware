@@ -5,12 +5,18 @@ import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,20 +24,21 @@ import java.util.ResourceBundle;
 public class AdminPageController implements Initializable {
     @FXML
     private Button hideButton;
-
+    @FXML
+    private Button settingsButton;
     @FXML
     private Button minMaxButton;
     @FXML
     private ChoiceBox<Department> chooseDepartment;
 
-    private final DepartmentModel departmentModel = new DepartmentModel();
+    //private final DepartmentModel departmentModel = new DepartmentModel();
     @FXML
     private FlowPane departmentScreens;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        chooseDepartment.setItems(departmentModel.getDepartments());
-        chooseDepartment.getSelectionModel().selectFirst();
+        //chooseDepartment.setItems(departmentModel.getDepartments());
+        //chooseDepartment.getSelectionModel().selectFirst();
     }
 
     public void hideWindow(ActionEvent actionEvent) {
@@ -65,8 +72,14 @@ public class AdminPageController implements Initializable {
     }
 
     @FXML
-    public void openSettings(ActionEvent event) {
-
+    public void openSettings(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage=(Stage) settingsButton.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

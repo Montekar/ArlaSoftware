@@ -35,14 +35,14 @@ public class SettingsPopUpController implements Initializable {
     @FXML
     private ChoiceBox<Department> chooseDepartment;
 
-    private final DepartmentModel departmentModel = new DepartmentModel();
+    //private final DepartmentModel departmentModel = new DepartmentModel();
 
     private final DepartmentManager departmentManager = new DepartmentManager();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        chooseDepartment.setItems(departmentModel.getDepartments());
-        chooseDepartment.getSelectionModel().selectFirst();
+        //chooseDepartment.setItems(departmentModel.getDepartments());
+        //chooseDepartment.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -55,12 +55,12 @@ public class SettingsPopUpController implements Initializable {
 
     @FXML
     void createDepartment(ActionEvent event) {
-        departmentManager.createDepartment(newDepartmentNameField.getText());
+        //departmentModel.createDepartment(newDepartmentNameField.getText());
     }
 
     @FXML
     void deleteDepartment(ActionEvent event) {
-        departmentManager.deleteDepartment(chooseDepartment.getSelectionModel().getSelectedIndex());
+        //departmentModel.deleteDepartment(chooseDepartment.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
