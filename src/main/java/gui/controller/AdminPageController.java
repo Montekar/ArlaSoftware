@@ -80,6 +80,7 @@ public class AdminPageController implements Initializable {
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(mainStage);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.show();
 
