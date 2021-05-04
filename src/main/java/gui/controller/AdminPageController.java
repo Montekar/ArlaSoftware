@@ -35,7 +35,7 @@ public class AdminPageController implements Initializable {
     @FXML
     private FlowPane departmentScreens;
 
-    public AdminPageController(){
+    public AdminPageController() {
         departmentModel = new DepartmentModel();
     }
 
@@ -74,14 +74,15 @@ public class AdminPageController implements Initializable {
     @FXML
     public void openSettings(ActionEvent event) throws IOException {
         Stage mainStage = (Stage) settingsButton.getScene().getWindow();
-        mainStage.setAlwaysOnTop(true);
 
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(mainStage);
+        stage.setResizable(false);
         stage.show();
+
     }
 
 
