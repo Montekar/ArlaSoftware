@@ -15,7 +15,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
         primaryStage.sceneProperty().addListener((observableValue, oldScene, newScene) -> {
@@ -32,7 +33,7 @@ public class Main extends Application {
                 }
             });
         });
-
+        primaryStage.setResizable(true);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

@@ -41,7 +41,7 @@ public class SettingsPopUpController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        chooseDepartment.setItems(departmentModel.getDepartmentsOverview());
+        chooseDepartment.setItems(departmentModel.getDepartments());
         chooseDepartment.getSelectionModel().selectFirst();
     }
 
