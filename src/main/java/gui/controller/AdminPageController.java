@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,6 +80,7 @@ public class AdminPageController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

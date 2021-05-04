@@ -1,6 +1,8 @@
 package gui.controller;
 
+import be.users.Department;
 import bll.DepartmentManager;
+import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,37 +30,52 @@ public class SettingsPopUpController implements Initializable {
     private Button editDepartmentButton;
     @FXML
     private Button deleteDepartmentButton;
+    @FXML
+    private ChoiceBox<Department> choiceDepartment;
 
-    //private final DepartmentModel departmentModel = new DepartmentModel();
-
-    private final DepartmentManager departmentManager = new DepartmentManager();
+    private final DepartmentModel departmentModel = new DepartmentModel();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //chooseDepartment.setItems(departmentModel.getDepartments());
-        //chooseDepartment.getSelectionModel().selectFirst();
+        choiceDepartment.setItems(departmentModel.getDepartments());
+        choiceDepartment.getSelectionModel().selectFirst();
     }
 
     @FXML
     void closeWindow(ActionEvent event) {
         Stage stage = (Stage) deleteDepartmentButton.getScene().getWindow();
         stage.close();
-        Platform.exit();
-        System.exit(0);
     }
 
     @FXML
     void createDepartment(ActionEvent event) {
-        //departmentModel.createDepartment(newDepartmentNameField.getText());
+        departmentModel.createDepartment(newDepartmentNameField.getText(), newDepartmentPasswordField.getText());
+        newDepartmentNameField.setText("");
+        newDepartmentNameField.setPromptText("Department created!");
+        newDepartmentPasswordField.setText("");
+
+        choiceDepartment.getSelectionModel().selectLast();
     }
 
     @FXML
     void deleteDepartment(ActionEvent event) {
-        //departmentModel.deleteDepartment(chooseDepartment.getSelectionModel().getSelectedIndex());
+        departmentModel.deleteDepartment(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+        editDepartmentNameField.setPromptText("Department deleted!");
+
+        choiceDepartment.getSelectionModel().selectFirst();
     }
 
     @FXML
     void editDepartment(ActionEvent event) {
+        int selectedIndex = choiceDepartment.getSelectionModel().getSelectedIndex();
+
+        departmentModel.editDepartment
+                (choiceDepartment.getSelectionModel().getSelectedItem().getId(), editDepartmentNameField.getText());
+        editDepartmentNameField.setText("");
+        editDepartmentNameField.setPromptText("Department changed!");
+
+        choiceDepartment.getSelectionModel().select(selectedIndex);
+
 
     }
 }

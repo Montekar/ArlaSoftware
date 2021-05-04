@@ -31,7 +31,7 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="chooseDepartment" prefWidth="150.0" />
+                              <ChoiceBox fx:id="choiceDepartment" prefWidth="150.0" />
                            </children>
                            <padding>
                               <Insets bottom="7.0" />
