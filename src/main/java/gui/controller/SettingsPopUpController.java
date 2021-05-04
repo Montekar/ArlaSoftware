@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.Department;
+import bll.DepartmentManager;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -17,24 +20,24 @@ import java.util.ResourceBundle;
 public class SettingsPopUpController implements Initializable {
 
     @FXML
-    private Text editDepartmentNameField;
-
+    private TextField editDepartmentNameField;
     @FXML
-    private Button editDepartmentButton;
-
+    private TextField newDepartmentNameField;
     @FXML
-    private Button deleteDepartmentButton;
-
-    @FXML
-    private Text newDepartmentNameField;
-
+    private PasswordField newDepartmentPasswordField;
     @FXML
     private Button createDepartmentButton;
+    @FXML
+    private Button editDepartmentButton;
+    @FXML
+    private Button deleteDepartmentButton;
 
     @FXML
     private ChoiceBox<Department> chooseDepartment;
 
     private final DepartmentModel departmentModel = new DepartmentModel();
+
+    private final DepartmentManager departmentManager = new DepartmentManager();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,12 +55,12 @@ public class SettingsPopUpController implements Initializable {
 
     @FXML
     void createDepartment(ActionEvent event) {
-
+        departmentManager.createDepartment(newDepartmentNameField.getText());
     }
 
     @FXML
     void deleteDepartment(ActionEvent event) {
-
+        departmentManager.deleteDepartment(chooseDepartment.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
