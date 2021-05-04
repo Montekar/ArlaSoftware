@@ -1,8 +1,15 @@
 package bll;
 
-public class WebViewLoader implements ViewLoader {
-    @Override
-    public void loadView(String path) {
+import javafx.scene.Node;
+import javafx.scene.web.WebView;
 
+public class WebViewLoader implements IViewLoader {
+
+
+    @Override
+    public Node loadView(String path) {
+        WebView webView = new WebView();
+        webView.getEngine().load(path);
+        return webView;
     }
 }
