@@ -23,6 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import refresh.RefreshButton;
 
 public class UserMockController implements Initializable {
 
@@ -33,6 +34,7 @@ public class UserMockController implements Initializable {
     private ZoomPane csvPane = new ZoomPane();
     private ZoomPane excelPane = new ZoomPane();
     private ZoomPane pdfPane = new ZoomPane();
+    private RefreshButton refreshButton = new RefreshButton();
 
     private IViewLoader webView;
     private IViewLoader csvView;
@@ -52,7 +54,7 @@ public class UserMockController implements Initializable {
         excelPane.getChildren().add( excelView.loadView("src/main/resources/mockFiles/MOCK_DATA.xls"));
         zoomLevel.put(csvPane,1);
 
-        mainPane.getChildren().addAll(webPane,csvPane,excelPane);
+        mainPane.getChildren().addAll(webPane,csvPane,excelPane,refreshButton);
        // idr
        /* csvFile.setOnKeyPressed(keyEvent -> {
            // int zoom = zoomLevel.get(csvFile);
