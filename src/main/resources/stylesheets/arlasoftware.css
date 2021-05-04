@@ -51,38 +51,18 @@
 }
 
 
-
-
-
-.choice-box{
-    -fx-background-color:  #5ed656;
-    -fx-cursor: hand;
-    -fx-pref-height: 30px;
-    -fx-pref-width: 120px;
+.choice-box .label {
     -fx-text-fill: white;
-    -fx-font-family: Arial;
+    -fx-pref-width: 120;
+    -fx-font-size: 12;
     -fx-font-weight: bold;
-    -fx-font-size: 12px;
 }
-
-.choice-box:hover {
+.choice-box {
     -fx-background-color: #56c44f;
+    -fx-control-inner-background: #56c44f;
+    -fx-selection-bar: #008000;
+    -fx-selection-bar-text-fill: "white";
 }
-
-.choice-box.label {
-    -fx-pref-width: 107px;
-}
-
-.choice-box:focused {
-    -fx-pref-width: 120px;
-}
-
-.choice-box:focused .label {
-    -fx-pref-width: 88px;
-    -fx-text-fill: black;
-}
-
-
 
 .menu-button{
     -fx-background-color:  #5ed656;
