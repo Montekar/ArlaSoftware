@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -43,8 +44,11 @@ public class AdminPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        choiceDepartment.setOnAction(this::changeDepartment);
         choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
         choiceDepartment.getSelectionModel().selectFirst();
+        departmentName.setText("Department");
     }
 
     public void hideWindow(ActionEvent actionEvent) {
@@ -114,5 +118,11 @@ public class AdminPageController implements Initializable {
     }
 
     public void deleteItem(ActionEvent actionEvent) {
+    }
+    @FXML
+    private void changeDepartment(ActionEvent event) {
+        System.out.println("Clicked Lol");
+        departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().toString());
+
     }
 }
