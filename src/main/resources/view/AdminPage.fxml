@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/arlasoftware.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/arlasoftware.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox style="-fx-background-color: #3D4956;" BorderPane.alignment="CENTER">
          <children>
@@ -95,7 +95,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="deparmentName" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="726.0" text="Department">
+                  <Label fx:id="departmentName" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="726.0" text="Department">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
