@@ -52,10 +52,20 @@ public class SettingsPopUpController implements Initializable {
 
     @FXML
     void createDepartment(ActionEvent event) {
-        departmentModel.createDepartment(newDepartmentNameField.getText(), newDepartmentPasswordField.getText());
-        newDepartmentNameField.setText("");
-        newDepartmentNameField.setPromptText("Department created!");
-        newDepartmentPasswordField.setText("");
+        String username = newDepartmentNameField.getText();
+        String password = newDepartmentPasswordField.getText();
+        if (!username.isBlank() && !password.isBlank()) {
+            departmentModel.createDepartment(username, password);
+            newDepartmentNameField.setText("");
+            newDepartmentNameField.setPromptText("Department created!");
+            newDepartmentPasswordField.setText("");
+        } else if (username.isBlank() && password.isBlank()){
+            newDepartmentNameField.setPromptText("Fill the blank fields");
+        } else if (username.isEmpty()) {
+            newDepartmentNameField.setPromptText("Fill in the username");
+        } else if (password.isEmpty()) {
+            newDepartmentPasswordField.setPromptText("Fill in the password");
+        }
 
         choiceDepartment.getSelectionModel().selectLast();
     }
