@@ -25,6 +25,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import refresh.RefreshButton;
+import refresh.RefreshTimer;
 
 public class UserMockController implements Initializable {
 
@@ -44,9 +45,11 @@ public class UserMockController implements Initializable {
     private final int zoomIn = 107;
     private final int zoomOut = 109;
     private Map<Pane, Integer> zoomLevel = new HashMap<>();
+    RefreshTimer refreshTimer = new RefreshTimer();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        refreshTimer.runTimer();
         webView = new WebViewLoader();
         csvView = new CSVLoader();
         excelView = new ExcelLoader();
