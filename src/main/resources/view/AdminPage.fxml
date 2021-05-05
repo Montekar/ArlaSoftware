@@ -85,7 +85,7 @@
                         <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="158.0" HBox.hgrow="NEVER">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="206.0" HBox.hgrow="NEVER">
                      <children>
                         <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
                         <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
