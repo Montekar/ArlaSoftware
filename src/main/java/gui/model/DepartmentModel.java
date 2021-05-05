@@ -5,14 +5,22 @@ import bll.DepartmentManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentModel {
     private final DepartmentManager departmentManager;
     private ObservableList<Department> departmentsOverview;
 
-    public DepartmentModel() {
+    private static DepartmentModel INSTANCE;
+
+    public static DepartmentModel getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new DepartmentModel();
+        }
+        return INSTANCE;
+    }
+
+    private DepartmentModel() {
         departmentManager = new DepartmentManager();
         departmentsOverview = FXCollections.observableArrayList(departmentManager.getAllDepartments());
     }
@@ -35,6 +43,7 @@ public class DepartmentModel {
     private void updateDepartments() {
         departmentsOverview.clear();
         departmentsOverview.addAll(departmentManager.getAllDepartments());
+        System.out.println(departmentsOverview);
     }
 
     public Department getDepartment(int departmentID) {
@@ -45,7 +54,7 @@ public class DepartmentModel {
         return getAllDepartments();
     }
 
-    public ObservableList<Department> getDepartments() {
+    public ObservableList<Department> getDepartmentsObservable() {
         return departmentsOverview;
     }
 }
