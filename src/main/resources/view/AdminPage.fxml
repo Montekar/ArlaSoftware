@@ -42,8 +42,9 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Label id="label" text="Department screens" />
+                  <Label id="label" text="Department" />
                   <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
+                  <Label id="label" text="Window" />
                   <MenuButton alignment="CENTER" mnemonicParsing="false" text="Add to screen" textFill="WHITE">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Image" />
@@ -81,10 +82,10 @@
                         </Label>
                      </children>
                      <padding>
-                        <Insets left="30.0" />
+                        <Insets left="40.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="68.0" prefWidth="244.0" HBox.hgrow="NEVER">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="158.0" HBox.hgrow="NEVER">
                      <children>
                         <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
                         <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
