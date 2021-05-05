@@ -41,6 +41,7 @@ public class SettingsPopUpController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
         choiceDepartment.getSelectionModel().selectFirst();
+
     }
 
     @FXML
