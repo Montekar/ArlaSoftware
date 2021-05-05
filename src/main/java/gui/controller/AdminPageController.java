@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
     @FXML
+    private Label departmentName;
+    @FXML
     private Button hideButton;
     @FXML
     private Button settingsButton;
