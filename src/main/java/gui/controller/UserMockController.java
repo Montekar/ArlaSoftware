@@ -75,6 +75,7 @@ public class UserMockController implements Initializable {
         if (keyCode == zoomIn && zoom < 2){
             selectedPane.setScaleX(zoom);
             selectedPane.setScaleY(zoom);
+            selectedPane.setPrefWidth(selectedPane.getWidth() * zoom);
             selectedPane.setZoom(selectedPane.getZoom()+0.1);
         }else if(keyCode == zoomOut && zoom > 0.5){
             selectedPane.setScaleX(zoom);
