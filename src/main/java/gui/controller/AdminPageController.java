@@ -36,12 +36,12 @@ public class AdminPageController implements Initializable {
     private FlowPane departmentScreens;
 
     public AdminPageController() {
-        departmentModel = new DepartmentModel();
+        departmentModel = DepartmentModel.getInstance();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceDepartment.setItems(departmentModel.getDepartments());
+        choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
         choiceDepartment.getSelectionModel().selectFirst();
     }
 
