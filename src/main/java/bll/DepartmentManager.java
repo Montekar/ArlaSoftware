@@ -1,16 +1,21 @@
 package bll;
 
 import be.users.Department;
+import bll.helper.HashingHelper;
+import bll.helper.IHashingHelper;
 import dal.IDepartmentRepository;
 import dal.db.DBDepartmentRepository;
 
+import java.security.MessageDigest;
 import java.util.List;
 
 public class DepartmentManager {
     IDepartmentRepository departmentRepository;
+    IHashingHelper hash;
 
     public DepartmentManager() {
         departmentRepository = new DBDepartmentRepository();
+        hash = new HashingHelper();
     }
 
     public Department getDepartment(int departmentID) {
@@ -26,7 +31,8 @@ public class DepartmentManager {
     }
 
     public void createDepartment(String username, String password) {
-        departmentRepository.createDepartment(username, password);
+
+        departmentRepository.createDepartment(username, hash.hashPassword(password));
     }
 
     public void deleteDepartment(int departmentID) {
