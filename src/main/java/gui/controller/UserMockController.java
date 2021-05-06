@@ -1,6 +1,7 @@
 package gui.controller;
 
 import bll.*;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.*;
 import java.util.*;
 
 import javafx.scene.control.ListView;
@@ -24,6 +26,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import refresh.Notification;
 import refresh.RefreshButton;
 import refresh.RefreshTimer;
 
@@ -37,6 +40,7 @@ public class UserMockController implements Initializable {
     private ZoomPane excelPane = new ZoomPane();
     private ZoomPane pdfPane = new ZoomPane();
     private RefreshButton refreshButton = new RefreshButton();
+    private Notification notification;
 
     private IViewLoader webView;
     private IViewLoader csvView;
@@ -49,6 +53,7 @@ public class UserMockController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        notification = new Notification();
         refreshTimer.runTimer();
         webView = new WebViewLoader();
         csvView = new CSVLoader();
@@ -68,6 +73,41 @@ public class UserMockController implements Initializable {
         });
 
 
+        Thread listenerThread = new Thread(() -> {
+            /*Platform.runLater(() -> {
+                listenForChanges();
+            });*/
+            listenForChanges();
+        });
+        listenerThread.start();
+
+
+    }
+
+    private void listenForChanges() {
+        try {
+            WatchService watchService = FileSystems.getDefault().newWatchService();
+            Path path = Paths.get("src/main/resources/mockFiles/");
+            path.register(watchService,
+                    StandardWatchEventKinds.ENTRY_DELETE,
+                    StandardWatchEventKinds.ENTRY_MODIFY);
+            while (true){
+                WatchKey key = watchService.take();
+                for (WatchEvent event: key.pollEvents()){
+                    System.out.println(event.kind() + ": " + event.context());
+                }
+                boolean valid = key.reset();
+                if (!valid){
+                    break;
+                }
+            }
+
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void zoomNode(ZoomPane selectedPane, int keyCode) {
