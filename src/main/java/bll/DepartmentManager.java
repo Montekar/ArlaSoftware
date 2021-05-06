@@ -5,8 +5,6 @@ import bll.helper.HashingHelper;
 import bll.helper.IHashingHelper;
 import dal.IDepartmentRepository;
 import dal.db.DBDepartmentRepository;
-
-import java.security.MessageDigest;
 import java.util.List;
 
 public class DepartmentManager {

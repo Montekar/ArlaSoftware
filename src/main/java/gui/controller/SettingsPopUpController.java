@@ -23,10 +23,6 @@ public class SettingsPopUpController implements Initializable {
     @FXML
     private PasswordField newDepartmentPasswordField;
     @FXML
-    private Button createDepartmentButton;
-    @FXML
-    private Button editDepartmentButton;
-    @FXML
     private Button deleteDepartmentButton;
     @FXML
     private ChoiceBox<Department> choiceDepartment;
