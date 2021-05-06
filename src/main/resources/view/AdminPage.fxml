@@ -34,7 +34,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="182.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label id="label" text="Main" />
-                  <Button fx:id="dashboardButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Dashboard" textFill="WHITE">
+                  <Button fx:id="dashboardButton" mnemonicParsing="false" onAction="#openDashboard" prefHeight="26.0" prefWidth="110.0" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
@@ -43,7 +43,7 @@
                      </opaqueInsets>
                   </Button>
                   <Label id="label" text="Department" />
-                  <ChoiceBox id="label" fx:id="choiceDepartment"  prefWidth="150.0" />
+                  <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
                   <Label id="label" text="Window" />
                   <MenuButton alignment="CENTER" mnemonicParsing="false" text="Add to screen" textFill="WHITE">
                     <items>
