@@ -12,9 +12,9 @@
    <top>
       <Pane prefHeight="64.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="close" layoutX="773.0" layoutY="20.0" mnemonicParsing="false" onAction="#onClose" text="Minimize" />
+            <Button fx:id="close" layoutX="773.0" layoutY="20.0" mnemonicParsing="false"  onAction="#onMinimize" text="Minimize" />
             <Button fx:id="show" layoutX="852.0" layoutY="20.0" mnemonicParsing="false" onAction="#fullScreen" text="Full Screen" />
-            <Button fx:id="min" layoutX="937.0" layoutY="20.0" mnemonicParsing="false" onAction="#onMinimize" text="Close" />
+            <Button fx:id="min" layoutX="937.0" layoutY="20.0" mnemonicParsing="false" onAction="#onClose" text="Close" />
          </children>
       </Pane>
    </top>
