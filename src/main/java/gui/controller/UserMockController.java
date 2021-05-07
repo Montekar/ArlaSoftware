@@ -3,6 +3,7 @@ package gui.controller;
 import bll.*;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,7 +13,9 @@ import java.net.URL;
 import java.nio.file.*;
 import java.util.*;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.FlowPane;
@@ -20,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.scene.web.WebView;
 
+import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -34,6 +38,15 @@ public class UserMockController implements Initializable {
 
     @FXML
     FlowPane mainPane;
+    
+    @FXML
+    Button min;
+    
+    @FXML
+    Button show;
+    
+    @FXML
+    Button close;
 
     private ZoomPane webPane = new ZoomPane();
     private ZoomPane csvPane = new ZoomPane();
@@ -123,4 +136,22 @@ public class UserMockController implements Initializable {
             selectedPane.setZoom(selectedPane.getZoom()-0.1);
         }
     }
+
+    public void onMinimize(ActionEvent actionEvent) {
+        Stage stage = (Stage) min.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void fullScreen(ActionEvent actionEvent) {
+        Stage stage = (Stage) show.getScene().getWindow();
+        stage.setFullScreen(!stage.isFullScreen());
+    }
+
+    public void onClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
+        Platform.exit();
+        System.exit(0);
+    }
+
 }
