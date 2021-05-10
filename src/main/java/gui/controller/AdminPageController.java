@@ -12,12 +12,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,7 +37,7 @@ public class AdminPageController implements Initializable {
 
     private final DepartmentModel departmentModel;
     @FXML
-    private FlowPane departmentScreens;
+    private GridPane contentGrid;
 
     public AdminPageController() {
         departmentModel = DepartmentModel.getInstance();
@@ -47,6 +49,7 @@ public class AdminPageController implements Initializable {
         choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
         choiceDepartment.getSelectionModel().selectFirst();
         departmentName.setText("Dashboard");
+        loadContent(new ArrayList<>());
     }
 
     public void hideWindow(ActionEvent actionEvent) {
@@ -66,13 +69,9 @@ public class AdminPageController implements Initializable {
         System.exit(0);
     }
 
-    //Load nodes to the flowpane
-    public void loadWindows(List<Node> nodes) {
-        departmentScreens.getChildren().removeAll();
-
-        for (Node n : nodes) {
-            departmentScreens.getChildren().add(n);
-        }
+    //Load nodes to the gridpane
+    public void loadContent(List<Node> nodes) {
+        //TODO
     }
 
     @FXML
@@ -117,6 +116,7 @@ public class AdminPageController implements Initializable {
 
     public void deleteItem(ActionEvent actionEvent) {
     }
+
     @FXML
     private void changeDepartment(ActionEvent event) {
         departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().toString());

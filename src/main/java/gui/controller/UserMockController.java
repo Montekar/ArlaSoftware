@@ -66,6 +66,7 @@ public class UserMockController implements Initializable {
         excelView = new ExcelLoader();
 
         viewArrayList = loader.getScreenParts("cocio");
+        /*
         for (View view : viewArrayList){
             if(view.getType().equals("webView")){
                 webPane.getChildren().add( webView.loadView(view.getPath()));
@@ -75,7 +76,7 @@ public class UserMockController implements Initializable {
                 excelPane.getChildren().add( excelView.loadView("src/main/resources/mockFiles/MOCK_DATA.xls"));
             }
         }
-
+        */
 
         zoomLevel.put(csvPane,1);
         mainPane.getChildren().addAll(webPane,csvPane,excelPane,refreshButton);

@@ -3,7 +3,7 @@ package dal.db;
 import be.users.Admin;
 import be.users.Department;
 import be.users.User;
-import dal.IAuthentication;
+import dal.IAuthenticationRepository;
 import error.ErrorHandler;
 
 import java.sql.Connection;
@@ -11,11 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBAuthentication implements IAuthentication {
+public class DBAuthenticationRepository implements IAuthenticationRepository {
     private DatabaseConnection connection;
     private ErrorHandler errorHandler;
 
-    public DBAuthentication() {
+    public DBAuthenticationRepository() {
         connection = new DatabaseConnection();
         errorHandler = new ErrorHandler();
     }
