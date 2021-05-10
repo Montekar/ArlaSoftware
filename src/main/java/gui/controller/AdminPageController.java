@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.users.Department;
+import gui.model.ContentModel;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -34,8 +35,8 @@ public class AdminPageController implements Initializable {
     private Button minMaxButton;
     @FXML
     private ChoiceBox<Department> choiceDepartment;
-
     private final DepartmentModel departmentModel;
+    private final ContentModel contentModel = ContentModel.getInstance();
     @FXML
     private GridPane contentGrid;
 
@@ -47,9 +48,7 @@ public class AdminPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceDepartment.setOnAction(this::changeDepartment);
         choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
-        choiceDepartment.getSelectionModel().selectFirst();
         departmentName.setText("Dashboard");
-        loadContent(new ArrayList<>());
     }
 
     public void hideWindow(ActionEvent actionEvent) {
@@ -70,7 +69,7 @@ public class AdminPageController implements Initializable {
     }
 
     //Load nodes to the gridpane
-    public void loadContent(List<Node> nodes) {
+    public void loadContent() {
         //TODO
     }
 
@@ -120,7 +119,8 @@ public class AdminPageController implements Initializable {
     @FXML
     private void changeDepartment(ActionEvent event) {
         departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().toString());
-
+        contentModel.updateContent(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+        loadContent();
     }
 
     public void openDashboard(ActionEvent actionEvent) {

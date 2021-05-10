@@ -25,7 +25,7 @@ public class DBContentRepository implements IContentRepository {
     public List<View> getContent(int departmentID) {
         List<View> content = new ArrayList<>();
         try (Connection con = connection.getConnection()) {
-            String sql = "Select * From Content WHERE ID = ?";
+            String sql = "Select * From Content WHERE DepartmentID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, departmentID);
             if (statement.execute()) {
@@ -36,7 +36,7 @@ public class DBContentRepository implements IContentRepository {
                 }
             }
         } catch (SQLException ex) {
-            errorHandler.errorDevelopmentInfo("Issue getting departments ", ex);
+            errorHandler.errorDevelopmentInfo("Issue getting content", ex);
         }
         return content;
     }
