@@ -1,10 +1,13 @@
 package gui.controller;
 
+import be.View;
 import bll.*;
+import bll.vloader.CSVLoader;
+import bll.vloader.ExcelLoader;
+import bll.vloader.IViewLoader;
+import bll.vloader.WebViewLoader;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -14,22 +17,10 @@ import java.nio.file.*;
 import java.util.*;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Scale;
-import javafx.scene.web.WebView;
 
 import javafx.stage.Stage;
-import javafx.util.Pair;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
 import refresh.Notification;
 import refresh.RefreshButton;
 import refresh.RefreshTimer;
@@ -63,6 +54,8 @@ public class UserMockController implements Initializable {
     private final int zoomOut = 109;
     private Map<Pane, Integer> zoomLevel = new HashMap<>();
     RefreshTimer refreshTimer = new RefreshTimer();
+    private Loader loader = new Loader();
+    private ArrayList<View> viewArrayList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,9 +64,19 @@ public class UserMockController implements Initializable {
         webView = new WebViewLoader();
         csvView = new CSVLoader();
         excelView = new ExcelLoader();
-        webPane.getChildren().add( webView.loadView("https://www.google.com"));
-        csvPane.getChildren().add(csvView.loadView("src/main/resources/mockFiles/MOCK_DATA.csv"));
-        excelPane.getChildren().add( excelView.loadView("src/main/resources/mockFiles/MOCK_DATA.xls"));
+
+        viewArrayList = loader.getScreenParts("cocio");
+        for (View view : viewArrayList){
+            if(view.getType().equals("webView")){
+                webPane.getChildren().add( webView.loadView(view.getPath()));
+            }else if(view.getType().equals("csvPane")){
+                csvPane.getChildren().add(csvView.loadView(view.getPath()));
+            }else if(view.getType().equals("excelPane")){
+                excelPane.getChildren().add( excelView.loadView("src/main/resources/mockFiles/MOCK_DATA.xls"));
+            }
+        }
+
+
         zoomLevel.put(csvPane,1);
         mainPane.getChildren().addAll(webPane,csvPane,excelPane,refreshButton);
 
@@ -114,7 +117,6 @@ public class UserMockController implements Initializable {
                     break;
                 }
             }
-
 
         } catch (IOException ioException) {
             ioException.printStackTrace();

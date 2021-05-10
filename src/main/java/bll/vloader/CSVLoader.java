@@ -1,5 +1,6 @@
-package bll;
+package bll.vloader;
 
+import bll.vloader.IViewLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 
