@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DepartmentModel {
     private final DepartmentManager departmentManager;
-    private ObservableList<Department> departmentsOverview;
+    private final ObservableList<Department> departmentsOverview;
 
     private static DepartmentModel INSTANCE;
 
@@ -43,7 +43,6 @@ public class DepartmentModel {
     private void updateDepartments() {
         departmentsOverview.clear();
         departmentsOverview.addAll(departmentManager.getAllDepartments());
-        System.out.println(departmentsOverview);
     }
 
     public Department getDepartment(int departmentID) {

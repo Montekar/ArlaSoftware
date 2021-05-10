@@ -21,7 +21,7 @@ public class LoadDepartmentParts {
         while (scanner.hasNext()){
             String data[] = scanner.nextLine().split(" ");
             System.out.println(data.length);
-            view = new View(data[0], data[1]);
+           /// view = new View(data[0], data[1]);
             viewArrayList.add(view);
         }
         } catch (FileNotFoundException e) {

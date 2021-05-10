@@ -3,15 +3,15 @@ package bll;
 import be.users.User;
 import bll.helper.HashingHelper;
 import bll.helper.IHashingHelper;
-import dal.IAuthentication;
-import dal.db.DBAuthentication;
+import dal.IAuthenticationRepository;
+import dal.db.DBAuthenticationRepository;
 
 public class AuthenticationManager {
-    private final IAuthentication authentication;
+    private final IAuthenticationRepository authentication;
     IHashingHelper hash;
 
     public AuthenticationManager() {
-        authentication = new DBAuthentication();
+        authentication = new DBAuthenticationRepository();
         hash = new HashingHelper();
     }
 
