@@ -1,5 +1,6 @@
-package bll;
+package bll.vloader;
 
+import bll.vloader.IViewLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -12,7 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class ExcelLoader implements IViewLoader{
+public class ExcelLoader implements IViewLoader {
     @Override
     public Node loadView(String path) {
         ListView listView = new ListView();

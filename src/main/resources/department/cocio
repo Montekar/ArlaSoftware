@@ -1,0 +1,3 @@
+webView https://www.google.com
+csvPane src/main/resources/mockFiles/MOCK_DATA.csv
+excelPane src/main/resources/mockFiles/MOCK_DATA.xls
