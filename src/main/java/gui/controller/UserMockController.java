@@ -56,6 +56,8 @@ public class UserMockController implements Initializable {
     RefreshTimer refreshTimer = new RefreshTimer();
     private Loader loader = new Loader();
     private ArrayList<View> viewArrayList;
+    private ArrayList<String> pathArrayList = new ArrayList<>();
+    private ArrayList<Object> fileArrayList = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,6 +70,10 @@ public class UserMockController implements Initializable {
         viewArrayList = loader.getScreenParts("cocio");
         /*
         for (View view : viewArrayList){
+            File file = new File(view.getPath());
+            Path path = Paths.get(view.getPath());
+            pathArrayList.add(file.getParent());
+            fileArrayList.add(path.getFileName());
             if(view.getType().equals("webView")){
                 webPane.getChildren().add( webView.loadView(view.getPath()));
             }else if(view.getType().equals("csvPane")){
@@ -104,21 +110,27 @@ public class UserMockController implements Initializable {
     private void listenForChanges() {
         try {
             WatchService watchService = FileSystems.getDefault().newWatchService();
-            Path path = Paths.get("src/main/resources/mockFiles/");
-            path.register(watchService,
-                    StandardWatchEventKinds.ENTRY_DELETE,
-                    StandardWatchEventKinds.ENTRY_MODIFY);
-            while (true){
-                WatchKey key = watchService.take();
-                for (WatchEvent event: key.pollEvents()){
-                    System.out.println(event.kind() + ": " + event.context());
-                }
-                boolean valid = key.reset();
-                if (!valid){
-                    break;
-                }
+            for (int i = 0; i < pathArrayList.size(); i++){
+                Path path = Path.of(String.valueOf(pathArrayList.get(i)));
+                path.register(watchService,
+                        StandardWatchEventKinds.ENTRY_DELETE,
+                        StandardWatchEventKinds.ENTRY_MODIFY);
             }
-
+                while (true){
+                    WatchKey key = watchService.take();
+                    for (WatchEvent event: key.pollEvents()){
+                        for (Object file : fileArrayList){
+                            if (file.equals(event.context())){
+                                System.out.println("Changes have been made");
+                                System.out.println(event.kind() + ": " + event.context() );
+                            }
+                        }
+                    }
+                    boolean valid = key.reset();
+                    if (!valid){
+                        break;
+                    }
+                }
         } catch (IOException ioException) {
             ioException.printStackTrace();
         } catch (InterruptedException e) {
