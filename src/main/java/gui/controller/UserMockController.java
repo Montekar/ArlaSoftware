@@ -2,10 +2,8 @@ package gui.controller;
 
 import be.View;
 import bll.*;
-import bll.vloader.CSVLoader;
-import bll.vloader.ExcelLoader;
-import bll.vloader.IViewLoader;
-import bll.vloader.WebViewLoader;
+import bll.vloader.*;
+import gui.model.SessionModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,18 +15,28 @@ import java.nio.file.*;
 import java.util.*;
 
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.validator.routines.UrlValidator;
 import refresh.Notification;
 import refresh.RefreshButton;
 import refresh.RefreshTimer;
 
 public class UserMockController implements Initializable {
+    enum fileType {
+        CSV,
+        XLS,
+        XLSX,
+        PDF,
+        JPG
+    }
 
     @FXML
-    FlowPane mainPane;
+    GridPane mainPane;
     
     @FXML
     Button min;
@@ -49,6 +57,7 @@ public class UserMockController implements Initializable {
     private IViewLoader webView;
     private IViewLoader csvView;
     private IViewLoader excelView;
+    private IViewLoader imageView;
 
     private final int zoomIn = 107;
     private final int zoomOut = 109;
@@ -58,43 +67,54 @@ public class UserMockController implements Initializable {
     private ArrayList<View> viewArrayList;
     private ArrayList<String> pathArrayList = new ArrayList<>();
     private ArrayList<Object> fileArrayList = new ArrayList<>();
+    private SessionModel sessionModel = SessionModel.getInstance();
+    private UrlValidator urlValidator;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public UserMockController(){
         notification = new Notification();
         refreshTimer.runTimer();
         webView = new WebViewLoader();
         csvView = new CSVLoader();
         excelView = new ExcelLoader();
+        urlValidator = new UrlValidator();
+        imageView = new ImageLoader();
+    }
 
-        viewArrayList = loader.getScreenParts("cocio");
-        /*
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewArrayList = loader.getScreenParts(25);
         for (View view : viewArrayList){
-            File file = new File(view.getPath());
-            Path path = Paths.get(view.getPath());
-            pathArrayList.add(file.getParent());
-            fileArrayList.add(path.getFileName());
-            if(view.getType().equals("webView")){
-                webPane.getChildren().add( webView.loadView(view.getPath()));
-            }else if(view.getType().equals("csvPane")){
-                csvPane.getChildren().add(csvView.loadView(view.getPath()));
-            }else if(view.getType().equals("excelPane")){
-                excelPane.getChildren().add( excelView.loadView("src/main/resources/mockFiles/MOCK_DATA.xls"));
+            if(urlValidator.isValid(view.getPath())){
+                mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
+            }else if (new File(view.getPath()).isFile()){
+                File file = new File(view.getPath());
+                Path path = Paths.get(view.getPath());
+                pathArrayList.add(file.getParent());
+                fileArrayList.add(path.getFileName());
+                String fileExtension = FilenameUtils.getExtension(view.getPath()).toUpperCase();
+                if (fileType.CSV.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+                    mainPane.add(csvView.loadView(view.getPath()), view.getRow(),view.getColumn());
+                }else if (fileType.XLS.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+                    mainPane.add(excelView.loadView(view.getPath()), view.getRow(),view.getColumn());
+                }else if (fileType.PDF.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+
+                }else if (fileType.JPG.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+                    mainPane.add(imageView.loadView(view.getPath()), view.getRow(), view.getColumn());
+                }
+            }else {
+                System.out.println("Unsupported item");
             }
         }
-        */
 
-        zoomLevel.put(csvPane,1);
-        mainPane.getChildren().addAll(webPane,csvPane,excelPane,refreshButton);
 
-        csvPane.setOnKeyPressed(keyEvent -> {
+       /* csvPane.setOnKeyPressed(keyEvent -> {
             zoomNode(csvPane, keyEvent.getCode().getCode());
         });
 
         excelPane.setOnKeyPressed(keyEvent -> {
             zoomNode(excelPane, keyEvent.getCode().getCode());
         });
-
+*/
 
         Thread listenerThread = new Thread(() -> {
             /*Platform.runLater(() -> {

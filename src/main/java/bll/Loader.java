@@ -1,17 +1,18 @@
 package bll;
 
 import be.View;
-import dal.LoadDepartmentParts;
+import dal.ILoadDepartmentParts;
+import dal.db.LoadDepartmentParts;
 
 import java.util.ArrayList;
 
 public class Loader {
 
-    private LoadDepartmentParts loadDepartmentParts = new LoadDepartmentParts();
+    private ILoadDepartmentParts loadDepartmentParts = new LoadDepartmentParts();
 
 
-    public ArrayList<View> getScreenParts(String department){
-        return loadDepartmentParts.getScreenParts(department);
+    public ArrayList<View> getScreenParts(int departmentId){
+        return loadDepartmentParts.getScreenParts(departmentId);
     }
 
 
