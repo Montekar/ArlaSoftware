@@ -26,7 +26,7 @@ import refresh.Notification;
 import refresh.RefreshButton;
 import refresh.RefreshTimer;
 
-public class UserMockController implements Initializable {
+public class DepartmentController implements Initializable {
     enum fileType {
         CSV,
         XLS,
@@ -37,20 +37,8 @@ public class UserMockController implements Initializable {
 
     @FXML
     GridPane mainPane;
-    
-    @FXML
-    Button min;
-    
-    @FXML
-    Button show;
-    
-    @FXML
-    Button close;
 
-    private ZoomPane webPane = new ZoomPane();
-    private ZoomPane csvPane = new ZoomPane();
-    private ZoomPane excelPane = new ZoomPane();
-    private ZoomPane pdfPane = new ZoomPane();
+    private final String imagePath = "src/main/resources/mockFiles/warning.jpg";
     private RefreshButton refreshButton = new RefreshButton();
     private Notification notification;
 
@@ -58,7 +46,6 @@ public class UserMockController implements Initializable {
     private IViewLoader csvView;
     private IViewLoader excelView;
     private IViewLoader imageView;
-
     private final int zoomIn = 107;
     private final int zoomOut = 109;
     private Map<Pane, Integer> zoomLevel = new HashMap<>();
@@ -70,7 +57,7 @@ public class UserMockController implements Initializable {
     private SessionModel sessionModel = SessionModel.getInstance();
     private UrlValidator urlValidator;
 
-    public UserMockController(){
+    public DepartmentController(){
         notification = new Notification();
         refreshTimer.runTimer();
         webView = new WebViewLoader();
@@ -83,28 +70,7 @@ public class UserMockController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewArrayList = loader.getScreenParts(25);
-        for (View view : viewArrayList){
-            if(urlValidator.isValid(view.getPath())){
-                mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
-            }else if (new File(view.getPath()).isFile()){
-                File file = new File(view.getPath());
-                Path path = Paths.get(view.getPath());
-                pathArrayList.add(file.getParent());
-                fileArrayList.add(path.getFileName());
-                String fileExtension = FilenameUtils.getExtension(view.getPath()).toUpperCase();
-                if (fileType.CSV.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
-                    mainPane.add(csvView.loadView(view.getPath()), view.getRow(),view.getColumn());
-                }else if (fileType.XLS.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
-                    mainPane.add(excelView.loadView(view.getPath()), view.getRow(),view.getColumn());
-                }else if (fileType.PDF.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
-
-                }else if (fileType.JPG.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
-                    mainPane.add(imageView.loadView(view.getPath()), view.getRow(), view.getColumn());
-                }
-            }else {
-                System.out.println("Unsupported item");
-            }
-        }
+        loadComponents(viewArrayList);
 
 
        /* csvPane.setOnKeyPressed(keyEvent -> {
@@ -125,6 +91,31 @@ public class UserMockController implements Initializable {
         listenerThread.start();
 
 
+    }
+
+    private void loadComponents(ArrayList<View> viewArrayList) {
+        for (View view : viewArrayList){
+            if(urlValidator.isValid(view.getPath())){
+                mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
+            }else if (new File(view.getPath()).isFile()){
+                File file = new File(view.getPath());
+                Path path = Paths.get(view.getPath());
+                pathArrayList.add(file.getParent());
+                fileArrayList.add(path.getFileName());
+                String fileExtension = FilenameUtils.getExtension(view.getPath()).toUpperCase();
+                if (fileType.CSV.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+                    mainPane.add(csvView.loadView(view.getPath()), view.getRow(),view.getColumn());
+                }else if (fileType.XLS.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+                    mainPane.add(excelView.loadView(view.getPath()), view.getRow(),view.getColumn());
+                }else if (fileType.PDF.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+
+                }else if (fileType.JPG.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
+                    mainPane.add(imageView.loadView(view.getPath()), view.getRow(), view.getColumn());
+                }
+            }else {
+                mainPane.add(imageView.loadView(imagePath), view.getRow(), view.getColumn());
+            }
+        }
     }
 
     private void listenForChanges() {
@@ -171,22 +162,4 @@ public class UserMockController implements Initializable {
             selectedPane.setZoom(selectedPane.getZoom()-0.1);
         }
     }
-
-    public void onMinimize(ActionEvent actionEvent) {
-        Stage stage = (Stage) min.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    public void fullScreen(ActionEvent actionEvent) {
-        Stage stage = (Stage) show.getScene().getWindow();
-        stage.setFullScreen(!stage.isFullScreen());
-    }
-
-    public void onClose(ActionEvent actionEvent) {
-        Stage stage = (Stage) close.getScene().getWindow();
-        stage.close();
-        Platform.exit();
-        System.exit(0);
-    }
-
 }

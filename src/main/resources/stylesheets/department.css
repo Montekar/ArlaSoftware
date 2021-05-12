@@ -1,0 +1,5 @@
+#menuBar {
+    -fx-background-color: red;
+    -fx-min-width: 250px;
+    visibility: hidden;
+}
