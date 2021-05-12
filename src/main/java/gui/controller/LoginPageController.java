@@ -75,7 +75,7 @@ public class LoginPageController {
 
     public void goToClientPage(Stage stage, User user) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/UserMockView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentView.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
             stage.setFullScreen(true);
