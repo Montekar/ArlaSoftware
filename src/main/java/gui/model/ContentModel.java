@@ -34,7 +34,7 @@ public class ContentModel {
 
     public void buildGrid(GridPane grid) {
         grid.getChildren().clear();
-        System.out.println(contentOverview.stream());
+
         IViewLoader iViewLoader = null;
         for (View view : contentOverview) {
             ContentType contentType = pathManager.getType(view.getPath());
