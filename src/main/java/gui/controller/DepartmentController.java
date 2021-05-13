@@ -46,6 +46,7 @@ public class DepartmentController implements Initializable {
     private IViewLoader csvView;
     private IViewLoader excelView;
     private IViewLoader imageView;
+    private IViewLoader pdfView;
     private final int zoomIn = 107;
     private final int zoomOut = 109;
     private Map<Pane, Integer> zoomLevel = new HashMap<>();
@@ -65,6 +66,7 @@ public class DepartmentController implements Initializable {
         excelView = new ExcelLoader();
         urlValidator = new UrlValidator();
         imageView = new ImageLoader();
+        pdfView = new PdfLoader();
     }
 
     @Override
@@ -96,7 +98,8 @@ public class DepartmentController implements Initializable {
     private void loadComponents(ArrayList<View> viewArrayList) {
         for (View view : viewArrayList){
             if(urlValidator.isValid(view.getPath())){
-                mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
+                //mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
+                mainPane.add(pdfView.loadView(view.getPath()), view.getRow(), view.getColumn());
             }else if (new File(view.getPath()).isFile()){
                 File file = new File(view.getPath());
                 Path path = Paths.get(view.getPath());
@@ -108,7 +111,7 @@ public class DepartmentController implements Initializable {
                 }else if (fileType.XLS.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
                     mainPane.add(excelView.loadView(view.getPath()), view.getRow(),view.getColumn());
                 }else if (fileType.PDF.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
-
+                    mainPane.add(pdfView.loadView(view.getPath()), view.getRow(), view.getColumn());
                 }else if (fileType.JPG.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
                     mainPane.add(imageView.loadView(view.getPath()), view.getRow(), view.getColumn());
                 }
