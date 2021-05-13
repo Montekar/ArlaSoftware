@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.users.Department;
+import bll.ContentType;
 import gui.model.ContentModel;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
@@ -8,11 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,8 +19,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
@@ -70,7 +67,7 @@ public class AdminPageController implements Initializable {
 
     //Load nodes to the gridpane
     public void loadContent() {
-        //TODO
+        contentModel.buildGrid(contentGrid);
     }
 
     @FXML
