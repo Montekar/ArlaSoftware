@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,13 +15,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/arlasoftware.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/arlasoftware.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
-      <VBox style="-fx-background-color: #3D4956;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="1026.0" prefWidth="117.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="132.0" prefWidth="182.0">
                <children>
-                  <ImageView fitHeight="119.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="98.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/logo.png" />
                      </image>
@@ -29,23 +30,97 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="182.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="151.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label id="label" text="Department" />
-                  <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
-                  <Label id="label" text="Content" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Refresh" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Edit" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Delete" />
-                  <Label id="label" text="Settings" />
-                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" prefHeight="26.0" prefWidth="110.0" text="Settings" />
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/department.png" />
+                           </image>
+                        </ImageView>
+                        <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/refresh.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/edit.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Edit" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/delete.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Delete" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/settings.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" prefHeight="26.0" prefWidth="150.0" text="Settings" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logout.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Logout" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" top="200.0" />
+                     </padding>
+                  </HBox>
+                  <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="194.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="194.0" styleClass="hide" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
-                  <Insets top="20.0" />
+                  <Insets top="100.0" />
                </padding>
             </VBox>
          </children>
@@ -54,35 +129,15 @@
    <center>
       <VBox fx:id="root" alignment="TOP_CENTER">
          <children>
-            <HBox style="-fx-background-color: #ebeced;">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="601.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label prefHeight="46.0" prefWidth="235.0" text="Administrator ">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="206.0" HBox.hgrow="NEVER">
-                     <children>
-                        <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
-                        <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
-                        <Button alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="50.0" prefWidth="50.0" styleClass="close" />
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="departmentName" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="726.0" text="Department">
+                  <Label fx:id="departmentName" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="726.0" text="Department">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
                   </Label>
                </children>
             </HBox>
@@ -103,4 +158,17 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <AnchorPane prefHeight="90.0" prefWidth="1567.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="150.0">
+               <children>
+                  <Button fx:id="hideButton1" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
+                  <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
+                  <Button alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="50.0" prefWidth="50.0" styleClass="close" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>
