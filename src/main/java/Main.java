@@ -22,13 +22,13 @@ public class Main extends Application {
 
         primaryStage.sceneProperty().addListener((observableValue, oldScene, newScene) -> {
             newScene.setOnMousePressed(mouseEvent -> {
-                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                    xOffset = mouseEvent.getSceneX();
-                    yOffset = mouseEvent.getSceneY();
-                }
+                    if (!primaryStage.isFullScreen() && mouseEvent.getButton() == MouseButton.PRIMARY) {
+                        xOffset = mouseEvent.getSceneX();
+                        yOffset = mouseEvent.getSceneY();
+                    }
             });
             newScene.setOnMouseDragged(mouseEvent -> {
-                if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                if (!primaryStage.isFullScreen() &&mouseEvent.getButton() == MouseButton.PRIMARY) {
                     primaryStage.setX(mouseEvent.getScreenX() - xOffset);
                     primaryStage.setY(mouseEvent.getScreenY() - yOffset);
                 }
