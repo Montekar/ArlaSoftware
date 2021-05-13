@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/arlasoftware.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onESCAPE" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox prefHeight="1026.0" prefWidth="117.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
@@ -108,7 +107,7 @@
                               <Image url="@../images/logout.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Logout" />
+                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="150.0" text="Logout" />
                      </children>
                      <padding>
                         <Insets left="5.0" top="200.0" />
@@ -158,17 +157,4 @@
          </children>
       </VBox>
    </center>
-   <bottom>
-      <AnchorPane prefHeight="90.0" prefWidth="1567.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="150.0">
-               <children>
-                  <Button fx:id="hideButton1" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="50.0" styleClass="hide" />
-                  <Button fx:id="minMaxButton" alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#minMaxWindow" prefHeight="50.0" prefWidth="50.0" styleClass="minmax" />
-                  <Button alignment="CENTER" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="50.0" prefWidth="50.0" styleClass="close" />
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-   </bottom>
 </BorderPane>
