@@ -72,18 +72,24 @@ public class SettingsPopUpController implements Initializable {
 
     @FXML
     void deleteDepartment(ActionEvent event) {
-        departmentModel.deleteDepartment(choiceDepartment.getSelectionModel().getSelectedItem().getId());
-        editDepartmentNameField.setPromptText("Department deleted!");
-        choiceDepartment.getSelectionModel().selectFirst();
+        String editDepartmentName = editDepartmentNameField.getText();
+        if (!editDepartmentName.isBlank()) {
+            departmentModel.deleteDepartment(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+            editDepartmentNameField.setPromptText("Department deleted!");
+            choiceDepartment.getSelectionModel().selectFirst();
+        } else { editDepartmentNameField.setPromptText("Field can not be empty"); }
     }
 
     @FXML
     void editDepartment(ActionEvent event) {
-        int selectedIndex = choiceDepartment.getSelectionModel().getSelectedIndex();
-        departmentModel.editDepartment(choiceDepartment.getSelectionModel().getSelectedItem().getId(), editDepartmentNameField.getText());
-        choiceDepartment.getSelectionModel().select(selectedIndex);
-        editDepartmentNameField.setText("");
-        editDepartmentNameField.setPromptText("Department changed!");
+        String editDepartmentName = editDepartmentNameField.getText();
+        if (!editDepartmentName.isBlank()) {
+            int selectedIndex = choiceDepartment.getSelectionModel().getSelectedIndex();
+            departmentModel.editDepartment(choiceDepartment.getSelectionModel().getSelectedItem().getId(), editDepartmentNameField.getText());
+            choiceDepartment.getSelectionModel().select(selectedIndex);
+            editDepartmentNameField.setText("");
+            editDepartmentNameField.setPromptText("Department changed!");
+        } else { editDepartmentNameField.setPromptText("Field can not be empty"); }
     }
 
     @FXML
