@@ -2,6 +2,7 @@ package gui.model;
 
 import be.View;
 import bll.ContentManager;
+import bll.ContentType;
 import bll.PathManager;
 import bll.vloader.*;
 import javafx.collections.FXCollections;
@@ -34,15 +35,19 @@ public class ContentModel {
     public void buildGrid(GridPane grid) {
         grid.getChildren().clear();
 
-        IViewLoader iViewLoader;
+        IViewLoader iViewLoader = null;
         for (View view : contentOverview) {
-            switch (pathManager.getType(view.getPath())) {
-                case CSV -> iViewLoader = new CSVLoader();
-                case PDF -> iViewLoader = new PdfLoader();
-                case JPG -> iViewLoader = new ImageLoader();
-                case WEB -> iViewLoader = new WebViewLoader();
-                case XLS -> iViewLoader = new ExcelLoader();
-                default ->  iViewLoader = null;
+            ContentType contentType = pathManager.getType(view.getPath());
+            if(contentType!=null) {
+                switch (contentType) {
+                    case CSV -> iViewLoader = new CSVLoader();
+                    case PDF -> iViewLoader = new PdfLoader();
+                    case JPG -> iViewLoader = new ImageLoader();
+                    case WEB -> iViewLoader = new WebViewLoader();
+                    case XLS -> iViewLoader = new ExcelLoader();
+                }
+            }else{
+                //TODO iViewLoader = load error view on null
             }
             assert iViewLoader != null;
             grid.add(iViewLoader.loadView(view.getPath()), view.getColumn(), view.getRow());
