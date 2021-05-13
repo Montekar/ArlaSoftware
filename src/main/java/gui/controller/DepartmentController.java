@@ -15,6 +15,8 @@ import java.nio.file.*;
 import java.util.*;
 
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -163,6 +165,16 @@ public class DepartmentController implements Initializable {
             selectedPane.setScaleX(zoom);
             selectedPane.setScaleY(zoom);
             selectedPane.setZoom(selectedPane.getZoom()-0.1);
+        }
+    }
+
+    @FXML
+    void onESCAPE(KeyEvent enter) throws IOException {
+        if (enter.getCode().equals(KeyCode.ESCAPE)) {
+            Stage stage = (Stage) mainPane.getScene().getWindow();
+            stage.close();
+            Platform.exit();
+            System.exit(0);
         }
     }
 }

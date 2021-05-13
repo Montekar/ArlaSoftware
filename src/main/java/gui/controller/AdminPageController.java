@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.users.Department;
+import be.users.User;
 import bll.ContentType;
 import gui.model.ContentModel;
 import gui.model.DepartmentModel;
@@ -12,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +25,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
+    @FXML
+    private Button logoutButton;
     @FXML
     private Label departmentName;
     @FXML
@@ -122,5 +127,28 @@ public class AdminPageController implements Initializable {
 
     public void openDashboard(ActionEvent actionEvent) {
         departmentName.setText("Dashboard");
+    }
+
+    public void logout(ActionEvent actionEvent)  throws IOException {
+        Stage mainStage = (Stage) settingsButton.getScene().getWindow();
+        mainStage.close();
+
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    @FXML
+    void onESCAPE(KeyEvent enter) throws IOException {
+        if (enter.getCode().equals(KeyCode.ESCAPE)) {
+            Stage stage = (Stage) hideButton.getScene().getWindow();
+            stage.close();
+            Platform.exit();
+            System.exit(0);
+        }
     }
 }

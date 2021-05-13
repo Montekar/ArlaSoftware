@@ -123,4 +123,14 @@ public class LoginPageController {
             });
         }).start();
     }
+
+    @FXML
+    void onESCAPE(KeyEvent enter) throws IOException {
+        if (enter.getCode().equals(KeyCode.ESCAPE)) {
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.close();
+            Platform.exit();
+            System.exit(0);
+        }
+    }
 }

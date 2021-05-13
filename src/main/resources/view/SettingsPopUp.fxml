@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/arlasoftware.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingsPopUpController">
+<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingsPopUpController">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: white;">
+      <Pane layoutX="14.0" layoutY="14.0" onKeyReleased="#onESCAPE" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: white;" stylesheets="@../stylesheets/buttons.css">
          <children>
-            <Button layoutX="291.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/arlasoftware.css" text="Button" />
+            <Button layoutX="291.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/administrator.css" text="Button" />
             <VBox alignment="TOP_CENTER" layoutX="12.0" layoutY="61.0" prefHeight="334.0" prefWidth="306.0" spacing="5.0">
                <children>
                   <VBox prefHeight="174.0" prefWidth="306.0" style="-fx-border-color: black; -fx-border-width: 1;">

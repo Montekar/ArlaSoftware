@@ -1,0 +1,35 @@
+.button{
+    -fx-cursor: hand;
+    -fx-pref-height: 30px;
+    -fx-background-color: #56c44f;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.button:hover {
+    -fx-background-color: #008000;
+}
+
+
+.choice-box {
+    -fx-pref-height: 30px;
+
+    -fx-font-size: 16;
+    -fx-font-family: Arial;
+    -fx-background-color:  #56c44f;
+    -fx-control-inner-background: #56c44f;
+    -fx-selection-bar: #008000;
+    -fx-selection-bar-text-fill: "white";
+}
+
+.choice-box .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 108;
+}
+
+.choice-box:hover{
+    -fx-background-color: #56c44f;
+}
