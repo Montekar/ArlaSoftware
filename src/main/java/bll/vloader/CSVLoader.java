@@ -1,5 +1,6 @@
 package bll.vloader;
 
+import bll.FileReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -18,11 +19,12 @@ public class CSVLoader implements IViewLoader {
 
     private boolean isFirstLine = true;
     private ObservableList observableList = FXCollections.observableArrayList();
+    private FileReader fileReader = new FileReader();
 
     @Override
     public Node loadView(String path) {
         TableView tableView = new TableView();
-        List<String> data = loadData(path);
+        List<String> data = fileReader.loadData(path);
         for (Object item: data) {
             String currentLine = item.toString();
             String[] itemArray = currentLine.split(",");
@@ -42,19 +44,6 @@ public class CSVLoader implements IViewLoader {
         return tableView;
     }
 
-    private List<String> loadData(String path) {
-        List<String> csvData = new ArrayList<>();
-        try {
-            Scanner csvScanner = new Scanner(new File(path));
-            while (csvScanner.hasNext()) {
-                csvData.add(csvScanner.next());
-            }
-            csvScanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return csvData;
-    }
 }
 
 
