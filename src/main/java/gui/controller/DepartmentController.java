@@ -2,6 +2,10 @@ package gui.controller;
 
 import be.View;
 import bll.*;
+import bll.gloader.BarChartLoader;
+import bll.gloader.IChartLoader;
+import bll.gloader.LineChartLoader;
+import bll.gloader.PieChartLoader;
 import bll.vloader.*;
 import gui.model.SessionModel;
 import javafx.application.Platform;
@@ -49,6 +53,9 @@ public class DepartmentController implements Initializable {
     private IViewLoader excelView;
     private IViewLoader imageView;
     private IViewLoader pdfView;
+    private IChartLoader pieChart;
+    private IChartLoader lineChart;
+    private IChartLoader barChart;
     private final int zoomIn = 107;
     private final int zoomOut = 109;
     private Map<Pane, Integer> zoomLevel = new HashMap<>();
@@ -69,6 +76,9 @@ public class DepartmentController implements Initializable {
         urlValidator = new UrlValidator();
         imageView = new ImageLoader();
         pdfView = new PdfLoader();
+        pieChart = new PieChartLoader();
+        lineChart = new LineChartLoader();
+        barChart = new BarChartLoader();
     }
 
     @Override
@@ -100,14 +110,12 @@ public class DepartmentController implements Initializable {
     private void loadComponents(ArrayList<View> viewArrayList) {
         for (View view : viewArrayList){
             if(urlValidator.isValid(view.getPath())){
-                //mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
-                mainPane.add(pdfView.loadView(view.getPath()), view.getRow(), view.getColumn());
+                mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
             }else if (new File(view.getPath()).isFile()){
                 File file = new File(view.getPath());
                 Path path = Paths.get(view.getPath());
                 pathArrayList.add(file.getParent());
                 fileArrayList.add(path.getFileName());
-                String fileExtension = FilenameUtils.getExtension(view.getPath()).toUpperCase();
                 if (fileType.CSV.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
                     mainPane.add(csvView.loadView(view.getPath()), view.getRow(),view.getColumn());
                 }else if (fileType.XLS.toString().equalsIgnoreCase(FilenameUtils.getExtension(view.getPath()))){
