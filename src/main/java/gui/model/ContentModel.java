@@ -34,7 +34,7 @@ public class ContentModel {
 
     public void buildGrid(GridPane grid) {
         grid.getChildren().clear();
-
+        grid.setGridLinesVisible(true);
         IViewLoader iViewLoader = null;
         for (View view : contentOverview) {
             ContentType contentType = pathManager.getType(view.getPath());
@@ -58,7 +58,14 @@ public class ContentModel {
         contentOverview.clear();
         contentOverview.addAll(contentManager.getContent(departmentID));
     }
-
+    public void createContent(int departmentID,String title,String path, int column, int row){
+        contentManager.createContent(departmentID, title, path, column, row);
+        updateContent(departmentID);
+    }
+    public void deleteContent(int departmentID, int column, int row){
+        contentManager.deleteContent(departmentID, column, row);
+        updateContent(departmentID);
+    }
     public ObservableList<View> getContentOverview() {
         return contentOverview;
     }

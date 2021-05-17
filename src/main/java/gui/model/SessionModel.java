@@ -8,7 +8,6 @@ public class SessionModel {
 
     private SessionModel() {
         INSTANCE = null;
-        user = null;
     }
 
     public void setUser(User user) {

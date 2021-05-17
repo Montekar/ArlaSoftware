@@ -40,4 +40,36 @@ public class DBContentRepository implements IContentRepository {
         }
         return content;
     }
+
+    @Override
+    public void createContent(int departmentID,String title,String path, int column, int row) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "INSERT INTO Content Values(?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, departmentID);
+            statement.setInt(2, column);
+            statement.setInt(3, row);
+            statement.setString(4, title);
+            statement.setString(5, path);
+            statement.execute();
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue adding content", ex);
+        }
+    }
+
+    @Override
+    public void deleteContent(int departmentID, int column, int row) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "DELETE FROM Content WHERE DepartmentID = ? AND [Column] = ? AND Row = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1,departmentID);
+            statement.setInt(2,column);
+            statement.setInt(3,row);
+            statement.execute();
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue deleting content", ex);
+        }
+    }
+
+
 }
