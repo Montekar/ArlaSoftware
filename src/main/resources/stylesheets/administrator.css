@@ -34,7 +34,7 @@
 .choice-box .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-pref-width: 88;
+    -fx-pref-width: 90;
 }
 
 .choice-box:hover{
