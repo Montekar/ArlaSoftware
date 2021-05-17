@@ -14,8 +14,8 @@ public class FileReader {
         List<String> data = new ArrayList<>();
         try {
             Scanner csvScanner = new Scanner(new File(path));
-            while (csvScanner.hasNext()) {
-                data.add(csvScanner.next());
+            while (csvScanner.hasNextLine()) {
+                data.add(csvScanner.nextLine());
             }
             csvScanner.close();
         } catch (FileNotFoundException e) {
@@ -25,9 +25,8 @@ public class FileReader {
     }
 
     public int[] getDataPosition(List data, String nameColumn, String dataColumn) {
-        int[] position = new int[2];
+        int[] position = new int[0];
         String firstLine = (String) data.get(0);
-        System.out.println(firstLine);
         String[] itemArray = firstLine.split(",");
         String[] itemsToFound = {nameColumn, dataColumn};
         for (String toBeFound: itemsToFound){
@@ -37,6 +36,7 @@ public class FileReader {
                 }
             }
         }
+        System.out.println(position.length);
         return position;
     }
 }

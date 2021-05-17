@@ -39,7 +39,6 @@ public class CSVLoader implements IViewLoader {
                 observableList.add(currentLine);
             }
         }
-        System.out.println(observableList);
         tableView.setItems(observableList);
         return tableView;
     }
