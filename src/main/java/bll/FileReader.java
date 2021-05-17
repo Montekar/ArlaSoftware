@@ -36,7 +36,6 @@ public class FileReader {
                 }
             }
         }
-        System.out.println(position.length);
         return position;
     }
 }

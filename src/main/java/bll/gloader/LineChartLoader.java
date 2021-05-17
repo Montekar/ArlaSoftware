@@ -24,8 +24,6 @@ public class LineChartLoader implements IChartLoader{
         LineChart lineChart = new LineChart(xAxis, yAxis);
         XYChart.Series dataSeries = new XYChart.Series();
         dataSeries.setName("Monthly production");
-        System.out.println(dataPosition[0] + " " + dataPosition[1]);
-        System.out.println(data.size());
         for (Object currentData: Iterables.skip(data, 1)){
             String currentLine = currentData.toString();
             String[] splitLine = currentLine.split(",");
