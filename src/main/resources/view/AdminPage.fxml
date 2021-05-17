@@ -42,7 +42,7 @@
                               <Image url="@../images/department.png" />
                            </image>
                         </ImageView>
-                        <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
+                        <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="112.0" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -55,7 +55,7 @@
                               <Image url="@../images/refresh.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="Refresh" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -68,7 +68,7 @@
                               <Image url="@../images/edit.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Edit" />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="Edit" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -81,7 +81,7 @@
                               <Image url="@../images/delete.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Delete" />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="Delete" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -94,7 +94,7 @@
                               <Image url="@../images/settings.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" prefHeight="26.0" prefWidth="150.0" text="Settings" />
+                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" prefHeight="26.0" prefWidth="112.0" text="Settings" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -107,7 +107,7 @@
                               <Image url="@../images/logout.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="150.0" text="Logout" />
+                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="105.0" text="Logout" />
                      </children>
                      <padding>
                         <Insets left="5.0" top="200.0" />

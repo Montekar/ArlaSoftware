@@ -77,7 +77,7 @@
                            <children>
                               <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="114.0" spacing="10.0">
                                  <children>
-                                    <Label text="Departmnet name:" />
+                                    <Label text="Department name:" />
                                     <Label text="Password:" />
                                  </children>
                               </VBox>
