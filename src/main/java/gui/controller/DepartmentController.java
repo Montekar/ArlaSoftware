@@ -108,8 +108,7 @@ public class DepartmentController implements Initializable {
     private void loadComponents(ArrayList<View> viewArrayList) {
         for (View view : viewArrayList){
             if(urlValidator.isValid(view.getPath())){
-                //mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
-                mainPane.add(barChart.loadChart(view.getPath(), "Month", "Amount"), view.getRow(), view.getColumn());
+                mainPane.add(webView.loadView(view.getPath()), view.getRow(), view.getColumn());
             }else if (new File(view.getPath()).isFile()){
                 File file = new File(view.getPath());
                 Path path = Paths.get(view.getPath());

@@ -14,7 +14,7 @@ public class BarChartLoader implements IChartLoader{
     private FileReader fileReader = new FileReader();
     @Override
     public Node loadChart(String path, String nameColumn, String dataColumn) {
-        List<String> data = fileReader.loadData("src/main/resources/mockFiles/Bar_Chart_Data.csv");
+        List<String> data = fileReader.loadData(path);
         int[] dataPosition = fileReader.getDataPosition(data, nameColumn, dataColumn);
         CategoryAxis categoryAxis = new CategoryAxis();
         NumberAxis numberAxis = new NumberAxis();

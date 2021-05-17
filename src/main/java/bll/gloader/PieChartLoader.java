@@ -20,7 +20,7 @@ public class PieChartLoader implements IChartLoader{
     public Node loadChart(String path, String nameColumn, String dataColumn) {
         PieChart pieChart = new PieChart();
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        List<String> data = fileReader.loadData("src/main/resources/mockFiles/Pie_Chart_Data.csv");
+        List<String> data = fileReader.loadData(path);
         int dataPosition[] = fileReader.getDataPosition(data,nameColumn,dataColumn);
         for (Object currentData: Iterables.skip(data, 1)){
             String currentLine = currentData.toString();

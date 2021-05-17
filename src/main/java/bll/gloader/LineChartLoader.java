@@ -15,7 +15,7 @@ public class LineChartLoader implements IChartLoader{
 
     @Override
     public Node loadChart(String path, String nameColumn, String dataColumn) {
-        List<String> data = fileReader.loadData("src/main/resources/mockFiles/Line_Chart_Data.csv");
+        List<String> data = fileReader.loadData(path);
         int[] dataPosition = fileReader.getDataPosition(data,nameColumn,dataColumn);
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel(nameColumn);
