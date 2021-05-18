@@ -19,13 +19,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
@@ -63,6 +68,8 @@ public class AdminPageController implements Initializable {
     private TextField columnField;
     @FXML
     private TextField rowField;
+    @FXML
+    private BorderPane borderPane;
 
     public AdminPageController() {
         departmentModel = DepartmentModel.getInstance();
@@ -157,32 +164,46 @@ public class AdminPageController implements Initializable {
     }
 
     public void selectPath(ActionEvent actionEvent) {
-
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(settingsButton.getScene().getWindow());
+        Path path = Path.of(file.getPath());
+        pathField.setText(path.toString());
     }
 
     public void addContent(ActionEvent actionEvent) {
-        if (!titleField.getText().isEmpty() && !pathField.getText().isEmpty() && !columnField.getText().isEmpty() && !rowField.getText().isEmpty()) {
+        if (!titleField.getText().isEmpty() && !pathField.getText().isEmpty() && !columnField.getText().isEmpty() && !rowField.getText().isEmpty() && choiceDepartment.getSelectionModel().getSelectedItem() != null) {
             String title = titleField.getText();
             String path = pathField.getText();
             int col = Integer.parseInt(columnField.getText());
             int row = Integer.parseInt(rowField.getText());
             int departmentID = choiceDepartment.getSelectionModel().getSelectedItem().getId();
 
-            contentModel.createContent(departmentID, title, path, col, row);
+            contentModel.createContent(new View(departmentID, col, row, path, title));
             contentModel.buildGrid(contentGrid);
         }
     }
 
     public void deleteContent(ActionEvent actionEvent) {
-        if(contentTable.getSelectionModel().getSelectedItem()!=null){
+        if (contentTable.getSelectionModel().getSelectedItem() != null) {
             View view = contentTable.getSelectionModel().getSelectedItem();
-            int departmentID = choiceDepartment.getSelectionModel().getSelectedItem().getId();
-            contentModel.deleteContent(departmentID,view.getColumn(),view.getRow());
+            contentModel.deleteContent(view);
             contentModel.buildGrid(contentGrid);
         }
     }
 
     public void editContent(ActionEvent actionEvent) {
-        contentModel.buildGrid(contentGrid);
+        if (contentTable.getSelectionModel().getSelectedItem()!=null && !titleField.getText().isEmpty() && !pathField.getText().isEmpty() && !columnField.getText().isEmpty() && !rowField.getText().isEmpty() && choiceDepartment.getSelectionModel().getSelectedItem() != null) {
+            String title = titleField.getText();
+            String path = pathField.getText();
+            int col = Integer.parseInt(columnField.getText());
+            int row = Integer.parseInt(rowField.getText());
+            int departmentID = choiceDepartment.getSelectionModel().getSelectedItem().getId();
+
+            View oldView = contentTable.getSelectionModel().getSelectedItem();
+            View newView = new View(departmentID, col, row, path, title);
+
+            contentModel.editContent(oldView,newView);
+            contentModel.buildGrid(contentGrid);
+        }
     }
 }
