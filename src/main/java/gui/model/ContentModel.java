@@ -47,7 +47,7 @@ public class ContentModel {
                     case XLS -> iViewLoader = new ExcelLoader();
                 }
             }else{
-                //TODO iViewLoader = load error view on null
+                iViewLoader = new ErrorView();
             }
             assert iViewLoader != null;
             grid.add(iViewLoader.loadView(view.getPath()), view.getColumn(), view.getRow());
@@ -58,13 +58,17 @@ public class ContentModel {
         contentOverview.clear();
         contentOverview.addAll(contentManager.getContent(departmentID));
     }
-    public void createContent(int departmentID,String title,String path, int column, int row){
-        contentManager.createContent(departmentID, title, path, column, row);
-        updateContent(departmentID);
+    public void createContent(View view){
+        contentManager.createContent(view);
+        updateContent(view.getId());
     }
-    public void deleteContent(int departmentID, int column, int row){
-        contentManager.deleteContent(departmentID, column, row);
-        updateContent(departmentID);
+    public void deleteContent(View view){
+        contentManager.deleteContent(view);
+        updateContent(view.getId());
+    }
+    public void editContent(View oldView, View newView){
+        contentManager.editContent(oldView,newView);
+        updateContent(newView.getId());
     }
     public ObservableList<View> getContentOverview() {
         return contentOverview;
