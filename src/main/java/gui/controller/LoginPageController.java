@@ -75,11 +75,11 @@ public class LoginPageController {
 
     public void goToClientPage(Stage stage, User user) {
         try {
+            sessionModel.setUser(user);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentView.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
             stage.setFullScreen(true);
-            sessionModel.setUser(user);
         } catch (IOException e) {
             e.printStackTrace();
         }
