@@ -64,7 +64,7 @@ public class DepartmentController implements Initializable {
     private ArrayList<View> viewArrayList;
     private ArrayList<String> pathArrayList = new ArrayList<>();
     private ArrayList<Object> fileArrayList = new ArrayList<>();
-    private SessionModel sessionModel = SessionModel.getInstance();
+    private SessionModel sessionModel;
     private UrlValidator urlValidator;
 
     public DepartmentController(){
@@ -79,11 +79,12 @@ public class DepartmentController implements Initializable {
         pieChart = new PieChartLoader();
         lineChart = new LineChartLoader();
         barChart = new BarChartLoader();
+        sessionModel = SessionModel.getInstance();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewArrayList = loader.getScreenParts(25);
+        viewArrayList = loader.getScreenParts(sessionModel.getUser().getId());
         loadComponents(viewArrayList);
 
 
