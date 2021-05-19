@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class Loader {
 
     private ILoadDepartmentParts loadDepartmentParts = new LoadDepartmentParts();
-
-
     public ArrayList<View> getScreenParts(int departmentId){
         return loadDepartmentParts.getScreenParts(departmentId);
     }
