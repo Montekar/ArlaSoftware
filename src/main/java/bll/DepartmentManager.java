@@ -8,8 +8,8 @@ import dal.db.DBDepartmentRepository;
 import java.util.List;
 
 public class DepartmentManager {
-    IDepartmentRepository departmentRepository;
-    IHashingHelper hash;
+    private final IDepartmentRepository departmentRepository;
+    private final IHashingHelper hash;
 
     public DepartmentManager() {
         departmentRepository = new DBDepartmentRepository();
@@ -31,6 +31,10 @@ public class DepartmentManager {
     public void createDepartment(String username, String password) {
 
         departmentRepository.createDepartment(username, hash.hashPassword(password));
+    }
+
+    public int getRefreshTime(int departmentID){
+        return departmentRepository.getRefreshTime(departmentID);
     }
 
     public void deleteDepartment(int departmentID) {

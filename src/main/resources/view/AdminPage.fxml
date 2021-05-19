@@ -50,7 +50,20 @@
                         <Insets left="5.0" />
                      </padding>
                   </HBox>
-                  <HBox>
+                  <HBox alignment="CENTER" prefWidth="149.0">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/settings.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" onAction="#openEdit" prefHeight="32.0" prefWidth="363.0" text="Edit" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER">
                      <children>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,45 +71,6 @@
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" onAction="#refreshContent" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
-                     </children>
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/edit.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" onAction="#openEditMode" prefHeight="26.0" prefWidth="150.0" text="Edit Mode" />
-                     </children>
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/delete.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Delete" />
-                     </children>
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/settings.png" />
-                           </image>
-                        </ImageView>
-                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" prefHeight="26.0" prefWidth="150.0" text="Settings" />
                      </children>
                      <padding>
                         <Insets left="5.0" />

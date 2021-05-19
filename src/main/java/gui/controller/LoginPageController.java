@@ -4,6 +4,7 @@ import be.users.Admin;
 import be.users.Department;
 import be.users.User;
 import bll.AuthenticationManager;
+import bll.helper.HashingHelper;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import gui.model.SessionModel;
