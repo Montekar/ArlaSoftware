@@ -45,6 +45,10 @@ public class DepartmentModel {
         departmentsOverview.addAll(departmentManager.getAllDepartments());
     }
 
+    public int getRefreshTime(int departmentID){
+        return departmentManager.getRefreshTime(departmentID);
+    }
+
     public Department getDepartment(int departmentID) {
         return departmentManager.getDepartment(departmentID);
     }

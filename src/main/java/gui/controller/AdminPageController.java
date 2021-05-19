@@ -35,15 +35,9 @@ import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
     @FXML
-    private Button logoutButton;
-    @FXML
     private Label departmentName;
     @FXML
     private Button hideButton;
-    @FXML
-    private Button settingsButton;
-    @FXML
-    private Button minMaxButton;
     @FXML
     private ChoiceBox<Department> choiceDepartment;
     private final DepartmentModel departmentModel;
@@ -79,7 +73,7 @@ public class AdminPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceDepartment.setOnAction(this::changeDepartment);
         choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
-        departmentName.setText("No Department");
+        choiceDepartment.getSelectionModel().selectFirst();
 
         contentTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         contentPath.setCellValueFactory(new PropertyValueFactory<>("path"));
@@ -107,27 +101,15 @@ public class AdminPageController implements Initializable {
     }
 
     @FXML
-    public void openSettings(ActionEvent event) throws IOException {
-        Stage mainStage = (Stage) settingsButton.getScene().getWindow();
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(mainStage);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    @FXML
     private void changeDepartment(ActionEvent event) {
         departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().toString());
         contentModel.updateContent(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+        System.out.println(departmentModel.getRefreshTime(choiceDepartment.getSelectionModel().getSelectedItem().getId()));
         loadContent();
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
-        Stage mainStage = (Stage) settingsButton.getScene().getWindow();
+        Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
         mainStage.close();
 
         Stage stage = new Stage();
@@ -150,7 +132,7 @@ public class AdminPageController implements Initializable {
     }
 
     public void openEditMode(ActionEvent actionEvent) throws IOException {
-        Stage mainStage = (Stage) settingsButton.getScene().getWindow();
+        Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/view/EditMode.fxml"));
         stage.setScene(new Scene(root, 1920, 1080));
@@ -165,7 +147,7 @@ public class AdminPageController implements Initializable {
 
     public void selectPath(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(settingsButton.getScene().getWindow());
+        File file = fileChooser.showOpenDialog(choiceDepartment.getScene().getWindow());
         Path path = Path.of(file.getPath());
         pathField.setText(path.toString());
     }
@@ -205,5 +187,17 @@ public class AdminPageController implements Initializable {
             contentModel.editContent(oldView,newView);
             contentModel.buildGrid(contentGrid);
         }
+    }
+
+    public void openEdit(ActionEvent actionEvent) throws IOException {
+        Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(mainStage);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
+        stage.show();
     }
 }

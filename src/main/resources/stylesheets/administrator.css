@@ -35,6 +35,7 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-pref-width: 90;
+    -fx-alignment: center;
 }
 
 .choice-box:hover{

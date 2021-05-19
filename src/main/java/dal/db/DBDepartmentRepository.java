@@ -2,6 +2,7 @@ package dal.db;
 
 import be.users.Admin;
 import be.users.Department;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.IDepartmentRepository;
 import error.ErrorHandler;
 
@@ -76,10 +77,11 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     @Override
     public void createDepartment(String username, String password) {
         try (Connection con = connection.getConnection()) {
-            String sql = "INSERT INTO Department Values(?,?)";
+            String sql = "INSERT INTO Department Values(?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
+            statement.setInt(3, 5);
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue creating a department", ex);
@@ -91,10 +93,36 @@ public class DBDepartmentRepository implements IDepartmentRepository {
         try (Connection con = connection.getConnection()) {
             String sql = "DELETE FROM Department WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1,departmentID);
+            statement.setInt(1, departmentID);
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue deleting a department", ex);
         }
     }
+    @Override
+    public int getRefreshTime(int departmentID) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "SELECT Refresh From Department Where ID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, departmentID);
+            if (statement.execute()) {
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    return resultSet.getInt("Refresh");
+                }
+                return -1;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
     }
+    /*            if (statement.execute()) {
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    return resultSet.getInt("Refresh");
+            }
+
+     */
+}
