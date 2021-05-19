@@ -146,7 +146,7 @@
                <children>
                   <GridPane fx:id="contentGrid" prefHeight="1070.0" prefWidth="1418.0">
             </GridPane>
-                  <TableView fx:id="contentTable">
+                  <TableView fx:id="contentTable" VBox.vgrow="NEVER">
                     <columns>
                       <TableColumn fx:id="contentTitle" prefWidth="128.0" text="Title" />
                       <TableColumn fx:id="contentPath" prefWidth="1055.0" text="Path" />

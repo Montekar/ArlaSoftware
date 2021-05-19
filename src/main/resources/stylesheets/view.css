@@ -1,0 +1,8 @@
+.label{
+    -fx-text-fill: #56c44f;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+}
+HBox{
+    -fx-background-color:  #1F1A24;
+}

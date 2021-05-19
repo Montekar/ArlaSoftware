@@ -7,7 +7,11 @@ import bll.PathManager;
 import bll.vloader.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 
@@ -34,11 +38,10 @@ public class ContentModel {
 
     public void buildGrid(GridPane grid) {
         grid.getChildren().clear();
-        grid.setGridLinesVisible(true);
         IViewLoader iViewLoader = null;
         for (View view : contentOverview) {
             ContentType contentType = pathManager.getType(view.getPath());
-            if(contentType!=null) {
+            if (contentType != null) {
                 switch (contentType) {
                     case CSV -> iViewLoader = new CSVLoader();
                     case PDF -> iViewLoader = new PdfLoader();
@@ -46,11 +49,19 @@ public class ContentModel {
                     case WEB -> iViewLoader = new WebViewLoader();
                     case XLS -> iViewLoader = new ExcelLoader();
                 }
-            }else{
+            } else {
                 iViewLoader = new ErrorView();
             }
             assert iViewLoader != null;
-            grid.add(iViewLoader.loadView(view.getPath()), view.getColumn(), view.getRow());
+            HBox titleBox = new HBox(new Label(view.getTitle()));
+            titleBox.getStylesheets().add("/stylesheets/view.css");
+            titleBox.setAlignment(Pos.CENTER);
+
+            VBox viewToDisplay = new VBox();
+            viewToDisplay.getChildren().addAll(titleBox,iViewLoader.loadView(view.getPath()));
+            viewToDisplay.setAlignment(Pos.TOP_CENTER);
+
+            grid.add(viewToDisplay, view.getColumn(), view.getRow());
         }
     }
 
@@ -58,18 +69,22 @@ public class ContentModel {
         contentOverview.clear();
         contentOverview.addAll(contentManager.getContent(departmentID));
     }
-    public void createContent(View view){
+
+    public void createContent(View view) {
         contentManager.createContent(view);
         updateContent(view.getId());
     }
-    public void deleteContent(View view){
+
+    public void deleteContent(View view) {
         contentManager.deleteContent(view);
         updateContent(view.getId());
     }
-    public void editContent(View oldView, View newView){
-        contentManager.editContent(oldView,newView);
+
+    public void editContent(View oldView, View newView) {
+        contentManager.editContent(oldView, newView);
         updateContent(newView.getId());
     }
+
     public ObservableList<View> getContentOverview() {
         return contentOverview;
     }
