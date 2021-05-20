@@ -17,61 +17,44 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import refresh.Notification;
-import refresh.RefreshTimer;
+import refresh.RefreshManager;
 
 public class DepartmentController implements Initializable {
     @FXML
     GridPane mainGrid;
-    private Notification notification;
-    ContentModel contentModel;
+
     private final int zoomIn = 107;
     private final int zoomOut = 109;
-    RefreshTimer refreshTimer;
-    private Loader loader;
+
     private ObservableList<View> viewObservableList;
     private ArrayList<String> pathArrayList = new ArrayList<>();
     private ArrayList<Object> fileArrayList = new ArrayList<>();
+
     private SessionModel sessionModel;
+    private ContentModel contentModel;
+    private RefreshManager refreshManager;
+
 
     public DepartmentController(){
-        loader = new Loader();
-        refreshTimer = new RefreshTimer();
-        notification = new Notification();
-        refreshTimer.runTimer();
         sessionModel = SessionModel.getInstance();
         contentModel = ContentModel.getInstance();
+        refreshManager = RefreshManager.getInstance();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewObservableList =  contentModel.getContentOverview();
-        //loadComponents(viewArrayList);
         contentModel.updateContent(sessionModel.getUser().getId());
         contentModel.buildGrid(mainGrid);
-       /* csvPane.setOnKeyPressed(keyEvent -> {
-            zoomNode(csvPane, keyEvent.getCode().getCode());
-        });
 
-        excelPane.setOnKeyPressed(keyEvent -> {
-            zoomNode(excelPane, keyEvent.getCode().getCode());
-        });
-*/
         Thread listenerThread = new Thread(() -> {
             Platform.runLater(() -> {
+                Stage stage = (Stage) mainGrid.getScene().getWindow();
+                refreshManager.runTimer(sessionModel.getUser(), stage);
+                //refreshManager.listenChanges(contentModel.getContentOverview(), sessionModel.getUser().getId());
             });
         });
         listenerThread.start();
 
-
-    }
-
-    private void loadComponents(ObservableList<View> viewList) {
-        for (View view : viewList){
-                File file = new File(view.getPath());
-                Path path = Paths.get(view.getPath());
-                pathArrayList.add(file.getParent());
-                fileArrayList.add(path.getFileName());
-        }
     }
 
     private void zoomNode(ZoomPane selectedPane, int keyCode) {
