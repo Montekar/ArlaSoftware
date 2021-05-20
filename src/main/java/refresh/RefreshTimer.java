@@ -1,41 +1,52 @@
 package refresh;
 
+import be.users.User;
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import org.apache.poi.ss.formula.functions.T;
+import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class RefreshTimer {
+
     private Notification notification;
     private boolean first = true;
+    private final String message = "The view will update now";
 
-   public RefreshTimer (){
-        notification = new Notification();
+    private static RefreshTimer INSTANCE;
+
+    public static RefreshTimer getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new RefreshTimer();
+        }
+        return INSTANCE;
     }
-    private Thread thread = Thread.currentThread();
 
-    public void runTimer(){
+    private RefreshTimer() {
+        notification = Notification.getInstance();
+    }
+
+    public void runTimer(User department, Stage stage) {
         Timer timer = new Timer();
-
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 if (!first) {
                     Platform.runLater(() -> {
-                        notification.displayAlert();
+                        notification.displayAlert(department, stage, message);
+                        setFirst();
                     });
-                }else{
+                } else {
                     first = false;
                 }
             }
         };
-        timer.scheduleAtFixedRate(timerTask,0,300000);
+        timer.scheduleAtFixedRate(timerTask, 30000, 300000);
+    }
+
+    public void setFirst(){
+        if (this.first == false){
+            this.first = true;
+        }
     }
 }
