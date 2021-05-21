@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingsPopUpController">
+<AnchorPane prefHeight="462.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" onKeyReleased="#onESCAPE" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: white;" stylesheets="@../stylesheets/buttons.css">
+      <Pane layoutX="14.0" layoutY="14.0" onKeyReleased="#onESCAPE" prefHeight="434.0" prefWidth="330.0" style="-fx-background-color: white;">
          <children>
             <Button layoutX="291.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/administrator.css" text="Button" />
             <VBox alignment="TOP_CENTER" layoutX="12.0" layoutY="61.0" prefHeight="334.0" prefWidth="306.0" spacing="5.0">
@@ -26,32 +26,32 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="73.0" prefWidth="305.0" spacing="10.0">
                            <children>
-                              <Label text="Edit/delete department:">
+                              <Label text="Edit department:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="choiceDepartment" prefWidth="150.0" />
                            </children>
-                           <padding>
-                              <Insets bottom="7.0" />
-                           </padding>
                         </VBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="305.0" spacing="10.0">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="305.0" spacing="10.0">
                            <children>
-                              <VBox alignment="CENTER_LEFT">
+                              <VBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>
+                                    <Label prefHeight="18.0" prefWidth="102.0" text="Department:" />
                                     <Label prefHeight="18.0" prefWidth="102.0" text="Department name:" />
+                                    <Label prefHeight="18.0" prefWidth="102.0" text="Refresh time:" />
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER_LEFT" prefWidth="162.0">
+                              <VBox alignment="CENTER_LEFT" prefWidth="162.0" spacing="3.0">
                                  <children>
-                                    <TextField fx:id="editDepartmentNameField" />
+                                    <ChoiceBox fx:id="choiceDepartment" prefHeight="32.0" prefWidth="186.0" />
+                                    <TextField fx:id="editDepartmentNameField" promptText="Name" />
+                                    <TextField fx:id="editRefreshField" promptText="Refresh time in minutes" />
                                  </children>
                               </VBox>
                            </children>
                            <padding>
-                              <Insets left="20.0" />
+                              <Insets bottom="10.0" top="10.0" />
                            </padding>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="305.0" spacing="10.0">
@@ -59,6 +59,9 @@
                               <Button fx:id="editDepartmentButton" mnemonicParsing="false" onAction="#editDepartment" text="Edit" />
                               <Button fx:id="deleteDepartmentButton" mnemonicParsing="false" onAction="#deleteDepartment" text="Delete" />
                            </children>
+                           <padding>
+                              <Insets bottom="10.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </VBox>
@@ -73,23 +76,28 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="305.0">
+                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="305.0">
                            <children>
                               <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="114.0" spacing="10.0">
                                  <children>
                                     <Label text="Department name:" />
                                     <Label text="Password:" />
+                                    <Label text="Refresh time:" />
                                  </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="162.0" spacing="3.0">
                                  <children>
-                                    <TextField fx:id="newDepartmentNameField" />
-                                    <PasswordField fx:id="newDepartmentPasswordField" />
+                                    <TextField fx:id="newDepartmentNameField" promptText="Name" />
+                                    <PasswordField fx:id="newDepartmentPasswordField" promptText="Password" />
+                                    <TextField fx:id="newRefreshField" promptText="Refresh time in minutes" text="5" />
                                  </children>
                               </VBox>
                            </children>
                            <padding>
-                              <Insets left="20.0" />
+                              <Insets bottom="10.0" top="10.0" />
                            </padding>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="305.0">
@@ -97,7 +105,7 @@
                               <Button fx:id="createDepartmentButton" mnemonicParsing="false" onAction="#createDepartment" text="Create" />
                            </children>
                            <padding>
-                              <Insets bottom="4.0" />
+                              <Insets bottom="10.0" />
                            </padding>
                         </HBox>
                      </children>

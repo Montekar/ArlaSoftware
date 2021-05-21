@@ -24,13 +24,13 @@ public class DepartmentManager {
         return departmentRepository.getAllDepartments();
     }
 
-    public void editDepartment(int departmentID, String username) {
-        departmentRepository.editDepartment(departmentID, username);
+    public void editDepartment(int departmentID, String username, int refresh) {
+        departmentRepository.editDepartment(departmentID, username, refresh);
     }
 
-    public void createDepartment(String username, String password) {
+    public void createDepartment(String username, String password, int refresh) {
 
-        departmentRepository.createDepartment(username, hash.hashPassword(password));
+        departmentRepository.createDepartment(username, hash.hashPassword(password),refresh);
     }
 
     public int getRefreshTime(int departmentID){

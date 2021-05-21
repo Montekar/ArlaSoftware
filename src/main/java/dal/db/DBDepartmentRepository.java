@@ -1,8 +1,6 @@
 package dal.db;
 
-import be.users.Admin;
 import be.users.Department;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.IDepartmentRepository;
 import error.ErrorHandler;
 
@@ -62,12 +60,13 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public void editDepartment(int departmentID, String username) {
+    public void editDepartment(int departmentID, String username, int refresh) {
         try (Connection con = connection.getConnection()) {
-            String sql = "UPDATE Department SET Username = ? WHERE ID = ?";
+            String sql = "UPDATE Department SET Username = ?, Refresh = ? WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
-            statement.setInt(2, departmentID);
+            statement.setInt(2, refresh);
+            statement.setInt(3, departmentID);
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue changing department's name", ex);
@@ -75,13 +74,13 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public void createDepartment(String username, String password) {
+    public void createDepartment(String username, String password, int refresh) {
         try (Connection con = connection.getConnection()) {
             String sql = "INSERT INTO Department Values(?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
-            statement.setInt(3, 5);
+            statement.setInt(3, refresh);
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue creating a department", ex);
