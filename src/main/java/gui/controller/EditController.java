@@ -74,7 +74,6 @@ public class EditController implements Initializable {
                 editRefreshField.setText(departmentModel.getRefreshTime(t1.getId()) + "");
             }
         });
-        choiceDepartment.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -95,6 +94,7 @@ public class EditController implements Initializable {
                 choiceDepartment.getSelectionModel().selectLast();
                 newDepartmentNameField.setText("");
                 newDepartmentPasswordField.setText("");
+                newRefreshField.setText("5");
             }
         }
     }
