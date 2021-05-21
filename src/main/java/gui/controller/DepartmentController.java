@@ -33,12 +33,14 @@ public class DepartmentController implements Initializable {
     private SessionModel sessionModel;
     private ContentModel contentModel;
     private RefreshManager refreshManager;
+    private DepartmentMenu departmentMenu;
 
 
     public DepartmentController(){
         sessionModel = SessionModel.getInstance();
         contentModel = ContentModel.getInstance();
         refreshManager = RefreshManager.getInstance();
+        departmentMenu = new DepartmentMenu();
     }
 
     @Override
@@ -54,7 +56,6 @@ public class DepartmentController implements Initializable {
             });
         });
         listenerThread.start();
-
     }
 
     private void zoomNode(ZoomPane selectedPane, int keyCode) {
@@ -72,12 +73,24 @@ public class DepartmentController implements Initializable {
     }
 
     @FXML
-    void onESCAPE(KeyEvent enter) throws IOException {
-        if (enter.getCode().equals(KeyCode.ESCAPE)) {
-            Stage stage = (Stage) mainGrid.getScene().getWindow();
+    void close(Stage stage){ ;
             stage.close();
             Platform.exit();
             System.exit(0);
+
+    }
+
+    public void onKeyPressed(KeyEvent keyEvent) {
+        Stage stage = (Stage) mainGrid.getScene().getWindow();
+        switch (keyEvent.getCode()){
+            case ESCAPE: close(stage);
+            break;
+            case SHIFT:
+                if (stage == null){
+                    System.out.println("is empty");
+                }
+                departmentMenu.showMenu(stage);
+            break;
         }
     }
 }

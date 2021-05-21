@@ -58,4 +58,18 @@ public class DBAdminRepository implements IAdminRepository {
         }
         return null;
     }
+
+    @Override
+    public void report(String departmentName, String title, String description) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "INSERT INTO Report Values(?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, departmentName);
+            statement.setString(2, title);
+            statement.setString(3, description);
+            statement.execute();
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue while sending a report", ex);
+        }
     }
+}
