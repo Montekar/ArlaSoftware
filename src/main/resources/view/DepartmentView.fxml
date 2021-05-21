@@ -3,5 +3,5 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane fx:id="mainGrid" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="gui.controller.DepartmentController">
+<GridPane fx:id="mainGrid" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" onKeyPressed="#onKeyPressed" fx:controller="gui.controller.DepartmentController">
 </GridPane>

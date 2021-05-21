@@ -12,7 +12,7 @@ public class ErrorView implements IViewLoader{
     public Node loadView(String path) {
         FileInputStream input = null;
         try {
-            input = new FileInputStream("src/main/resources/mockFiles/warning.jpg");
+            input = new FileInputStream("src/main/resources/images/error.gif");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

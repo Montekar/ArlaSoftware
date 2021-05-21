@@ -118,11 +118,4 @@ public class DBDepartmentRepository implements IDepartmentRepository {
         }
         return -1;
     }
-    /*            if (statement.execute()) {
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    return resultSet.getInt("Refresh");
-            }
-
-     */
 }
