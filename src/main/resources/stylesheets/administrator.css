@@ -26,8 +26,8 @@
     -fx-font-size: 16;
     -fx-font-family: Arial;
     -fx-background-color:  #1F1A24;
-    -fx-control-inner-background: #56c44f;
-    -fx-selection-bar: #008000;
+    -fx-control-inner-background: #1F1A24;
+    -fx-selection-bar: #56c44f;
     -fx-selection-bar-text-fill: "white";
 }
 

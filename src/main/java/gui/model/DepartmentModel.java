@@ -25,13 +25,13 @@ public class DepartmentModel {
         departmentsOverview = FXCollections.observableArrayList(departmentManager.getAllDepartments());
     }
 
-    public void editDepartment(int departmentID, String username) {
-        departmentManager.editDepartment(departmentID, username);
+    public void editDepartment(int departmentID, String username, int refresh) {
+        departmentManager.editDepartment(departmentID, username, refresh);
         updateDepartments();
     }
 
-    public void createDepartment(String username, String password) {
-        departmentManager.createDepartment(username, password);
+    public void createDepartment(String username, String password, int refresh) {
+        departmentManager.createDepartment(username, password,refresh);
         updateDepartments();
     }
 

@@ -57,7 +57,7 @@
                               <Image url="@../images/settings.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" onAction="#openEdit" prefHeight="32.0" prefWidth="363.0" text="Edit" />
+                        <Button mnemonicParsing="false" onAction="#openEdit" prefHeight="32.0" prefWidth="363.0" text="Edit/Create" />
                      </children>
                      <padding>
                         <Insets left="5.0" />

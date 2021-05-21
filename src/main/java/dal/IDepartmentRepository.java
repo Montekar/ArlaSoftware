@@ -9,7 +9,7 @@ public interface IDepartmentRepository {
     List<Department> getAllDepartments();
     int getRefreshTime(int departmentID);
 
-    void editDepartment(int departmentID, String username);
-    void createDepartment(String username, String password);
+    void editDepartment(int departmentID, String username, int refresh);
+    void createDepartment(String username, String password, int refresh);
     void deleteDepartment(int departmentID);
 }

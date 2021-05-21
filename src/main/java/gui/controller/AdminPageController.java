@@ -2,8 +2,6 @@ package gui.controller;
 
 import be.View;
 import be.users.Department;
-import be.users.User;
-import bll.ContentType;
 import gui.model.ContentModel;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
@@ -11,22 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -102,10 +94,11 @@ public class AdminPageController implements Initializable {
 
     @FXML
     private void changeDepartment(ActionEvent event) {
-        departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().toString());
-        contentModel.updateContent(choiceDepartment.getSelectionModel().getSelectedItem().getId());
-        System.out.println(departmentModel.getRefreshTime(choiceDepartment.getSelectionModel().getSelectedItem().getId()));
-        loadContent();
+        if (choiceDepartment.getSelectionModel().getSelectedItem() != null) {
+            departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().getUsername() + "");
+            contentModel.updateContent(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+            loadContent();
+        }
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
@@ -129,16 +122,6 @@ public class AdminPageController implements Initializable {
             Platform.exit();
             System.exit(0);
         }
-    }
-
-    public void openEditMode(ActionEvent actionEvent) throws IOException {
-        Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/EditMode.fxml"));
-        stage.setScene(new Scene(root, 1920, 1080));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(mainStage);
-        stage.show();
     }
 
     public void refreshContent(ActionEvent actionEvent) {
@@ -174,7 +157,7 @@ public class AdminPageController implements Initializable {
     }
 
     public void editContent(ActionEvent actionEvent) {
-        if (contentTable.getSelectionModel().getSelectedItem()!=null && !titleField.getText().isEmpty() && !pathField.getText().isEmpty() && !columnField.getText().isEmpty() && !rowField.getText().isEmpty() && choiceDepartment.getSelectionModel().getSelectedItem() != null) {
+        if (contentTable.getSelectionModel().getSelectedItem() != null && !titleField.getText().isEmpty() && !pathField.getText().isEmpty() && !columnField.getText().isEmpty() && !rowField.getText().isEmpty() && choiceDepartment.getSelectionModel().getSelectedItem() != null) {
             String title = titleField.getText();
             String path = pathField.getText();
             int col = Integer.parseInt(columnField.getText());
@@ -184,7 +167,7 @@ public class AdminPageController implements Initializable {
             View oldView = contentTable.getSelectionModel().getSelectedItem();
             View newView = new View(departmentID, col, row, path, title);
 
-            contentModel.editContent(oldView,newView);
+            contentModel.editContent(oldView, newView);
             contentModel.buildGrid(contentGrid);
         }
     }
@@ -192,12 +175,18 @@ public class AdminPageController implements Initializable {
     public void openEdit(ActionEvent actionEvent) throws IOException {
         Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/SettingsPopUp.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditDepartment.fxml"));
+        EditController editController = new EditController();
+        loader.setController(editController);
+        Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(mainStage);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.show();
+
+        editController.choiceDepartment.getSelectionModel().select(choiceDepartment.getSelectionModel().getSelectedIndex());
     }
 }
