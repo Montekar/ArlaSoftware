@@ -5,9 +5,11 @@ import bll.ContentManager;
 import bll.ContentType;
 import bll.PathManager;
 import bll.vloader.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -23,7 +25,6 @@ public class ContentModel {
     private final ObservableList<View> contentOverview;
 
     private static ContentModel INSTANCE;
-    private PathManager pathManager = new PathManager();
 
     public static ContentModel getInstance() {
         if (INSTANCE == null) {
@@ -38,32 +39,19 @@ public class ContentModel {
     }
 
     public void buildGrid(GridPane grid) {
-        grid.getChildren().clear();
-        IViewLoader iViewLoader = null;
-        for (View view : contentOverview) {
-            ContentType contentType = pathManager.getType(view.getPath());
-            if (contentType != null) {
-                switch (contentType) {
-                    case CSV -> iViewLoader = new CSVLoader();
-                    case PDF -> iViewLoader = new PdfLoader();
-                    case JPG -> iViewLoader = new ImageLoader();
-                    case WEB -> iViewLoader = new WebViewLoader();
-                    case XLS -> iViewLoader = new ExcelLoader();
-                }
-            } else {
-                iViewLoader = new ErrorView();
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                grid.getChildren().clear();
+            });
+
+            for (View view : contentOverview) {
+                VBox vbox = contentManager.getWindow(view);
+                Platform.runLater(() -> {
+                    grid.add(vbox, view.getColumn(), view.getRow());
+                });
+
             }
-            assert iViewLoader != null;
-            HBox titleBox = new HBox(new Label(view.getTitle()));
-            titleBox.getStylesheets().add("/stylesheets/view.css");
-            titleBox.setAlignment(Pos.CENTER);
-
-            VBox viewToDisplay = new VBox();
-            viewToDisplay.getChildren().addAll(titleBox,iViewLoader.loadView(view.getPath()));
-            viewToDisplay.setAlignment(Pos.TOP_CENTER);
-
-            grid.add(viewToDisplay, view.getColumn(), view.getRow());
-        }
+        }).start();
     }
 
     public void updateContent(int departmentID) {

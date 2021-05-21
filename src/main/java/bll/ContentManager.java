@@ -1,29 +1,81 @@
 package bll;
 
 import be.View;
+import bll.vloader.*;
 import dal.IContentRepository;
 import dal.db.DBContentRepository;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
 public class ContentManager {
     private final IContentRepository contentRepository;
+    private final PathManager pathManager;
 
     public ContentManager() {
         contentRepository = new DBContentRepository();
+        pathManager = new PathManager();
     }
 
     public List<View> getContent(int departmentID) {
         return contentRepository.getContent(departmentID);
     }
-    public void createContent(View view){
+
+    public void createContent(View view) {
         contentRepository.createContent(view);
     }
-    public void deleteContent(View view){
+
+    public void deleteContent(View view) {
         contentRepository.deleteContent(view);
     }
 
-    public void editContent(View oldView, View newView){
-        contentRepository.editContent(oldView,newView);
+    public void editContent(View oldView, View newView) {
+        contentRepository.editContent(oldView, newView);
+    }
+
+    public IViewLoader getLoader(View view) {
+        ContentType contentType = pathManager.getType(view.getPath());
+        if (contentType != null) {
+            switch (contentType) {
+                case CSV -> {
+                    return new CSVLoader();
+                }
+                case PDF -> {
+                    return new PdfLoader();
+                }
+                case JPG -> {
+                    return new ImageLoader();
+                }
+                case WEB -> {
+                    return new WebViewLoader();
+                }
+                case XLS -> {
+                    return new ExcelLoader();
+                }
+            }
+        } else {
+            return new ErrorView();
+        }
+        return null;
+    }
+    public VBox getWindow(View view){
+        HBox title = new HBox(new Label(view.getTitle()));
+        title.getStylesheets().add("/stylesheets/view.css");
+        title.setAlignment(Pos.CENTER);
+
+        VBox window = new VBox();
+        window.setAlignment(Pos.TOP_CENTER);
+
+        IViewLoader loader = getLoader(view);
+        Platform.runLater(() -> {
+            window.getChildren().addAll(title, loader.loadView(view.getPath()));
+        });
+
+        return window;
     }
 }
