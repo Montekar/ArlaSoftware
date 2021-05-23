@@ -26,6 +26,10 @@ public class RefreshTimer {
         notification = Notification.getInstance();
     }
 
+    /*
+        Method that runs timer and redirects to Notification after certain time.
+        Set to skip the first run and has a delay as well.
+     */
     public void runTimer(User department, Stage stage) {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
@@ -41,9 +45,10 @@ public class RefreshTimer {
                 }
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 30000, 300000);
+        timer.schedule(timerTask, 30000, 300000);
     }
 
+    // Set the boolean value to true if it is false
     public void setFirst(){
         if (this.first == false){
             this.first = true;

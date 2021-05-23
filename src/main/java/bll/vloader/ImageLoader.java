@@ -8,6 +8,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class ImageLoader implements IViewLoader{
+
+    /*
+        Image loader loads image. It streams the path and if it finds and image
+        it adds it. The image is displayed inside of a Image View.
+     */
     @Override
     public Node loadView(String path) {
         FileInputStream input = null;

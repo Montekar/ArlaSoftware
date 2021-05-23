@@ -8,6 +8,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class ErrorView implements IViewLoader{
+
+    /*
+        Error View is show when the file is not supported or wasn't found.
+        The reason for this is to have a better user experience than showing an
+        empty window.
+     */
     @Override
     public Node loadView(String path) {
         FileInputStream input = null;

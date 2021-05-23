@@ -32,6 +32,11 @@ public class Notification {
         refreshView = RefreshView.getINSTANCE();
     }
 
+    /*
+        Method to display a dynamic alert with a timeline inside that
+        is responsible for the counter like label. After the timeline reaches
+        the selected point the view will be redirected and refreshed
+     */
     public void displayAlert(User department, Stage stage, String message){
         if (timeline != null) {
             timeline.stop();

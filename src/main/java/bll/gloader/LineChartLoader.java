@@ -13,6 +13,12 @@ import java.util.List;
 public class LineChartLoader implements IChartLoader{
     private FileReader fileReader = new FileReader();
 
+    /*
+        This method is responsible for loading data and converting it into a Line Chart.
+        Series name is set to static for now. And it only works if all necessary requirements
+        are met. Those are providing a path to csv file in which data is separated by column. And
+        providing two columns name that will be used as a foundation of creating the Line Chart.
+     */
     @Override
     public Node loadChart(String path, String nameColumn, String dataColumn) {
         List<String> data = fileReader.loadData(path);

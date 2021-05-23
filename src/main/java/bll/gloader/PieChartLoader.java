@@ -6,15 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class PieChartLoader implements IChartLoader{
     private FileReader fileReader = new FileReader();
+
+    /*
+        This method is responsible for loading data and converting it into a Pie Chart.
+        The Pie Chart will only be loaded if all necessary requirements are met. Those are providing
+        a path to csv file in which data is separated by column. And providing two columns
+        name that will be used as a foundation of creating the Pie Chart.
+     */
 
     @Override
     public Node loadChart(String path, String nameColumn, String dataColumn) {

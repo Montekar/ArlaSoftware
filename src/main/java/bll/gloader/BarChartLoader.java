@@ -12,6 +12,12 @@ import java.util.List;
 
 public class BarChartLoader implements IChartLoader{
     private FileReader fileReader = new FileReader();
+
+    /*
+        This class loads a Bar Chart based on the data provided and if it
+        received all the parameters. Series name is set to static. When all data
+        gets loaded it returns a Bar Chart
+     */
     @Override
     public Node loadChart(String path, String nameColumn, String dataColumn) {
         List<String> data = fileReader.loadData(path);
