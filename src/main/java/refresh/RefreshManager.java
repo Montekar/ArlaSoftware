@@ -17,16 +17,19 @@ public class RefreshManager {
         }
         return INSTANCE;
     }
+
     private RefreshManager(){
         refreshTimer = RefreshTimer.getInstance();
         changesListener = ChangesListener.getInstance();
     }
 
+    // Redirects to the RefreshTimer class responsible for the timer
     public void runTimer(User department, Stage stage){
         refreshTimer.runTimer(department, stage);
     }
 
-    public void listenChanges(ObservableList<View> viewList, int departmentID){
-        changesListener.listenForChanges(viewList,departmentID);
+    // Redirects to the ChangesListener class responsible for file changes
+    public void listenChanges(ObservableList<View> viewList, User department, Stage stage) {
+        changesListener.listenForChanges(viewList,department, stage);
     }
 }

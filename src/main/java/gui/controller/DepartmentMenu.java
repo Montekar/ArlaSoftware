@@ -18,14 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -44,9 +42,7 @@ public class DepartmentMenu implements Initializable {
     Label time;
 
     private Stage parentStage;
-
     private SessionModel sessionModel;
-
     private AdminManager adminManager;
 
     public DepartmentMenu() {
@@ -54,6 +50,10 @@ public class DepartmentMenu implements Initializable {
         adminManager = new AdminManager();
     }
 
+    /*
+        Initialization of the menu class in which dynamic labels are set
+        to the required data as the department, time
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         profile.setText(sessionModel.getUser().getUsername());
@@ -71,6 +71,7 @@ public class DepartmentMenu implements Initializable {
 
     }
 
+    // Method to load the fxml file for the department menu
     public void showMenu(Stage departmentStage) {
         this.parentStage = departmentStage;
 
@@ -85,6 +86,7 @@ public class DepartmentMenu implements Initializable {
         }
     }
 
+    // Logout functionality redirects to the Login Page
     public void logOut(MouseEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/LoginPage.fxml"));
@@ -97,12 +99,15 @@ public class DepartmentMenu implements Initializable {
         }
     }
 
+    // Method changes the screen size
     public void fullScreen(MouseEvent event) {
     }
 
+    // Method hides the window
     public void minScreen(MouseEvent event) {
     }
 
+    // Method for getting the text out of the fields and sending them to the database
     public void sendReport(ActionEvent actionEvent) {
         if ( !title.getText().isEmpty() && !description.getText().isEmpty()){
             adminManager.report(sessionModel.getUser().getUsername(), title.getText(), description.getText());
@@ -111,6 +116,7 @@ public class DepartmentMenu implements Initializable {
         }
     }
 
+    // Method for closing the application
     public void closeScreen(MouseEvent event) {
             Stage stage = parentStage;
             stage.close();

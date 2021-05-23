@@ -20,6 +20,7 @@ public class RefreshView {
         loginPageController = new LoginPageController();
     }
 
+    // Method that will redirect the view and update it after event
     public void updateView(User department, Stage stage) {
         loginPageController.goToClientPage(stage, department);
     }

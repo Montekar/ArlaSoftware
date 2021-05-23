@@ -1,8 +1,9 @@
 package refresh;
 
 import be.View;
+import be.users.User;
 import javafx.collections.ObservableList;
-import org.apache.commons.validator.routines.UrlValidator;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,56 +16,58 @@ public class ChangesListener {
     private Notification notification;
 
     public static ChangesListener getInstance() {
-        if (INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new ChangesListener();
         }
         return INSTANCE;
     }
 
-    private ChangesListener(){
+    private ChangesListener() {
         notification = Notification.getInstance();
     }
 
-    public void listenForChanges(ObservableList<View> viewList, int departmentID) {
-        fileChangeListener(viewList);
-    }
-
-    private void fileChangeListener(ObservableList<View> viewList){
+    /*
+        Main method that listens for file change and reloads the view when needed.
+        Implemented by using the WatchService a builtin function that extends closable and registers
+        objects for changes and events.
+     */
+    public void listenForChanges(ObservableList<View> viewList, User department, Stage stage) {
         ArrayList pathArrayList = getThePath(viewList);
         ArrayList fileArrayList = getTheFile(viewList);
+        String message = "Changes have been made the view will update";
 
-        try (WatchService watchService = FileSystems.getDefault().newWatchService()){
-            for (int i = 0; i < pathArrayList.size(); i++){
+        try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+            for (int i = 0; i < pathArrayList.size(); i++) {
                 Path path = Path.of(String.valueOf(pathArrayList.get(i)));
                 path.register(watchService,
                         StandardWatchEventKinds.ENTRY_DELETE,
                         StandardWatchEventKinds.ENTRY_MODIFY);
             }
-            while (true){
+            while (true) {
                 WatchKey key = watchService.take();
-                for (WatchEvent event: key.pollEvents()){
-                    for (Object file : fileArrayList){
-                        if (file.equals(event.context())){
+                for (WatchEvent event : key.pollEvents()) {
+                    for (Object file : fileArrayList) {
+                        if (file.equals(event.context())) {
                             System.out.println("Changes have been made");
-                            System.out.println(event.kind() + ": " + event.context() );
+                            System.out.println(event.kind() + ": " + event.context());
                         }
                     }
                 }
+                notification.displayAlert(department, stage, message);
                 boolean valid = key.reset();
-                if (!valid){
+                if (valid) {
                     break;
                 }
             }
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (IOException | InterruptedException exception) {
+            exception.printStackTrace();
         }
     }
 
-    private ArrayList getThePath(ObservableList<View> viewList){
+    // Method provides the directory to the WatchService
+    private ArrayList getThePath(ObservableList<View> viewList) {
         ArrayList arrayList = new ArrayList();
-        for (View view : viewList){
+        for (View view : viewList) {
             if (new File(view.getPath()).isFile()) {
                 File file = new File(view.getPath());
                 arrayList.add(file.getParent());
@@ -73,9 +76,10 @@ public class ChangesListener {
         return arrayList;
     }
 
-    private ArrayList getTheFile(ObservableList<View> viewList){
+    // Method provides the files to the WatchService
+    private ArrayList getTheFile(ObservableList<View> viewList) {
         ArrayList fileArrayList = new ArrayList();
-        for (View view : viewList){
+        for (View view : viewList) {
             if (new File(view.getPath()).isFile()) {
                 Path path = Paths.get(view.getPath());
                 fileArrayList.add(path.getFileName());

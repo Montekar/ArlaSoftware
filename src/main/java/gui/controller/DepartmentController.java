@@ -1,22 +1,16 @@
 package gui.controller;
 
-import be.View;
 import bll.*;
 import gui.model.ContentModel;
 import gui.model.SessionModel;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import java.io.*;
 import java.net.URL;
-import java.nio.file.*;
 import java.util.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import refresh.Notification;
 import refresh.RefreshManager;
 
 public class DepartmentController implements Initializable {
@@ -26,7 +20,6 @@ public class DepartmentController implements Initializable {
     private final int zoomIn = 107;
     private final int zoomOut = 109;
 
-    private ObservableList<View> viewObservableList;
     private ArrayList<String> pathArrayList = new ArrayList<>();
     private ArrayList<Object> fileArrayList = new ArrayList<>();
 
@@ -43,6 +36,10 @@ public class DepartmentController implements Initializable {
         departmentMenu = new DepartmentMenu();
     }
 
+    /*
+        Initialize method in witch we set up the department view as well start
+        the necessary listeners such as the timer and file change listener
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         contentModel.updateContent(sessionModel.getUser().getId());
@@ -52,12 +49,13 @@ public class DepartmentController implements Initializable {
             Platform.runLater(() -> {
                 Stage stage = (Stage) mainGrid.getScene().getWindow();
                 refreshManager.runTimer(sessionModel.getUser(), stage);
-                //refreshManager.listenChanges(contentModel.getContentOverview(), sessionModel.getUser().getId());
+                //refreshManager.listenChanges(contentModel.getContentOverview(), sessionModel.getUser(), stage);
             });
         });
         listenerThread.start();
     }
 
+    // Zooming method not fully functional
     private void zoomNode(ZoomPane selectedPane, int keyCode) {
         double zoom = selectedPane.getZoom();
         if (keyCode == zoomIn && zoom < 2){
@@ -72,24 +70,21 @@ public class DepartmentController implements Initializable {
         }
     }
 
+    // Closing program method
     @FXML
     void close(Stage stage){ ;
             stage.close();
             Platform.exit();
             System.exit(0);
-
     }
 
+    // Method listens for key press and redirect to the selected route
     public void onKeyPressed(KeyEvent keyEvent) {
         Stage stage = (Stage) mainGrid.getScene().getWindow();
         switch (keyEvent.getCode()){
             case ESCAPE: close(stage);
             break;
-            case SHIFT:
-                if (stage == null){
-                    System.out.println("is empty");
-                }
-                departmentMenu.showMenu(stage);
+            case SHIFT: departmentMenu.showMenu(stage);
             break;
         }
     }

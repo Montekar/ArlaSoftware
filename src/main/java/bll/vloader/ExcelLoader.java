@@ -14,6 +14,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class ExcelLoader implements IViewLoader {
+
+    /*
+        This class is responsible for loading an excel file with the .xls extension.
+        It loops through the excel sheet and checks if the data is and int or string.
+        The data is than added to a line String and displayed as a raw data list.
+     */
     @Override
     public Node loadView(String path) {
         ListView listView = new ListView();

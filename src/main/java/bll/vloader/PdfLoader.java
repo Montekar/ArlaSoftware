@@ -9,11 +9,16 @@ import java.io.IOException;
 
 
 public class PdfLoader implements IViewLoader{
+
+    /*
+        The pdf loader uses a extern library that loads a file that will
+        be displayed in a pdf viewer.
+     */
     @Override
     public Node loadView(String path) {
         PDFDisplayer displayer = new PDFDisplayer();
         try {
-            displayer.displayPdf(new File("src/main/resources/mockFiles/uk_arla_consolidated_annual_report_2020.pdf"));
+            displayer.displayPdf(new File(path));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
