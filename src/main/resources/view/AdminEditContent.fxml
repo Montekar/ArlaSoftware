@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="296.0" prefWidth="817.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="contentTable">
+      <TableView fx:id="contentTable" VBox.vgrow="ALWAYS">
         <columns>
           <TableColumn fx:id="contentTitle" prefWidth="75.0" text="Title" />
           <TableColumn fx:id="contentPath" prefWidth="75.0" text="Path" />
@@ -22,29 +22,40 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox alignment="CENTER" spacing="10.0">
+      <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
          <children>
             <Button mnemonicParsing="false" onAction="#selectPath" text="Select Path" />
             <TextField fx:id="pathField" promptText="Type: URL/CSV/PDF/IMG" />
             <Label text="Title:" />
             <TextField fx:id="titleField" promptText="Enter title:" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" spacing="10.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
             <Label text="Column:" />
             <TextField fx:id="columnField" prefHeight="25.0" prefWidth="42.0" promptText="X" />
             <Label text="Row:" />
             <TextField fx:id="rowField" prefHeight="25.0" prefWidth="42.0" promptText="X" />
+            <Label text="Width:" />
+            <TextField fx:id="widthField" prefHeight="25.0" prefWidth="42.0" promptText="W" />
+            <Label text="Height:" />
+            <TextField fx:id="heightField" prefHeight="25.0" prefWidth="42.0" promptText="H" />
          </children>
-         <padding>
-            <Insets bottom="5.0" top="5.0" />
-         </padding>
       </HBox>
-      <HBox alignment="CENTER" spacing="10.0">
+      <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
          <children>
             <Button mnemonicParsing="false" onAction="#addContent" text="Add" />
             <Button mnemonicParsing="false" onAction="#editContent" text="Edit" />
             <Button mnemonicParsing="false" onAction="#deleteContent" text="Delete" />
          </children>
          <padding>
-            <Insets bottom="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </HBox>
    </children>

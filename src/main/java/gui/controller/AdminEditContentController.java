@@ -2,6 +2,8 @@ package gui.controller;
 
 import be.View;
 import gui.model.ContentModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class AdminEditContentController implements Initializable {
     @FXML
-    private TextField pathField, titleField, columnField, rowField;
+    private TextField pathField, titleField, columnField, rowField, widthField, heightField;
     @FXML
     private TableView<View> contentTable;
     @FXML
@@ -36,7 +38,7 @@ public class AdminEditContentController implements Initializable {
 
     private final ContentModel contentModel;
 
-    public AdminEditContentController(GridPane contentGrid,int departmentID){
+    public AdminEditContentController(GridPane contentGrid, int departmentID) {
         this.contentGrid = contentGrid;
         this.departmentID = departmentID;
         contentModel = ContentModel.getInstance();
@@ -56,14 +58,20 @@ public class AdminEditContentController implements Initializable {
                 titleField.setText(t1.getTitle());
                 columnField.setText(t1.getColumn() + "");
                 rowField.setText(t1.getRow() + "");
+                widthField.setText(t1.getWidth()+"");
+                heightField.setText(t1.getHeight()+"");
             }
         });
+        setNumberListener(columnField);
+        setNumberListener(rowField);
+        setNumberListener(widthField);
+        setNumberListener(heightField);
     }
 
     public void selectPath(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(contentTable.getScene().getWindow());
-        if(file!=null) {
+        if (file != null) {
             Path path = Path.of(file.getPath());
             pathField.setText(path.toString());
         }
@@ -76,7 +84,7 @@ public class AdminEditContentController implements Initializable {
             int col = Integer.parseInt(columnField.getText());
             int row = Integer.parseInt(rowField.getText());
 
-            contentModel.createContent(new View(departmentID, col, row, path, title));
+            contentModel.createContent(new View(departmentID, col, row, 5, 5, path, title));
             contentModel.buildGrid(contentGrid);
         }
     }
@@ -89,7 +97,7 @@ public class AdminEditContentController implements Initializable {
             int row = Integer.parseInt(rowField.getText());
 
             View oldView = contentTable.getSelectionModel().getSelectedItem();
-            View newView = new View(departmentID, col, row, path, title);
+            View newView = new View(departmentID, col, row, 5, 5, path, title);
 
             contentModel.editContent(oldView, newView);
             contentModel.buildGrid(contentGrid);
@@ -102,5 +110,16 @@ public class AdminEditContentController implements Initializable {
             contentModel.deleteContent(view);
             contentModel.buildGrid(contentGrid);
         }
+    }
+    private void setNumberListener(TextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 }
