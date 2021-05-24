@@ -1,5 +1,6 @@
 package dal.db;
 
+import be.ChartView;
 import be.View;
 import be.users.Admin;
 import dal.IContentRepository;
