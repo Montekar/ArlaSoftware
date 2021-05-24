@@ -25,7 +25,6 @@ public class LoadDepartmentParts implements ILoadDepartmentParts {
         errorHandler = new ErrorHandler();
     }
 
-
     @Override
     public ArrayList<View> getScreenParts(int departmentId) {
         try (Connection conn = connection.getConnection()) {
