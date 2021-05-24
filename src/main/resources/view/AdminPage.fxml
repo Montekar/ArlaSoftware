@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onEscape" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane fx:id="borderPane" onKeyPressed="#onEscape" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox prefHeight="1026.0" prefWidth="117.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
@@ -76,7 +76,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </HBox>
-                  <HBox>
+                  <HBox prefWidth="149.0">
                      <children>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -116,11 +116,11 @@
                   </Label>
                </children>
             </HBox>
-            <VBox alignment="CENTER">
-               <children>
-                  <GridPane fx:id="contentGrid" prefHeight="1070.0" prefWidth="1418.0">
+            <GridPane fx:id="contentGrid" prefHeight="121.0" prefWidth="1419.0" VBox.vgrow="ALWAYS">
             </GridPane>
-                  <TableView fx:id="contentTable" VBox.vgrow="NEVER">
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <TableView fx:id="contentTable" prefHeight="117.0" prefWidth="1419.0" VBox.vgrow="NEVER">
                     <columns>
                       <TableColumn fx:id="contentTitle" prefWidth="128.0" text="Title" />
                       <TableColumn fx:id="contentPath" prefWidth="1055.0" text="Path" />
