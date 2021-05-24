@@ -88,6 +88,7 @@ public class AdminEditContentController implements Initializable {
 
             contentModel.createContent(new View(departmentID, col, row, width, height, path, title));
             contentModel.buildGrid(contentGrid);
+            contentTable.getSelectionModel().selectLast();
         }
     }
 
@@ -97,12 +98,16 @@ public class AdminEditContentController implements Initializable {
             String path = pathField.getText();
             int col = Integer.parseInt(columnField.getText());
             int row = Integer.parseInt(rowField.getText());
+            int width = Integer.parseInt(widthField.getText());
+            int height = Integer.parseInt(heightField.getText());
+            int selectedIndex = contentTable.getSelectionModel().getSelectedIndex();
 
             View oldView = contentTable.getSelectionModel().getSelectedItem();
-            View newView = new View(departmentID, col, row, 5, 5, path, title);
+            View newView = new View(departmentID, col, row, width, height, path, title);
 
             contentModel.editContent(oldView, newView);
             contentModel.buildGrid(contentGrid);
+            contentTable.getSelectionModel().select(selectedIndex);
         }
     }
 

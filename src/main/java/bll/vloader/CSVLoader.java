@@ -20,7 +20,7 @@ public class CSVLoader implements IViewLoader {
         set to table view. After that the whole Table View is returned and displayed.
      */
     @Override
-    public Node loadView(String path) {
+    public Node loadView(String path,int width, int height) {
         TableView<List<String>> tableView = new TableView();
         List<String> lines = fileReader.loadData(path);
         List<String> headerStrings = Arrays.asList(lines.get(0).split(","));
@@ -37,6 +37,11 @@ public class CSVLoader implements IViewLoader {
             observableList.add(stringsInLine);
         }
         tableView.setItems(observableList);
+
+        tableView.setMinHeight(height);
+        tableView.setMaxHeight(height);
+        tableView.setMinWidth(width);
+        tableView.setMaxWidth(width);
         return tableView;
     }
 }

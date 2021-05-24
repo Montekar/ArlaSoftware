@@ -45,7 +45,7 @@ public class DBContentRepository implements IContentRepository {
     @Override
     public void createContent(View view) {
         try (Connection con = connection.getConnection()) {
-            String sql = "INSERT INTO Content Values(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Content Values(?,?,?,?,?,?,?,-1)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, view.getId());
             statement.setInt(2, view.getColumn());

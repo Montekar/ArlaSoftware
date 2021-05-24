@@ -71,9 +71,12 @@ public class ContentManager {
         VBox window = new VBox();
         window.setAlignment(Pos.TOP_CENTER);
 
+        window.setPrefSize(view.getWidth(),view.getHeight());
+
         IViewLoader loader = getLoader(view);
         Platform.runLater(() -> {
-            window.getChildren().addAll(title, loader.loadView(view.getPath()));
+            Node content = loader.loadView(view.getPath(),view.getWidth(),view.getHeight());
+            window.getChildren().addAll(title, content);
         });
 
         return window;

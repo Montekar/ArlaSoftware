@@ -14,7 +14,7 @@ public class ImageLoader implements IViewLoader{
         it adds it. The image is displayed inside of a Image View.
      */
     @Override
-    public Node loadView(String path) {
+    public Node loadView(String path,int width, int height) {
         FileInputStream input = null;
         try {
             input = new FileInputStream(path);
@@ -23,6 +23,8 @@ public class ImageLoader implements IViewLoader{
         }
         Image image = new Image(input);
         ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
         return imageView;
     }
 }

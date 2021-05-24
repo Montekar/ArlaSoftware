@@ -21,7 +21,7 @@ public class ExcelLoader implements IViewLoader {
         The data is than added to a line String and displayed as a raw data list.
      */
     @Override
-    public Node loadView(String path) {
+    public Node loadView(String path,int width, int height) {
         ListView listView = new ListView();
         try {
             FileInputStream fileInputStream = new FileInputStream(new File(path));
