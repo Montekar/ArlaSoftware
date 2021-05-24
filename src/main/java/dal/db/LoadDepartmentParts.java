@@ -37,6 +37,8 @@ public class LoadDepartmentParts implements ILoadDepartmentParts {
                     view = new View(resultSet.getInt("DepartmentID"),
                             resultSet.getInt("Column"),
                             resultSet.getInt("Row"),
+                            resultSet.getInt("Width"),
+                            resultSet.getInt("Height"),
                             resultSet.getString("Path"),
                             resultSet.getString("Title"));
                     viewArrayList.add(view);

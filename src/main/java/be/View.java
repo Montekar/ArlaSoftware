@@ -6,12 +6,16 @@ public class View {
     private int column;
     private int row;
     private int id;
+    private int width;
+    private int height;
 
-    public View(int departmentID, int column, int row, String path,String title) {
+    public View(int departmentID, int column, int row, int width, int height, String path, String title) {
         this.path = path;
         this.title = title;
         this.column = column;
         this.row = row;
+        this.width = width;
+        this.height = height;
         this.id = departmentID;
     }
 
@@ -25,6 +29,14 @@ public class View {
 
     public int getId() {
         return id;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public String getPath() {
