@@ -63,8 +63,10 @@ public class AdminEditContentController implements Initializable {
     public void selectPath(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(contentTable.getScene().getWindow());
-        Path path = Path.of(file.getPath());
-        pathField.setText(path.toString());
+        if(file!=null) {
+            Path path = Path.of(file.getPath());
+            pathField.setText(path.toString());
+        }
     }
 
     public void addContent(ActionEvent actionEvent) {
