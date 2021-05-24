@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onEscape" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onEscape" prefHeight="1026.0" prefWidth="1567.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox prefHeight="1026.0" prefWidth="117.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
@@ -44,7 +44,7 @@
                               <Image url="@../images/department.png" />
                            </image>
                         </ImageView>
-                        <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="150.0" />
+                        <ChoiceBox id="label" fx:id="choiceDepartment" prefWidth="147.0" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -57,7 +57,7 @@
                               <Image url="@../images/settings.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" onAction="#openEdit" prefHeight="32.0" prefWidth="363.0" text="Edit/Create" />
+                        <Button mnemonicParsing="false" onAction="#openEdit" prefWidth="147.0" text="Edit/Create" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -70,7 +70,7 @@
                               <Image url="@../images/refresh.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" onAction="#refreshContent" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
+                        <Button mnemonicParsing="false" onAction="#refreshContent" prefWidth="147.0" text="Refresh" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -83,7 +83,7 @@
                               <Image url="@../images/logout.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="150.0" text="Logout" />
+                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefWidth="147.0" text="Logout" />
                      </children>
                      <padding>
                         <Insets left="5.0" top="200.0" />
