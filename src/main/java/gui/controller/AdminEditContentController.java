@@ -83,8 +83,10 @@ public class AdminEditContentController implements Initializable {
             String path = pathField.getText();
             int col = Integer.parseInt(columnField.getText());
             int row = Integer.parseInt(rowField.getText());
+            int width = Integer.parseInt(widthField.getText());
+            int height = Integer.parseInt(heightField.getText());
 
-            contentModel.createContent(new View(departmentID, col, row, 5, 5, path, title));
+            contentModel.createContent(new View(departmentID, col, row, width, height, path, title));
             contentModel.buildGrid(contentGrid);
         }
     }
