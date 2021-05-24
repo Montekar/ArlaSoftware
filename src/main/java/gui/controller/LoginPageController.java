@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -64,11 +65,11 @@ public class LoginPageController {
 
     public void goToAdminPage(Stage stage, User user) {
         try {
+            sessionModel.setUser(user);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
             stage.setFullScreen(true);
-            sessionModel.setUser(user);
         } catch (IOException e) {
             e.printStackTrace();
         }
