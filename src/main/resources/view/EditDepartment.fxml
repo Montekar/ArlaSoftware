@@ -44,7 +44,7 @@
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefWidth="162.0" spacing="3.0">
                                  <children>
-                                    <ChoiceBox fx:id="choiceDepartment" prefHeight="32.0" prefWidth="186.0" stylesheets="@../stylesheets/buttons.css" />
+                                    <ChoiceBox fx:id="choiceDepartment" prefHeight="32.0" prefWidth="186.0" />
                                     <TextField fx:id="editDepartmentNameField" promptText="Name" />
                                     <TextField fx:id="editRefreshField" promptText="Refresh time in minutes" />
                                  </children>
@@ -56,8 +56,8 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="305.0" spacing="10.0">
                            <children>
-                              <Button fx:id="editDepartmentButton" mnemonicParsing="false" onAction="#editDepartment" stylesheets="@../stylesheets/buttons.css" text="Edit" />
-                              <Button fx:id="deleteDepartmentButton" mnemonicParsing="false" onAction="#deleteDepartment" stylesheets="@../stylesheets/buttons.css" text="Delete" />
+                              <Button fx:id="editDepartmentButton" mnemonicParsing="false" onAction="#editDepartment" text="Edit" />
+                              <Button fx:id="deleteDepartmentButton" mnemonicParsing="false" onAction="#deleteDepartment" text="Delete" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" />
@@ -102,7 +102,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="305.0">
                            <children>
-                              <Button fx:id="createDepartmentButton" mnemonicParsing="false" onAction="#createDepartment" stylesheets="@../stylesheets/buttons.css" text="Create" />
+                              <Button fx:id="createDepartmentButton" mnemonicParsing="false" onAction="#createDepartment" text="Create" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" />
@@ -128,7 +128,7 @@
             </HBox>
          </children>
          <effect>
-            <DropShadow color="#518f38" />
+            <DropShadow />
          </effect>
       </Pane>
    </children>
