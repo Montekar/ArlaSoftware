@@ -10,9 +10,11 @@ public class WebViewLoader implements IViewLoader {
         has and engine method which loads the web page.
      */
     @Override
-    public Node loadView(String path) {
+    public Node loadView(String path,int width, int height) {
         WebView webView = new WebView();
         webView.getEngine().load(path);
+        webView.setPrefHeight(height);
+        webView.setPrefWidth(width);
         return webView;
     }
 }

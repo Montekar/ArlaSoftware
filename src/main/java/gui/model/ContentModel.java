@@ -31,7 +31,6 @@ public class ContentModel {
     public void buildGrid(GridPane grid) {
         new Thread(() -> {
             Platform.runLater(() -> {
-                grid.setGridLinesVisible(true);
                 grid.getChildren().clear();
             });
 
@@ -43,6 +42,10 @@ public class ContentModel {
                 });
 
             }
+            Platform.runLater(() -> {
+                grid.setGridLinesVisible(true);
+            });
+
         }).start();
     }
 
