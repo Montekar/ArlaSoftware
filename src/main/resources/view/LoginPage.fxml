@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginPageController">
+<AnchorPane prefHeight="430.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginPageController">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" onKeyPressed="#onESCAPE" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: white;">
          <children>
@@ -23,10 +23,10 @@
             <JFXTextField fx:id="usernameField" layoutX="98.0" layoutY="223.0" onKeyPressed="#onEnter" promptText="Deparment name" />
             <JFXPasswordField fx:id="passwordField" layoutX="98.0" layoutY="273.0" onKeyPressed="#onEnter" promptText="Password" />
             <Label fx:id="message" layoutX="98.0" layoutY="191.0" prefHeight="17.0" prefWidth="135.0" text="Welcome to Arla Foods" />
-            <Button alignment="CENTER" contentDisplay="TOP" layoutX="130.0" layoutY="326.0" mnemonicParsing="false" onAction="#loginClickAction" text="Log in" />
+            <Button alignment="CENTER" contentDisplay="TOP" layoutX="130.0" layoutY="326.0" mnemonicParsing="false" onAction="#loginClickAction" stylesheets="@../stylesheets/administrator.css" text="Log in" />
          </children>
          <effect>
-            <DropShadow color="#518f38" />
+            <DropShadow />
          </effect>
       </Pane>
    </children>

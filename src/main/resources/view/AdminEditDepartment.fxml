@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="462.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="462.0" prefWidth="360.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" onKeyReleased="#onESCAPE" prefHeight="434.0" prefWidth="330.0" style="-fx-background-color: white;">
          <children>
@@ -128,7 +128,7 @@
             </HBox>
          </children>
          <effect>
-            <DropShadow color="#518f38" />
+            <DropShadow />
          </effect>
       </Pane>
    </children>
