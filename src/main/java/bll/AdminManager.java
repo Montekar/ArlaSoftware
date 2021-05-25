@@ -21,6 +21,6 @@ public class AdminManager {
         return adminRepository.getAllAdmins();
     }
 
-    public void report(String departmentName,String title, String description){ adminRepository.report(departmentName, title, description);}
+    public void report(int departmentID,String title, String description){ adminRepository.report(departmentID, title, description);}
 
 }

@@ -1,13 +1,18 @@
 package gui.controller;
 
+import be.users.Department;
 import bll.*;
 import gui.model.ContentModel;
 import gui.model.SessionModel;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.*;
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -26,14 +31,12 @@ public class DepartmentController implements Initializable {
     private SessionModel sessionModel;
     private ContentModel contentModel;
     private RefreshManager refreshManager;
-    private DepartmentMenu departmentMenu;
 
 
     public DepartmentController(){
         sessionModel = SessionModel.getInstance();
         contentModel = ContentModel.getInstance();
         refreshManager = RefreshManager.getInstance();
-        departmentMenu = new DepartmentMenu();
     }
 
     /*
@@ -44,14 +47,23 @@ public class DepartmentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         contentModel.updateContent(sessionModel.getUser().getId());
         contentModel.buildGrid(mainGrid);
+    }
 
-        Thread listenerThread = new Thread(() -> {
+    public void setupListeners(){
+        Stage stage = (Stage) mainGrid.getScene().getWindow();
+        System.out.println("Stage: " + stage);
+        Thread timerThread = new Thread(() -> {
             Platform.runLater(() -> {
-                Stage stage = (Stage) mainGrid.getScene().getWindow();
                 refreshManager.runTimer(sessionModel.getUser(), stage);
-                //refreshManager.listenChanges(contentModel.getContentOverview(), sessionModel.getUser(), stage);
             });
         });
+        timerThread.setDaemon(true);
+        timerThread.start();
+
+        Thread listenerThread = new Thread(() -> {
+            refreshManager.listenChanges(contentModel.getContentOverview(), sessionModel.getUser(), stage);
+        });
+        listenerThread.setDaemon(true);
         listenerThread.start();
     }
 
@@ -84,8 +96,23 @@ public class DepartmentController implements Initializable {
         switch (keyEvent.getCode()){
             case ESCAPE: close(stage);
             break;
-            case SHIFT: departmentMenu.showMenu(stage);
+            case SHIFT: openDepartmentWindow();
             break;
+        }
+    }
+
+    private void openDepartmentWindow(){
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentMenu.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            DepartmentMenu controller = fxmlLoader.getController();
+            controller.setParentStage((Stage)mainGrid.getScene().getWindow());
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

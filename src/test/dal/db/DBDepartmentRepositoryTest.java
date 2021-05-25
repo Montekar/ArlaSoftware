@@ -14,8 +14,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DBDepartmentRepositoryTest {
-    private DatabaseConnection connection;
-    List<Department> departmentList = new ArrayList<>();
+    private static DatabaseConnection connection = new DatabaseConnection();
+    private static List<Department> departmentList = new ArrayList<>();
     private int lastInsertedId = 0;
     private boolean createdDepartment = false;
     private final String departmentName = "DepartmentTest";
@@ -24,7 +24,7 @@ class DBDepartmentRepositoryTest {
 
     // Sets up the testing and retrieves list of all departments
     @BeforeAll
-    void setUp() {
+    static void setUp() {
         try(Connection con = connection.getConnection()){
             String sql = "SELECT * FROM Department";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -63,7 +63,7 @@ class DBDepartmentRepositoryTest {
             sqlException.printStackTrace();
         }
 
-        Assertions.assertEquals(departmentList,actualDepartmentList);
+        Assertions.assertEquals(departmentList.size(),actualDepartmentList.size());
     }
 
     // Testing the possibility to create a department
@@ -71,7 +71,7 @@ class DBDepartmentRepositoryTest {
     @Test
     void createDepartment() {
         try (Connection con = connection.getConnection()){
-            String sql = "INSERT INTO Department Values (? ,?,?)";
+            String sql = "INSERT INTO Department Values (? ,?, ?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1,departmentName);
             statement.setString(2,"Test123");
