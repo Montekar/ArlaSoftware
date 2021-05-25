@@ -11,12 +11,12 @@ import dal.IContentRepository;
 import dal.db.DBContentRepository;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.Locale;
 
 public class ContentManager {
     private final IContentRepository contentRepository;
@@ -90,28 +90,29 @@ public class ContentManager {
         return null;
     }
 
-    public VBox getWindow(View view){
+    public VBox getWindow(View view) {
         HBox title = new HBox(new Label(view.getTitle()));
         title.getStylesheets().add("/stylesheets/view.css");
         title.setAlignment(Pos.CENTER);
 
         VBox window = new VBox();
         window.setAlignment(Pos.TOP_CENTER);
-        if (view instanceof ChartView){
+        if (view instanceof ChartView) {
             IChartLoader loader = getChartLoader((ChartView) view);
             Platform.runLater(() -> {
-                window.getChildren().addAll(title, loader.loadChart(view.getPath(),((ChartView) view).getNameColumn(),((ChartView) view).getDataColumn()));
+                window.getChildren().addAll(title, loader.loadChart(view.getPath(), ((ChartView) view).getNameColumn(), ((ChartView) view).getDataColumn()));
             });
-        }else{
+        } else {
             IViewLoader loader = getLoader(view);
-        Platform.runLater(() -> {
-            Node content = loader.loadView(view.getPath(),view.getWidth(),view.getHeight());
-            window.getChildren().addAll(title, content);
-        });
+            Platform.runLater(() -> {
+                Node content = loader.loadView(view.getPath(), view.getWidth(), view.getHeight());
+                window.getChildren().addAll(title, content);
             });
         }
 
-        window.setPrefSize(view.getWidth(),view.getHeight());
+
+
+        window.setPrefSize(view.getWidth(), view.getHeight());
 
 
         return window;

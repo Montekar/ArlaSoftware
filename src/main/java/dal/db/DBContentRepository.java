@@ -35,7 +35,9 @@ public class DBContentRepository implements IContentRepository {
                 while (resultSet.next()) {
                     if (resultSet.getInt("chartId") < 0){
                         content.add(new View(resultSet.getInt("DepartmentID"),
-                                resultSet.getInt("Column"), resultSet.getInt("Row"), resultSet.getString("Path"), resultSet.getString("Title")
+                                resultSet.getInt("Column"), resultSet.getInt("Row"),
+                                resultSet.getInt("Width"), resultSet.getInt("Height"),
+                                resultSet.getString("Path"), resultSet.getString("Title")
                         ));
                     }else{
                         String sql1 = "SELECT * FROM Content " +
@@ -51,6 +53,7 @@ public class DBContentRepository implements IContentRepository {
                             if(resultSet1.next()){
                                 content.add(new ChartView(resultSet1.getInt("DepartmentID"),
                                         resultSet1.getInt("Column"), resultSet1.getInt("Row"),
+                                        resultSet1.getInt("Width"), resultSet1.getInt("Height"),
                                         resultSet1.getString("Path"), resultSet1.getString("Title"),
                                         resultSet1.getString("nameCol"),resultSet1.getString("dataCol"),
                                         ChartType.getTypeFromString(resultSet1.getString("chartType"))
