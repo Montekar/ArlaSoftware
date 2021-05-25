@@ -9,6 +9,7 @@ public class ChartView extends View{
     private ChartType chartType;
 
     // Chart View is an extended View class related to chart loaders as they require more parameters
+
     public ChartView(int departmentID, int column, int row, String path, String title, String nameColumn, String dataColumn, ChartType chartType) {
         super(departmentID, column, row, path, title);
         this.nameColumn = nameColumn;

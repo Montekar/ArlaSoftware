@@ -15,7 +15,7 @@ public class ErrorView implements IViewLoader{
         empty window.
      */
     @Override
-    public Node loadView(String path) {
+    public Node loadView(String path,int width, int height) {
         FileInputStream input = null;
         try {
             input = new FileInputStream("src/main/resources/images/error.gif");
@@ -24,6 +24,8 @@ public class ErrorView implements IViewLoader{
         }
         Image image = new Image(input);
         ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
         return imageView;
     }
 }

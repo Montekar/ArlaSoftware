@@ -104,10 +104,14 @@ public class ContentManager {
             });
         }else{
             IViewLoader loader = getLoader(view);
-            Platform.runLater(() -> {
-                window.getChildren().addAll(title, loader.loadView(view.getPath()));
+        Platform.runLater(() -> {
+            Node content = loader.loadView(view.getPath(),view.getWidth(),view.getHeight());
+            window.getChildren().addAll(title, content);
+        });
             });
         }
+
+        window.setPrefSize(view.getWidth(),view.getHeight());
 
 
         return window;

@@ -2,21 +2,11 @@ package gui.model;
 
 import be.View;
 import bll.ContentManager;
-import bll.ContentType;
-import bll.PathManager;
-import bll.vloader.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.validator.routines.UrlValidator;
 
 import java.util.ArrayList;
 
@@ -41,17 +31,21 @@ public class ContentModel {
     public void buildGrid(GridPane grid) {
         new Thread(() -> {
             Platform.runLater(() -> {
-                grid.setGridLinesVisible(true);
                 grid.getChildren().clear();
             });
 
             for (View view : contentOverview) {
                 VBox vbox = contentManager.getWindow(view);
+
                 Platform.runLater(() -> {
                     grid.add(vbox, view.getColumn(), view.getRow());
                 });
 
             }
+            Platform.runLater(() -> {
+                grid.setGridLinesVisible(true);
+            });
+
         }).start();
     }
 

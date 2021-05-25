@@ -15,13 +15,14 @@ public class PdfLoader implements IViewLoader{
         be displayed in a pdf viewer.
      */
     @Override
-    public Node loadView(String path) {
+    public Node loadView(String path,int width, int height) {
         PDFDisplayer displayer = new PDFDisplayer();
         try {
             displayer.displayPdf(new File(path));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+
         return displayer.toNode();
     }
 }

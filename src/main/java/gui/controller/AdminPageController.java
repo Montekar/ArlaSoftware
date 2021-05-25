@@ -111,16 +111,18 @@ public class AdminPageController implements Initializable {
     }
 
     public void openContentSetup(ActionEvent actionEvent) throws IOException {
-        Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
-        Stage stage = new Stage();
+        if (choiceDepartment.getSelectionModel().getSelectedItem() != null) {
+            Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
+            Stage stage = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminEditContent.fxml"));
-        AdminEditContentController editContentController = new AdminEditContentController(contentGrid,choiceDepartment.getSelectionModel().getSelectedItem().getId());
-        loader.setController(editContentController);
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(mainStage);
-        stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminEditContent.fxml"));
+            AdminEditContentController editContentController = new AdminEditContentController(contentGrid, choiceDepartment.getSelectionModel().getSelectedItem().getId());
+            loader.setController(editContentController);
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(mainStage);
+            stage.show();
+        }
     }
 }

@@ -71,13 +71,15 @@ public class DBContentRepository implements IContentRepository {
     @Override
     public void createContent(View view) {
         try (Connection con = connection.getConnection()) {
-            String sql = "INSERT INTO Content Values(?,?,?,?,?)";
+            String sql = "INSERT INTO Content Values(?,?,?,?,?,?,?,-1)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, view.getId());
             statement.setInt(2, view.getColumn());
             statement.setInt(3, view.getRow());
-            statement.setString(4, view.getTitle());
-            statement.setString(5, view.getPath());
+            statement.setInt(4, view.getWidth());
+            statement.setInt(5, view.getHeight());
+            statement.setString(6, view.getTitle());
+            statement.setString(7, view.getPath());
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue adding content", ex);
@@ -89,9 +91,9 @@ public class DBContentRepository implements IContentRepository {
         try (Connection con = connection.getConnection()) {
             String sql = "DELETE FROM Content WHERE DepartmentID = ? AND [Column] = ? AND Row = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1,view.getId());
-            statement.setInt(2,view.getColumn());
-            statement.setInt(3,view.getRow());
+            statement.setInt(1, view.getId());
+            statement.setInt(2, view.getColumn());
+            statement.setInt(3, view.getRow());
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue deleting content", ex);
@@ -101,15 +103,17 @@ public class DBContentRepository implements IContentRepository {
     @Override
     public void editContent(View oldView, View newView) {
         try (Connection con = connection.getConnection()) {
-            String sql = "UPDATE Content SET [Column] = ?, Row = ?, Title = ?, Path = ? WHERE DepartmentID = ? AND [Column] = ? AND Row = ?";
+            String sql = "UPDATE Content SET [Column] = ?, Row = ?, Width = ?, Height = ?, Title = ?, Path = ? WHERE DepartmentID = ? AND [Column] = ? AND Row = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1,newView.getColumn());
-            statement.setInt(2,newView.getRow());
-            statement.setString(3,newView.getTitle());
-            statement.setString(4,newView.getPath());
-            statement.setInt(5,oldView.getId());
-            statement.setInt(6,oldView.getColumn());
-            statement.setInt(7,oldView.getRow());
+            statement.setInt(1, newView.getColumn());
+            statement.setInt(2, newView.getRow());
+            statement.setInt(3, newView.getWidth());
+            statement.setInt(4, newView.getHeight());
+            statement.setString(5, newView.getTitle());
+            statement.setString(6, newView.getPath());
+            statement.setInt(7, oldView.getId());
+            statement.setInt(8, oldView.getColumn());
+            statement.setInt(9, oldView.getRow());
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue editing content", ex);
