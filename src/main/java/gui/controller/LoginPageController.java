@@ -81,6 +81,8 @@ public class LoginPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentView.fxml"));
             Parent root = fxmlLoader.load();
             stage.setScene(new Scene(root));
+            DepartmentController deptCtrl = fxmlLoader.getController(); // Must be loaded AFTER fxmlloader.load()
+            deptCtrl.setupListeners();
             stage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();

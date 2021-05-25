@@ -60,11 +60,11 @@ public class DBAdminRepository implements IAdminRepository {
     }
 
     @Override
-    public void report(String departmentName, String title, String description) {
+    public void report(int departmentID, String title, String description) {
         try (Connection con = connection.getConnection()) {
             String sql = "INSERT INTO Report Values(?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, departmentName);
+            statement.setInt(1, departmentID);
             statement.setString(2, title);
             statement.setString(3, description);
             statement.execute();

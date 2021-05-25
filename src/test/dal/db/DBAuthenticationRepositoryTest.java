@@ -3,6 +3,7 @@ package dal.db;
 import be.users.Admin;
 import be.users.Department;
 import be.users.User;
+import dal.IAuthenticationRepository;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
@@ -12,8 +13,8 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DBAuthenticationRepositoryTest {
-    private static DatabaseConnection connection;
-    private DBAuthenticationRepository dbAuthenticationRepository = new DBAuthenticationRepository();
+    private static DatabaseConnection connection = new DatabaseConnection();
+    private IAuthenticationRepository dbAuthenticationRepository = new DBAuthenticationRepository();
     private final static String adminUsername = "AdminTest";
     private final static String adminPassword = "admin123";
     private final static String departmentUsername = "DepartmentTest";
@@ -24,7 +25,7 @@ class DBAuthenticationRepositoryTest {
     public static void setUp() {
         try(Connection con = connection.getConnection()){
             String sqlAdmin = "INSERT INTO Admin Values(?, ?)";
-            String sqlDepartment = "INSERT INTO Department Values(?, ?)";
+            String sqlDepartment = "INSERT INTO Department Values(?, ?,?)";
 
             PreparedStatement adminStatement = con.prepareStatement(sqlAdmin);
             adminStatement.setString(1,adminUsername);
@@ -34,6 +35,7 @@ class DBAuthenticationRepositoryTest {
             PreparedStatement departmentStatement = con.prepareStatement(sqlDepartment);
             departmentStatement.setString(1,departmentUsername);
             departmentStatement.setString(2,departmentPassword);
+            departmentStatement.setInt(3,5);
             departmentStatement.execute();
         }catch (SQLException sqlException){
             sqlException.printStackTrace();

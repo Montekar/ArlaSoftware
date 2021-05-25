@@ -1,17 +1,22 @@
 package bll;
 
+import be.ChartView;
 import be.View;
+import bll.gloader.BarChartLoader;
+import bll.gloader.IChartLoader;
+import bll.gloader.LineChartLoader;
+import bll.gloader.PieChartLoader;
 import bll.vloader.*;
 import dal.IContentRepository;
 import dal.db.DBContentRepository;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ContentManager {
     private final IContentRepository contentRepository;
@@ -63,6 +68,28 @@ public class ContentManager {
         }
         return null;
     }
+
+    public IChartLoader getChartLoader(ChartView chartView) {
+        ChartType chartType = chartView.getChartType();
+        if (chartType != null) {
+            switch (chartType) {
+                case BAR -> {
+                    return new BarChartLoader();
+                }
+                case PIE -> {
+                    return new PieChartLoader();
+                }
+                case LINE -> {
+                    return new LineChartLoader();
+                }
+
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
+
     public VBox getWindow(View view){
         HBox title = new HBox(new Label(view.getTitle()));
         title.getStylesheets().add("/stylesheets/view.css");
@@ -70,11 +97,18 @@ public class ContentManager {
 
         VBox window = new VBox();
         window.setAlignment(Pos.TOP_CENTER);
+        if (view instanceof ChartView){
+            IChartLoader loader = getChartLoader((ChartView) view);
+            Platform.runLater(() -> {
+                window.getChildren().addAll(title, loader.loadChart(view.getPath(),((ChartView) view).getNameColumn(),((ChartView) view).getDataColumn()));
+            });
+        }else{
+            IViewLoader loader = getLoader(view);
+            Platform.runLater(() -> {
+                window.getChildren().addAll(title, loader.loadView(view.getPath()));
+            });
+        }
 
-        IViewLoader loader = getLoader(view);
-        Platform.runLater(() -> {
-            window.getChildren().addAll(title, loader.loadView(view.getPath()));
-        });
 
         return window;
     }

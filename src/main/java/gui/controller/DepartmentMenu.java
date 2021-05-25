@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -28,6 +29,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DepartmentMenu implements Initializable {
+    @FXML
+    AnchorPane menu;
 
     @FXML
     TextField title;
@@ -45,10 +48,6 @@ public class DepartmentMenu implements Initializable {
     private SessionModel sessionModel;
     private AdminManager adminManager;
 
-    public DepartmentMenu() {
-        sessionModel = SessionModel.getInstance();
-        adminManager = new AdminManager();
-    }
 
     /*
         Initialization of the menu class in which dynamic labels are set
@@ -56,6 +55,8 @@ public class DepartmentMenu implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        sessionModel = SessionModel.getInstance();
+        adminManager = new AdminManager();
         profile.setText(sessionModel.getUser().getUsername());
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),
                 new EventHandler() {
@@ -71,23 +72,15 @@ public class DepartmentMenu implements Initializable {
 
     }
 
-    // Method to load the fxml file for the department menu
-    public void showMenu(Stage departmentStage) {
-        this.parentStage = departmentStage;
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentMenu.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setParentStage(Stage parentStage){
+        this.parentStage = parentStage;
     }
 
     // Logout functionality redirects to the Login Page
     public void logOut(MouseEvent event) {
+        Stage stage = (Stage) this.menu.getScene().getWindow();
+        stage.close();
+        this.parentStage.close();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/LoginPage.fxml"));
             Parent root = (Parent) fxmlLoader.load();
@@ -110,7 +103,7 @@ public class DepartmentMenu implements Initializable {
     // Method for getting the text out of the fields and sending them to the database
     public void sendReport(ActionEvent actionEvent) {
         if ( !title.getText().isEmpty() && !description.getText().isEmpty()){
-            adminManager.report(sessionModel.getUser().getUsername(), title.getText(), description.getText());
+            adminManager.report(sessionModel.getUser().getId(), title.getText(), description.getText());
             title.setText("");
             description.setText("");
         }
@@ -118,9 +111,8 @@ public class DepartmentMenu implements Initializable {
 
     // Method for closing the application
     public void closeScreen(MouseEvent event) {
-            Stage stage = parentStage;
-            stage.close();
-            Platform.exit();
-            System.exit(0);
+           parentStage.close();
+           Platform.exit();
+           System.exit(0);
     }
 }

@@ -3,6 +3,7 @@ package dal.db;
 import be.ChartView;
 import be.View;
 import be.users.Admin;
+import bll.ChartType;
 import dal.IContentRepository;
 import error.ErrorHandler;
 
@@ -32,12 +33,37 @@ public class DBContentRepository implements IContentRepository {
             if (statement.execute()) {
                 ResultSet resultSet = statement.getResultSet();
                 while (resultSet.next()) {
-                    content.add(new View(resultSet.getInt("DepartmentID"),
-                            resultSet.getInt("Column"), resultSet.getInt("Row"), resultSet.getString("Path"), resultSet.getString("Title")));
+                    if (resultSet.getInt("chartId") < 0){
+                        content.add(new View(resultSet.getInt("DepartmentID"),
+                                resultSet.getInt("Column"), resultSet.getInt("Row"), resultSet.getString("Path"), resultSet.getString("Title")
+                        ));
+                    }else{
+                        String sql1 = "SELECT * FROM Content " +
+                                      "INNER JOIN ChartData " +
+                                      "ON ChartData.id = Content.chartId " +
+                                      "WHERE Content.DepartmentId = ? AND ChartData.id = ?";
+                        PreparedStatement statement1 = con.prepareStatement(sql1);
+                        statement1.setInt(1,departmentID);
+                        statement1.setInt(2,resultSet.getInt("chartId"));
+
+                        if (statement1.execute()){
+                            ResultSet resultSet1 = statement1.getResultSet();
+                            if(resultSet1.next()){
+                                content.add(new ChartView(resultSet1.getInt("DepartmentID"),
+                                        resultSet1.getInt("Column"), resultSet1.getInt("Row"),
+                                        resultSet1.getString("Path"), resultSet1.getString("Title"),
+                                        resultSet1.getString("nameCol"),resultSet1.getString("dataCol"),
+                                        ChartType.getTypeFromString(resultSet1.getString("chartType"))
+                                        ));
+                            }
+                        }
+                    }
+
                 }
             }
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue getting content", ex);
+            ex.printStackTrace();
         }
         return content;
     }

@@ -2,6 +2,7 @@ package refresh;
 
 import be.View;
 import be.users.User;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
@@ -43,7 +44,7 @@ public class ChangesListener {
                         StandardWatchEventKinds.ENTRY_DELETE,
                         StandardWatchEventKinds.ENTRY_MODIFY);
             }
-            while (true) {
+            //while (true) {
                 WatchKey key = watchService.take();
                 for (WatchEvent event : key.pollEvents()) {
                     for (Object file : fileArrayList) {
@@ -53,12 +54,12 @@ public class ChangesListener {
                         }
                     }
                 }
-                notification.displayAlert(department, stage, message);
+            Platform.runLater(()->notification.displayAlert(department, stage, message));
                 boolean valid = key.reset();
-                if (valid) {
+               /* if (valid) {
                     break;
-                }
-            }
+                }*/
+           // }
         } catch (IOException | InterruptedException exception) {
             exception.printStackTrace();
         }
