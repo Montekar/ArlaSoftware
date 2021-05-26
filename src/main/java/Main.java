@@ -1,4 +1,6 @@
 import bll.helper.HashingHelper;
+import dal.db.DBReportRepository;
+import gui.model.ReportModel;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +19,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
 

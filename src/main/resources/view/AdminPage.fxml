@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" onKeyPressed="#onEscape" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane fx:id="borderPane" onKeyPressed="#onEscape" prefHeight="475.0" prefWidth="1586.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
-      <VBox prefHeight="1026.0" prefWidth="167.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="577.0" prefWidth="167.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="132.0" prefWidth="182.0">
                <children>
@@ -31,7 +31,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="537.0" prefWidth="151.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <VBox alignment="TOP_CENTER" prefHeight="563.0" prefWidth="167.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label fx:id="labelEdit" style="-fx-text-fill: GREEN;" text="EDIT MODE" visible="false" />
                   <HBox>
@@ -70,7 +70,20 @@
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#openContentSetup" prefWidth="147.0" text="Edit Screen" />
                      </children>
                      <padding>
-                        <Insets left="5.0" />
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefWidth="149.0">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/issueimg.png" />
+                           </image>
+                        </ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#openIssueLog" prefWidth="147.0" text="Report Log" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
                      </padding>
                   </HBox>
                   <HBox alignment="CENTER">
@@ -83,10 +96,15 @@
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#refreshContent" prefWidth="147.0" text="Refresh" />
                      </children>
                      <padding>
-                        <Insets left="5.0" />
+                        <Insets left="5.0" right="5.0" />
                      </padding>
                   </HBox>
-                  <HBox prefWidth="149.0">
+                  <HBox prefHeight="142.0" prefWidth="167.0" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets left="5.0" top="200.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
                      <children>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -96,10 +114,12 @@
                         <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" prefWidth="147.0" text="Logout" />
                      </children>
                      <padding>
-                        <Insets left="5.0" top="200.0" />
+                        <Insets bottom="10.0" left="5.0" right="5.0" />
                      </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </HBox>
-                  <Button fx:id="hideButton" alignment="CENTER" maxHeight="50.0" maxWidth="194.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="50.0" prefWidth="194.0" styleClass="hide" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -126,7 +146,7 @@
                   </Label>
                </children>
             </HBox>
-            <GridPane fx:id="contentGrid" gridLinesVisible="true" prefHeight="121.0" prefWidth="1419.0" VBox.vgrow="ALWAYS">
+            <GridPane fx:id="contentGrid" gridLinesVisible="true" prefHeight="610.0" prefWidth="1419.0" VBox.vgrow="ALWAYS">
             </GridPane>
          </children>
       </VBox>

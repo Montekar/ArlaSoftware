@@ -18,7 +18,14 @@
     -fx-background-color: #56c44f;
 }
 
+.table-view .table-cell{
+    -fx-border-color: transparent;
+}
 
+
+.table-row-cell:selected {
+    -fx-background-color: #56c44f;
+}
 
 .choice-box {
     -fx-pref-height: 30px;
