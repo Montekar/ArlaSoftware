@@ -33,11 +33,14 @@ class LoadDepartmentPartsTest {
                             resultSet.getInt("DepartmentID"),
                             resultSet.getInt("Column"),
                             resultSet.getInt("Row"),
+                            resultSet.getInt("Width"),
+                            resultSet.getInt("Height"),
                             resultSet.getString("Path"),
                             resultSet.getString("Title")
                     ));
                 }
             }
+            //int departmentID, int column, int row, int width, int height, String path, String title
         }catch (SQLException sqlException){
             sqlException.printStackTrace();
         }*/
@@ -59,6 +62,8 @@ class LoadDepartmentPartsTest {
                             resultSet.getInt("DepartmentID"),
                             resultSet.getInt("Column"),
                             resultSet.getInt("Row"),
+                            resultSet.getInt("Width"),
+                            resultSet.getInt("Height"),
                             resultSet.getString("Path"),
                             resultSet.getString("Title")
                     ));

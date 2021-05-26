@@ -42,9 +42,6 @@ public class ContentModel {
                 });
 
             }
-            Platform.runLater(() -> {
-                grid.setGridLinesVisible(true);
-            });
 
         }).start();
     }
