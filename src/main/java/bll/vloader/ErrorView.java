@@ -18,9 +18,6 @@ public class ErrorView implements IViewLoader{
      */
     @Override
     public Node loadView(String path,int width, int height) {
-        VBox mainBox = new VBox();
-        Label message = new Label();
-        message.setText("Error occurred while loading your file");
         FileInputStream input = null;
         try {
             input = new FileInputStream("src/main/resources/images/error.gif");
@@ -31,7 +28,6 @@ public class ErrorView implements IViewLoader{
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(height);
         imageView.setFitWidth(width);
-        mainBox.getChildren().addAll(message,imageView);
-        return mainBox;
+        return imageView;
     }
 }

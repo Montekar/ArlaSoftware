@@ -15,7 +15,6 @@ class DBAdminRepositoryTest {
     private static final String department = "TestDepartment";
     private static int lastInsertedId = 0;
     private static final int departmentId = 1;
-    private boolean reportSend = false;
     private static Admin admin;
     private static List<Admin> admins = new ArrayList<>();
 
@@ -113,29 +112,5 @@ class DBAdminRepositoryTest {
             sqlException.printStackTrace();
         }
         Assertions.assertEquals(admins.size(), adminsActualValue.size());
-    }
-
-    // Test checks if the report was send
-    @DisplayName("Sending an report")
-    @Test
-    void report() {
-        try (Connection conn = connection.getConnection()) {
-            String sqlReport = "INSERT INTO Report Values (?, ?, ?)";
-            PreparedStatement statementReport = conn.prepareStatement(sqlReport);
-            statementReport.setInt(1, departmentId);
-            statementReport.setString(2, "TitleTest");
-            statementReport.setString(3, "DescriptionTest");
-            //error
-            if (statementReport.execute()){
-                ResultSet resultSet = statementReport.getResultSet();
-                if (resultSet.next()){
-                    lastInsertedId = resultSet.getInt(1);
-                }
-            }
-            reportSend = true;
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-        Assertions.assertTrue(reportSend);
     }
 }
