@@ -127,7 +127,6 @@ class DBAdminRepositoryTest {
             statementReport.setString(3, "DescriptionTest");
             //error
             if (statementReport.execute()){
-                System.out.println("result");
                 ResultSet resultSet = statementReport.getResultSet();
                 if (resultSet.next()){
                     lastInsertedId = resultSet.getInt(1);
@@ -137,7 +136,6 @@ class DBAdminRepositoryTest {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        System.out.println(lastInsertedId);
         Assertions.assertTrue(reportSend);
     }
 }

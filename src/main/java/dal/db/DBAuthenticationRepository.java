@@ -45,7 +45,6 @@ public class DBAuthenticationRepository implements IAuthenticationRepository {
     }
 
     public Department authenticateDepartment(String username, String password) {
-        System.out.println(password);
         try (Connection con = connection.getConnection()) {
             String sql = "SELECT * FROM Department WHERE Username = ? AND Password = ?";
             PreparedStatement statement = con.prepareStatement(sql);
