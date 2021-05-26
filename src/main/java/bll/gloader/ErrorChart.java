@@ -1,4 +1,4 @@
-package bll.vloader;
+package bll.gloader;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -9,28 +9,22 @@ import javafx.scene.layout.VBox;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class ErrorView implements IViewLoader{
+public class ErrorChart implements IChartLoader{
 
-    /*
-        Error View is show when the file is not supported or wasn't found.
-        The reason for this is to have a better user experience than showing an
-        empty window.
-     */
+    // Custom error view for charts
     @Override
-    public Node loadView(String path,int width, int height) {
+    public Node loadChart(String path, String nameColumn, String dataColumn) {
         VBox mainBox = new VBox();
         Label message = new Label();
-        message.setText("Error occurred while loading your file");
+        message.setText("An error occurred while loading your chart");
         FileInputStream input = null;
         try {
-            input = new FileInputStream("src/main/resources/images/error.gif");
+            input = new FileInputStream("src/main/resources/images/chartError.gif");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         Image image = new Image(input);
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(height);
-        imageView.setFitWidth(width);
         mainBox.getChildren().addAll(message,imageView);
         return mainBox;
     }

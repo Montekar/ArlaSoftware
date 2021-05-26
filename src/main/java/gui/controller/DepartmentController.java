@@ -31,6 +31,7 @@ public class DepartmentController implements Initializable {
     private SessionModel sessionModel;
     private ContentModel contentModel;
     private RefreshManager refreshManager;
+    private Stage menuStage;
 
 
     public DepartmentController(){
@@ -39,16 +40,14 @@ public class DepartmentController implements Initializable {
         refreshManager = RefreshManager.getInstance();
     }
 
-    /*
-        Initialize method in witch we set up the department view as well start
-        the necessary listeners such as the timer and file change listener
-     */
+    // Initialize method in witch we set up the department view
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         contentModel.updateContent(sessionModel.getUser().getId());
         contentModel.buildGrid(mainGrid);
     }
 
+    // Method to setup the listener threads
     public void setupListeners(){
         Stage stage = (Stage) mainGrid.getScene().getWindow();
         System.out.println("Stage: " + stage);
@@ -101,16 +100,21 @@ public class DepartmentController implements Initializable {
         }
     }
 
+    // Opens the department menu
     private void openDepartmentWindow(){
-
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentMenu.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            DepartmentMenu controller = fxmlLoader.getController();
-            controller.setParentStage((Stage)mainGrid.getScene().getWindow());
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            if (menuStage == null){
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentMenu.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                DepartmentMenu controller = fxmlLoader.getController();
+                controller.setParentStage((Stage)mainGrid.getScene().getWindow());
+                menuStage = new Stage();
+                menuStage.setOnHiding( we -> menuStage = null);
+                menuStage.setScene(new Scene(root));
+                menuStage.show();
+            }else{
+                menuStage.toFront();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

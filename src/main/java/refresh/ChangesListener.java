@@ -44,22 +44,17 @@ public class ChangesListener {
                         StandardWatchEventKinds.ENTRY_DELETE,
                         StandardWatchEventKinds.ENTRY_MODIFY);
             }
-            //while (true) {
-                WatchKey key = watchService.take();
-                for (WatchEvent event : key.pollEvents()) {
-                    for (Object file : fileArrayList) {
-                        if (file.equals(event.context())) {
-                            System.out.println("Changes have been made");
-                            System.out.println(event.kind() + ": " + event.context());
-                        }
+            while (true) {
+            WatchKey key = watchService.take();
+            Thread.sleep(50);
+            for (WatchEvent event : key.pollEvents()) {
+                for (Object file : fileArrayList) {
+                    if (event.context().equals(file)) {
+                        Platform.runLater(()->notification.displayAlert(department, stage, message));
                     }
                 }
-            Platform.runLater(()->notification.displayAlert(department, stage, message));
-                boolean valid = key.reset();
-               /* if (valid) {
-                    break;
-                }*/
-           // }
+            }
+             }
         } catch (IOException | InterruptedException exception) {
             exception.printStackTrace();
         }

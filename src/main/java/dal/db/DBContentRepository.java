@@ -27,41 +27,49 @@ public class DBContentRepository implements IContentRepository {
     public List<View> getContent(int departmentID) {
         List<View> content = new ArrayList<>();
         try (Connection con = connection.getConnection()) {
-            String sql = "Select * From Content WHERE DepartmentID = ?";
-            PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1, departmentID);
-            if (statement.execute()) {
-                ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    if (resultSet.getInt("chartId") < 0){
-                        content.add(new View(resultSet.getInt("DepartmentID"),
-                                resultSet.getInt("Column"), resultSet.getInt("Row"),
-                                resultSet.getInt("Width"), resultSet.getInt("Height"),
-                                resultSet.getString("Path"), resultSet.getString("Title")
+            String sqlView = "Select * From Content WHERE DepartmentID = ?";
+            PreparedStatement statementView = con.prepareStatement(sqlView);
+            statementView.setInt(1, departmentID);
+            if (statementView.execute()) {
+                ResultSet resultSetView = statementView.getResultSet();
+                while (resultSetView.next()) {
+                    if (resultSetView.getInt("chartId") < 0){
+                        content.add(new View(
+                                resultSetView.getInt("DepartmentID"),
+                                resultSetView.getInt("Column"),
+                                resultSetView.getInt("Row"),
+                                resultSetView.getInt("Width"),
+                                resultSetView.getInt("Height"),
+                                resultSetView.getString("Path"),
+                                resultSetView.getString("Title")
                         ));
                     }else{
-                        String sql1 = "SELECT * FROM Content " +
+                        String sqlChartView = "SELECT * FROM Content " +
                                       "INNER JOIN ChartData " +
                                       "ON ChartData.id = Content.chartId " +
                                       "WHERE Content.DepartmentId = ? AND ChartData.id = ?";
-                        PreparedStatement statement1 = con.prepareStatement(sql1);
-                        statement1.setInt(1,departmentID);
-                        statement1.setInt(2,resultSet.getInt("chartId"));
+                        PreparedStatement statementChartView = con.prepareStatement(sqlChartView);
+                        statementChartView.setInt(1,departmentID);
+                        statementChartView.setInt(2,resultSetView.getInt("chartId"));
 
-                        if (statement1.execute()){
-                            ResultSet resultSet1 = statement1.getResultSet();
-                            if(resultSet1.next()){
-                                content.add(new ChartView(resultSet1.getInt("DepartmentID"),
-                                        resultSet1.getInt("Column"), resultSet1.getInt("Row"),
-                                        resultSet1.getInt("Width"), resultSet1.getInt("Height"),
-                                        resultSet1.getString("Path"), resultSet1.getString("Title"),
-                                        resultSet1.getString("nameCol"),resultSet1.getString("dataCol"),
-                                        ChartType.getTypeFromString(resultSet1.getString("chartType"))
-                                        ));
+                        if (statementChartView.execute()){
+                            ResultSet resultSetChartView = statementChartView.getResultSet();
+                            if(resultSetChartView.next()){
+                                content.add(new ChartView(
+                                        resultSetChartView.getInt("DepartmentID"),
+                                        resultSetChartView.getInt("Column"),
+                                        resultSetChartView.getInt("Row"),
+                                        resultSetChartView.getInt("Width"),
+                                        resultSetChartView.getInt("Height"),
+                                        resultSetChartView.getString("Path"),
+                                        resultSetChartView.getString("Title"),
+                                        resultSetChartView.getString("nameCol"),
+                                        resultSetChartView.getString("dataCol"),
+                                        ChartType.getTypeFromString(resultSetChartView.getString("chartType"))
+                                ));
                             }
                         }
                     }
-
                 }
             }
         } catch (SQLException ex) {

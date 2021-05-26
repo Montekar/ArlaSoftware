@@ -2,10 +2,7 @@ package bll;
 
 import be.ChartView;
 import be.View;
-import bll.gloader.BarChartLoader;
-import bll.gloader.IChartLoader;
-import bll.gloader.LineChartLoader;
-import bll.gloader.PieChartLoader;
+import bll.gloader.*;
 import bll.vloader.*;
 import dal.IContentRepository;
 import dal.db.DBContentRepository;
@@ -85,7 +82,7 @@ public class ContentManager {
 
             }
         } else {
-            return null;
+            return new ErrorChart();
         }
         return null;
     }
