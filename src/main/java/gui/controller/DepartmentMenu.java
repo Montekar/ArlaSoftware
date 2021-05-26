@@ -69,9 +69,9 @@ public class DepartmentMenu implements Initializable {
                 }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
     }
 
+    // Sets up the parent stage
     public void setParentStage(Stage parentStage){
         this.parentStage = parentStage;
     }
@@ -94,10 +94,12 @@ public class DepartmentMenu implements Initializable {
 
     // Method changes the screen size
     public void fullScreen(MouseEvent event) {
+        parentStage.setFullScreen(true);
     }
 
     // Method hides the window
     public void minScreen(MouseEvent event) {
+        parentStage.setIconified(true);
     }
 
     // Method for getting the text out of the fields and sending them to the database
@@ -111,7 +113,6 @@ public class DepartmentMenu implements Initializable {
 
     // Method for closing the application
     public void closeScreen(MouseEvent event) {
-           parentStage.close();
            Platform.exit();
            System.exit(0);
     }
