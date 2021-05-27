@@ -25,7 +25,7 @@ import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
 
-public class AdminEditController implements Initializable {
+public class AdminEditDepartmentController implements Initializable {
 
     @FXML
     private TextField editDepartmentNameField;
@@ -42,7 +42,7 @@ public class AdminEditController implements Initializable {
 
     private final DepartmentModel departmentModel;
 
-    public AdminEditController() {
+    public AdminEditDepartmentController() {
         departmentModel = DepartmentModel.getInstance();
     }
 

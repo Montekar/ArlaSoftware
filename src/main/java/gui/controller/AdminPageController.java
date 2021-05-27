@@ -1,6 +1,5 @@
 package gui.controller;
 
-import be.View;
 import be.users.Department;
 import gui.model.ContentModel;
 import gui.model.DepartmentModel;
@@ -19,11 +18,7 @@ import javafx.stage.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class AdminPageController implements Initializable {
     @FXML
@@ -101,7 +96,7 @@ public class AdminPageController implements Initializable {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminEditDepartment.fxml"));
-        AdminEditController editController = new AdminEditController();
+        AdminEditDepartmentController editController = new AdminEditDepartmentController();
         loader.setController(editController);
         Parent root = loader.load();
         stage.setScene(new Scene(root));
@@ -122,6 +117,22 @@ public class AdminPageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminEditContent.fxml"));
             AdminEditContentController editContentController = new AdminEditContentController(contentGrid, choiceDepartment.getSelectionModel().getSelectedItem().getId());
             loader.setController(editContentController);
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(mainStage);
+            stage.show();
+        }
+    }
+
+    public void openIssueLog(ActionEvent actionEvent) throws IOException {
+        if (choiceDepartment.getSelectionModel().getSelectedItem() != null) {
+            Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
+            Stage stage = new Stage();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminReport.fxml"));
+            AdminReportController reportController = new AdminReportController(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+            loader.setController(reportController);
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);

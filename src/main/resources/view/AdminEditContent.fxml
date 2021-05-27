@@ -41,9 +41,9 @@
                </padding>
                <children>
                   <Label text="Column:" />
-                  <TextField fx:id="columnField" prefHeight="25.0" prefWidth="42.0" promptText="X" />
+                  <TextField fx:id="columnField" prefHeight="25.0" prefWidth="42.0" promptText="C" />
                   <Label text="Row:" />
-                  <TextField fx:id="rowField" prefHeight="25.0" prefWidth="42.0" promptText="X" />
+                  <TextField fx:id="rowField" prefHeight="25.0" prefWidth="42.0" promptText="R" />
                   <Label text="Width:" />
                   <TextField fx:id="widthField" prefHeight="25.0" prefWidth="42.0" promptText="W" />
                   <Label text="Height:" />
