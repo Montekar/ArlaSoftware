@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.View;
 import gui.model.ContentModel;
+import gui.model.DepartmentModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -37,10 +38,12 @@ public class AdminEditContentController implements Initializable {
     private final GridPane contentGrid;
 
     private final ContentModel contentModel;
+    private final DepartmentModel departmentModel;
 
     public AdminEditContentController(GridPane contentGrid, int departmentID) {
         this.contentGrid = contentGrid;
         this.departmentID = departmentID;
+        departmentModel = DepartmentModel.getInstance();
         contentModel = ContentModel.getInstance();
     }
 
@@ -87,7 +90,7 @@ public class AdminEditContentController implements Initializable {
             int height = Integer.parseInt(heightField.getText());
 
             contentModel.createContent(new View(departmentID, col, row, width, height, path, title));
-            contentModel.buildGrid(contentGrid);
+            contentModel.buildGrid(contentGrid, departmentModel.isAutoResizeEnabled(departmentID));
             contentTable.getSelectionModel().selectLast();
         }
     }
@@ -106,7 +109,7 @@ public class AdminEditContentController implements Initializable {
             View newView = new View(departmentID, col, row, width, height, path, title);
 
             contentModel.editContent(oldView, newView);
-            contentModel.buildGrid(contentGrid);
+            contentModel.buildGrid(contentGrid, departmentModel.isAutoResizeEnabled(departmentID));
             contentTable.getSelectionModel().select(selectedIndex);
         }
     }
@@ -115,7 +118,7 @@ public class AdminEditContentController implements Initializable {
         if (contentTable.getSelectionModel().getSelectedItem() != null) {
             View view = contentTable.getSelectionModel().getSelectedItem();
             contentModel.deleteContent(view);
-            contentModel.buildGrid(contentGrid);
+            contentModel.buildGrid(contentGrid, departmentModel.isAutoResizeEnabled(departmentID));
         }
     }
     private void setNumberListener(TextField textField){

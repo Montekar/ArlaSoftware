@@ -6,7 +6,8 @@ public enum ContentType {
     XLSX,
     PDF,
     JPG,
-    WEB
+    PNG,
+    WEB,
 }
 
 

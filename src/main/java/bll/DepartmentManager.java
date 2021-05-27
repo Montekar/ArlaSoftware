@@ -24,13 +24,17 @@ public class DepartmentManager {
         return departmentRepository.getAllDepartments();
     }
 
-    public void editDepartment(int departmentID, String username, int refresh) {
-        departmentRepository.editDepartment(departmentID, username, refresh);
+    public void editDepartment(int departmentID, String username, int refresh,boolean isAutoResizable) {
+        departmentRepository.editDepartment(departmentID, username, refresh,isAutoResizable);
     }
 
-    public void createDepartment(String username, String password, int refresh) {
+    public void createDepartment(String username, String password, int refresh, boolean isAutoResizable) {
 
-        departmentRepository.createDepartment(username, hash.hashPassword(password),refresh);
+        departmentRepository.createDepartment(username, hash.hashPassword(password),refresh, isAutoResizable);
+    }
+
+    public boolean isAutoResizeEnabled(int departmentID){
+        return departmentRepository.isAutoResizeEnabled(departmentID);
     }
 
     public int getRefreshTime(int departmentID){

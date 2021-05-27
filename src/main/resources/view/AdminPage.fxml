@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" onKeyPressed="#onEscape" prefHeight="475.0" prefWidth="1586.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane fx:id="borderPane" prefHeight="475.0" prefWidth="1586.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox prefHeight="577.0" prefWidth="167.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
