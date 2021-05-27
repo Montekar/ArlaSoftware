@@ -59,6 +59,12 @@ public class ContentManager {
                 case XLS -> {
                     return new ExcelLoader();
                 }
+                case XLSX -> {
+                    return new ExcelXLoader();
+                }
+                case MP4 -> {
+                    return new VideoLoader();
+                }
             }
         } else {
             return new ErrorView();
