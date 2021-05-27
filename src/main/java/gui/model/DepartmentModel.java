@@ -25,13 +25,13 @@ public class DepartmentModel {
         departmentsOverview = FXCollections.observableArrayList(departmentManager.getAllDepartments());
     }
 
-    public void editDepartment(int departmentID, String username, int refresh) {
-        departmentManager.editDepartment(departmentID, username, refresh);
+    public void editDepartment(int departmentID, String username, int refresh, boolean isAutoResizable) {
+        departmentManager.editDepartment(departmentID, username, refresh,isAutoResizable);
         updateDepartments();
     }
 
-    public void createDepartment(String username, String password, int refresh) {
-        departmentManager.createDepartment(username, password,refresh);
+    public void createDepartment(String username, String password, int refresh, boolean isAutoResizable) {
+        departmentManager.createDepartment(username, password,refresh,isAutoResizable);
         updateDepartments();
     }
 
@@ -47,6 +47,10 @@ public class DepartmentModel {
 
     public int getRefreshTime(int departmentID){
         return departmentManager.getRefreshTime(departmentID);
+    }
+
+    public boolean isAutoResizeEnabled(int departmentID){
+        return departmentManager.isAutoResizeEnabled(departmentID);
     }
 
     public Department getDepartment(int departmentID) {

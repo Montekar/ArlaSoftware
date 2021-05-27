@@ -7,9 +7,11 @@ import bll.vloader.*;
 import dal.IContentRepository;
 import dal.db.DBContentRepository;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -50,13 +52,13 @@ public class ContentManager {
                 case PDF -> {
                     return new PdfLoader();
                 }
-                case JPG -> {
+                case JPG, PNG -> {
                     return new ImageLoader();
                 }
                 case WEB -> {
                     return new WebViewLoader();
                 }
-                case XLS -> {
+                case XLS, XLSX -> {
                     return new ExcelLoader();
                 }
             }
@@ -108,10 +110,27 @@ public class ContentManager {
         }
 
 
-
         window.setPrefSize(view.getWidth(), view.getHeight());
 
 
         return window;
     }
+
+    public void buildGrid(GridPane grid,boolean autoResizeEnabled, ObservableList<View> contentObservable) {
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                grid.getChildren().clear();
+            });
+
+            for (View view : contentObservable) {
+                VBox vbox = getWindow(view);
+
+                Platform.runLater(() -> {
+                    grid.add(vbox, view.getColumn(), view.getRow());
+                });
+
+            }
+        }).start();
+    }
+
 }
