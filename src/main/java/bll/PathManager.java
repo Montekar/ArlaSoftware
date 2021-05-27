@@ -15,10 +15,14 @@ public class PathManager {
                 return ContentType.CSV;
             } else if (hasExtension(ContentType.XLS, path)) {
                 return ContentType.XLS;
+            }  else if (hasExtension(ContentType.XLSX, path)) {
+                return ContentType.XLSX;
             } else if (hasExtension(ContentType.PDF, path)) {
                 return ContentType.PDF;
             } else if (hasExtension(ContentType.JPG, path)) {
                 return ContentType.JPG;
+            } else if (hasExtension(ContentType.MP4, path)){
+                return ContentType.MP4;
             } else if (hasExtension(ContentType.PNG, path)) {
                 return ContentType.PNG;
             } else if (hasExtension(ContentType.XLSX, path)) {
