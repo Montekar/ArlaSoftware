@@ -3,6 +3,7 @@ package gui.controller;
 import be.users.Department;
 import bll.*;
 import gui.model.ContentModel;
+import gui.model.DepartmentModel;
 import gui.model.SessionModel;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -30,6 +31,7 @@ public class DepartmentController implements Initializable {
 
     private SessionModel sessionModel;
     private ContentModel contentModel;
+    private DepartmentModel departmentModel;
     private RefreshManager refreshManager;
     private Stage menuStage;
 
@@ -37,14 +39,16 @@ public class DepartmentController implements Initializable {
     public DepartmentController(){
         sessionModel = SessionModel.getInstance();
         contentModel = ContentModel.getInstance();
+        departmentModel = DepartmentModel.getInstance();
         refreshManager = RefreshManager.getInstance();
     }
 
     // Initialize method in witch we set up the department view
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        contentModel.updateContent(sessionModel.getUser().getId());
-        contentModel.buildGrid(mainGrid);
+        int departmentID = sessionModel.getUser().getId();
+        contentModel.updateContent(departmentID);
+        contentModel.buildGrid(mainGrid, departmentModel.isAutoResizeEnabled(departmentID));
     }
 
     // Method to setup the listener threads

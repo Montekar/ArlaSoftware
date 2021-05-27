@@ -24,8 +24,6 @@ public class AdminPageController implements Initializable {
     @FXML
     private Label departmentName;
     @FXML
-    private Button hideButton;
-    @FXML
     private ChoiceBox<Department> choiceDepartment;
     @FXML
     private GridPane contentGrid;
@@ -40,27 +38,26 @@ public class AdminPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceDepartment.setOnAction(this::changeDepartment);
         choiceDepartment.setItems(departmentModel.getDepartmentsObservable());
+        choiceDepartment.getSelectionModel().selectedItemProperty().addListener((observableValue, department, t1) -> {
+            if (t1 != null) {
+                departmentName.setText(t1.getUsername());
+                contentModel.updateContent(t1.getId());
+                loadContent(departmentModel.isAutoResizeEnabled(t1.getId()));
+            }
+        });
         choiceDepartment.getSelectionModel().selectFirst();
     }
 
-    public void hideWindow(ActionEvent actionEvent) {
-        Stage stage = (Stage) hideButton.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
     //Load nodes to the gridpane
-    public void loadContent() {
-        contentModel.buildGrid(contentGrid);
+    public void loadContent(boolean autoResizeEnabled) {
+        contentModel.buildGrid(contentGrid,autoResizeEnabled);
     }
 
-    @FXML
-    private void changeDepartment(ActionEvent event) {
+    public void refreshContent(ActionEvent actionEvent) {
         if (choiceDepartment.getSelectionModel().getSelectedItem() != null) {
-            departmentName.setText(choiceDepartment.getSelectionModel().getSelectedItem().getUsername() + "");
-            contentModel.updateContent(choiceDepartment.getSelectionModel().getSelectedItem().getId());
-            loadContent();
+            boolean autoresizeEnabled = departmentModel.isAutoResizeEnabled(choiceDepartment.getSelectionModel().getSelectedItem().getId());
+            loadContent(autoresizeEnabled);
         }
     }
 
@@ -75,20 +72,6 @@ public class AdminPageController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.show();
-    }
-
-    @FXML
-    void onEscape(KeyEvent enter) throws IOException {
-        if (enter.getCode().equals(KeyCode.ESCAPE)) {
-            Stage stage = (Stage) hideButton.getScene().getWindow();
-            stage.close();
-            Platform.exit();
-            System.exit(0);
-        }
-    }
-
-    public void refreshContent(ActionEvent actionEvent) {
-        loadContent();
     }
 
     public void openEdit(ActionEvent actionEvent) throws IOException {

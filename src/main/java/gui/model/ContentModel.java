@@ -28,22 +28,8 @@ public class ContentModel {
         contentOverview = FXCollections.observableArrayList(new ArrayList<>());
     }
 
-    public void buildGrid(GridPane grid) {
-        new Thread(() -> {
-            Platform.runLater(() -> {
-                grid.getChildren().clear();
-            });
-
-            for (View view : contentOverview) {
-                VBox vbox = contentManager.getWindow(view);
-
-                Platform.runLater(() -> {
-                    grid.add(vbox, view.getColumn(), view.getRow());
-                });
-
-            }
-
-        }).start();
+    public void buildGrid(GridPane grid, boolean autoResizeEnabled) {
+        contentManager.buildGrid(grid, autoResizeEnabled, contentOverview);
     }
 
     public void updateContent(int departmentID) {

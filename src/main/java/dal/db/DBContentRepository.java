@@ -33,7 +33,7 @@ public class DBContentRepository implements IContentRepository {
             if (statementView.execute()) {
                 ResultSet resultSetView = statementView.getResultSet();
                 while (resultSetView.next()) {
-                    if (resultSetView.getInt("chartId") < 0){
+                    if (resultSetView.getInt("ChartID") < 0){
                         content.add(new View(
                                 resultSetView.getInt("DepartmentID"),
                                 resultSetView.getInt("Column"),

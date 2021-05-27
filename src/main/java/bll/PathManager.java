@@ -23,6 +23,10 @@ public class PathManager {
                 return ContentType.JPG;
             } else if (hasExtension(ContentType.MP4, path)){
                 return ContentType.MP4;
+            } else if (hasExtension(ContentType.PNG, path)) {
+                return ContentType.PNG;
+            } else if (hasExtension(ContentType.XLSX, path)) {
+                return ContentType.XLSX;
             }
         } else if (UrlValidator.getInstance().isValid(path)) {
             return ContentType.WEB;

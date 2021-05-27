@@ -9,10 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -39,6 +36,8 @@ public class AdminEditDepartmentController implements Initializable {
     public ChoiceBox<Department> choiceDepartment;
     @FXML
     private TextField editRefreshField, newRefreshField;
+    @FXML
+    private CheckBox createCheckResizable,editCheckResizable;
 
     private final DepartmentModel departmentModel;
 
@@ -72,6 +71,7 @@ public class AdminEditDepartmentController implements Initializable {
             if (t1 != null) {
                 editDepartmentNameField.setText(t1.getUsername());
                 editRefreshField.setText(departmentModel.getRefreshTime(t1.getId()) + "");
+                editCheckResizable.setSelected(departmentModel.isAutoResizeEnabled(t1.getId()));
             }
         });
     }
@@ -90,7 +90,8 @@ public class AdminEditDepartmentController implements Initializable {
         if (!refresh.isBlank()) {
             int refreshRate = Integer.parseInt(refresh);
             if (!username.isBlank() && refreshRate > 0) {
-                departmentModel.createDepartment(username, password, refreshRate);
+                System.out.println(createCheckResizable.isSelected());
+                departmentModel.createDepartment(username, password, refreshRate, createCheckResizable.isSelected());
                 choiceDepartment.getSelectionModel().selectLast();
                 newDepartmentNameField.setText("");
                 newDepartmentPasswordField.setText("");
@@ -118,7 +119,7 @@ public class AdminEditDepartmentController implements Initializable {
             if (!username.isBlank() && refreshTime > 0) {
                 int selectedIndex = choiceDepartment.getSelectionModel().getSelectedIndex();
 
-                departmentModel.editDepartment(departmentID, username, refreshTime);
+                departmentModel.editDepartment(departmentID, username, refreshTime,editCheckResizable.isSelected());
 
                 choiceDepartment.getSelectionModel().select(selectedIndex);
             }

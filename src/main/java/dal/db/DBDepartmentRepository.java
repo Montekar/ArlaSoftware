@@ -60,13 +60,14 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public void editDepartment(int departmentID, String username, int refresh) {
+    public void editDepartment(int departmentID, String username, int refresh,boolean isAutoResizable) {
         try (Connection con = connection.getConnection()) {
-            String sql = "UPDATE Department SET Username = ?, Refresh = ? WHERE ID = ?";
+            String sql = "UPDATE Department SET Username = ?, Refresh = ?, AutoResize = ? WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setInt(2, refresh);
-            statement.setInt(3, departmentID);
+            statement.setBoolean(3, isAutoResizable);
+            statement.setInt(4, departmentID);
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue changing department's name", ex);
@@ -74,13 +75,14 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public void createDepartment(String username, String password, int refresh) {
+    public void createDepartment(String username, String password, int refresh, boolean isAutoResizable) {
         try (Connection con = connection.getConnection()) {
-            String sql = "INSERT INTO Department Values(?,?,?)";
+            String sql = "INSERT INTO Department Values(?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setInt(3, refresh);
+            statement.setBoolean(4,isAutoResizable);
             statement.execute();
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue creating a department", ex);
@@ -98,6 +100,7 @@ public class DBDepartmentRepository implements IDepartmentRepository {
             errorHandler.errorDevelopmentInfo("Issue deleting a department", ex);
         }
     }
+
     @Override
     public int getRefreshTime(int departmentID) {
         try (Connection con = connection.getConnection()) {
@@ -109,12 +112,31 @@ public class DBDepartmentRepository implements IDepartmentRepository {
                 if (resultSet.next()) {
                     return resultSet.getInt("Refresh");
                 }
-                return -1;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean isAutoResizeEnabled(int departmentID) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "SELECT AutoResize From Department Where ID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, departmentID);
+            if (statement.execute()) {
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    if (resultSet.getInt("AutoResize") == 1) {
+                        return true;
+                    }
+                }
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return -1;
+        return false;
     }
 }
