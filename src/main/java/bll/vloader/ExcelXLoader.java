@@ -1,46 +1,66 @@
 package bll.vloader;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExcelXLoader implements IViewLoader{
+    private ObservableList<List<String>> observableList = FXCollections.observableArrayList();
+    private boolean isFirst = true;
+
     @Override
     public Node loadView(String path, int width, int height) {
-        ListView listView = new ListView();
+        TableView<List<String>> tableView = new TableView<>();
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
             XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
             while (rowIterator.hasNext()){
-                String line = "";
                 Row row = rowIterator.next();
-                Iterator<Cell> cellIterator = row.cellIterator();
-                while (cellIterator.hasNext()){
-                    Cell cell = cellIterator.next();
-                    switch (cell.getCellType()){
-                        case NUMERIC: line += cell.getNumericCellValue() + "\t\t";
-                            break;
-                        case STRING: line += cell.getStringCellValue() + "\t\t";
-                            break;
+                if (isFirst){
+                    Iterator<Cell> cellHeaderIterator = row.cellIterator();
+                    while (cellHeaderIterator.hasNext()){
+                        Cell cell = cellHeaderIterator.next();
+                        TableColumn<List<String>, String> column = new TableColumn<>();
+                        column.setText(cell.getStringCellValue());
+                        column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(cell.getColumnIndex())));
+                        tableView.getColumns().add(column);
                     }
+                }else{
+                    List<String> rowData = new ArrayList<>();
+                    Iterator<Cell> cellDataIterator = row.cellIterator();
+                    while (cellDataIterator.hasNext()){
+                        Cell cell = cellDataIterator.next();
+                        switch (cell.getCellType()) {
+                            case NUMERIC -> rowData.add(String.valueOf(cell.getNumericCellValue()));
+                            case STRING -> rowData.add(cell.getStringCellValue());
+                        }
+                    }
+                    observableList.add(rowData);
                 }
-                listView.getItems().add(line);
-                line = "";
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return listView;
+        tableView.setMinHeight(height);
+        tableView.setMaxHeight(height);
+        tableView.setMinWidth(width);
+        tableView.setMaxWidth(width);
+        tableView.setItems(observableList);
+        return tableView;
     }
 }

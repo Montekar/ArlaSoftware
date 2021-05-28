@@ -6,20 +6,34 @@ import gui.model.ContentModel;
 import gui.model.DepartmentModel;
 import gui.model.SessionModel;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import java.net.URL;
 import java.util.*;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import refresh.RefreshManager;
 
 public class DepartmentController implements Initializable {
+
+    @FXML
+    Pane mainBox;
+
+    @FXML
+    Label department;
+
     @FXML
     GridPane mainGrid;
 
@@ -47,13 +61,14 @@ public class DepartmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int departmentID = sessionModel.getUser().getId();
+        department.setText(sessionModel.getUser().getUsername());
         contentModel.updateContent(departmentID);
         contentModel.buildGrid(mainGrid, departmentModel.isAutoResizeEnabled(departmentID));
     }
 
     // Method to setup the listener threads
     public void setupListeners(){
-        Stage stage = (Stage) mainGrid.getScene().getWindow();
+        Stage stage = (Stage) mainBox.getScene().getWindow();
         System.out.println("Stage: " + stage);
         Thread timerThread = new Thread(() -> {
             Platform.runLater(() -> {
@@ -95,7 +110,7 @@ public class DepartmentController implements Initializable {
 
     // Method listens for key press and redirect to the selected route
     public void onKeyPressed(KeyEvent keyEvent) {
-        Stage stage = (Stage) mainGrid.getScene().getWindow();
+        Stage stage = (Stage) mainBox.getScene().getWindow();
         switch (keyEvent.getCode()){
             case ESCAPE: close(stage);
             break;
@@ -111,10 +126,11 @@ public class DepartmentController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentMenu.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 DepartmentMenu controller = fxmlLoader.getController();
-                controller.setParentStage((Stage)mainGrid.getScene().getWindow());
+                controller.setParentStage((Stage)mainBox.getScene().getWindow());
                 menuStage = new Stage();
                 menuStage.setOnHiding( we -> menuStage = null);
                 menuStage.setScene(new Scene(root));
+                menuStage.initModality(Modality.APPLICATION_MODAL);
                 menuStage.show();
             }else{
                 menuStage.toFront();
@@ -122,5 +138,18 @@ public class DepartmentController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void min(ActionEvent actionEvent) {
+    }
+
+    public void close(ActionEvent actionEvent) {
+    }
+
+    public void full(ActionEvent actionEvent) {
+    }
+
+    public void openMenu(MouseEvent event) {
+        openDepartmentWindow();
     }
 }

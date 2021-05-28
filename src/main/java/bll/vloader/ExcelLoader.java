@@ -1,8 +1,15 @@
 package bll.vloader;
 
 import bll.vloader.IViewLoader;
+import com.google.common.collect.Iterables;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -12,8 +19,12 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExcelLoader implements IViewLoader {
+    private ObservableList<List<String>> observableList = FXCollections.observableArrayList();
+    private boolean isFirst = true;
 
     /*
         This class is responsible for loading an excel file with the .xls extension.
@@ -22,33 +33,42 @@ public class ExcelLoader implements IViewLoader {
      */
     @Override
     public Node loadView(String path,int width, int height) {
-        ListView listView = new ListView();
+        TableView<List<String>> tableView = new TableView();
         try {
-            FileInputStream fileInputStream = new FileInputStream(new File(path));
+            FileInputStream fileInputStream = new FileInputStream(path);
             HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 
             HSSFSheet sheet = workbook.getSheetAt(0);
 
             FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
             for (Row row: sheet){
-                String line = "";
-                for (Cell cell: row){
-                    switch (formulaEvaluator.evaluateInCell(cell).getCellType()){
-                        case NUMERIC:
-                            line += cell.getNumericCellValue() + "\t\t";
-                            break;
-
-                        case STRING:
-                            line += cell.getStringCellValue() + "\t\t";
-                            break;
+                if (isFirst){
+                    for (Cell cell : row.getSheet().getRow(0)){
+                        TableColumn<List<String>, String> column = new TableColumn();
+                        column.setText(cell.getStringCellValue());
+                        column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(cell.getColumnIndex())));
+                        tableView.getColumns().add(column);
                     }
+                    isFirst = false;
+                }else{
+                    List<String> rowData = new ArrayList<>();
+                    for (Cell cell: row){
+                        switch (formulaEvaluator.evaluateInCell(cell).getCellType()) {
+                            case NUMERIC -> rowData.add(String.valueOf(cell.getNumericCellValue()));
+                            case STRING -> rowData.add(cell.getStringCellValue());
+                        }
+                    }
+                    observableList.add(rowData);
                 }
-                listView.getItems().add(line);
-                line = "";
-            };
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return listView;
+        tableView.setMinHeight(height);
+        tableView.setMaxHeight(height);
+        tableView.setMinWidth(width);
+        tableView.setMaxWidth(width);
+        tableView.setItems(observableList);
+        return tableView;
     }
 }
