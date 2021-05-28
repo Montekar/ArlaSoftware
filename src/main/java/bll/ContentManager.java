@@ -58,7 +58,7 @@ public class ContentManager {
                 case WEB -> {
                     return new WebViewLoader();
                 }
-                case XLS, XLSX -> {
+                case XLS -> {
                     return new ExcelLoader();
                 }
                 case XLSX -> {
