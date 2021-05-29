@@ -1,5 +1,6 @@
 package bll.vloader;
 
+import be.View;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,7 +18,7 @@ public class ErrorView implements IViewLoader{
         empty window.
      */
     @Override
-    public Node loadView(String path,int width, int height) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         FileInputStream input = null;
         try {
             input = new FileInputStream("src/main/resources/images/error.gif");
@@ -26,8 +27,10 @@ public class ErrorView implements IViewLoader{
         }
         Image image = new Image(input);
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(height);
-        imageView.setFitWidth(width);
+        if (!autoResizeEnabled) {
+            imageView.setFitHeight(view.getHeight());
+            imageView.setFitWidth(view.getWidth());
+        }
         return imageView;
     }
 }

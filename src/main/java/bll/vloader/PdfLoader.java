@@ -1,5 +1,6 @@
 package bll.vloader;
 
+import be.View;
 import com.dansoftware.pdfdisplayer.PDFDisplayer;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -15,10 +16,10 @@ public class PdfLoader implements IViewLoader{
         be displayed in a pdf viewer.
      */
     @Override
-    public Node loadView(String path,int width, int height) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         PDFDisplayer displayer = new PDFDisplayer();
         try {
-            displayer.displayPdf(new File(path));
+            displayer.displayPdf(new File(view.getPath()));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

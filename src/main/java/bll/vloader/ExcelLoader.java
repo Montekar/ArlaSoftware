@@ -1,5 +1,6 @@
 package bll.vloader;
 
+import be.View;
 import bll.vloader.IViewLoader;
 import com.google.common.collect.Iterables;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,10 +33,10 @@ public class ExcelLoader implements IViewLoader {
         The data is than added to a line String and displayed as a raw data list.
      */
     @Override
-    public Node loadView(String path,int width, int height) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         TableView<List<String>> tableView = new TableView();
         try {
-            FileInputStream fileInputStream = new FileInputStream(path);
+            FileInputStream fileInputStream = new FileInputStream(view.getPath());
             HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 
             HSSFSheet sheet = workbook.getSheetAt(0);
@@ -64,10 +65,12 @@ public class ExcelLoader implements IViewLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        tableView.setMinHeight(height);
-        tableView.setMaxHeight(height);
-        tableView.setMinWidth(width);
-        tableView.setMaxWidth(width);
+        if (!autoResizeEnabled) {
+            tableView.setMinHeight(view.getHeight());
+            tableView.setMaxHeight(view.getHeight());
+            tableView.setMinWidth(view.getWidth());
+            tableView.setMaxWidth(view.getWidth());
+        }
         tableView.setItems(observableList);
         return tableView;
     }

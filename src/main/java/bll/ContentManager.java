@@ -8,12 +8,12 @@ import dal.IContentRepository;
 import dal.db.DBContentRepository;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.util.List;
 
@@ -58,11 +58,8 @@ public class ContentManager {
                 case WEB -> {
                     return new WebViewLoader();
                 }
-                case XLS -> {
+                case XLS, XLSX -> {
                     return new ExcelLoader();
-                }
-                case XLSX -> {
-                    return new ExcelXLoader();
                 }
                 case MP4 -> {
                     return new VideoLoader();
@@ -95,7 +92,7 @@ public class ContentManager {
         return null;
     }
 
-    public VBox getWindow(View view) {
+    public VBox getWindow(View view, boolean autoResizeEnabled) {
         HBox title = new HBox(new Label(view.getTitle()));
         title.getStylesheets().add("/stylesheets/view.css");
         title.setAlignment(Pos.CENTER);
@@ -110,31 +107,45 @@ public class ContentManager {
         } else {
             IViewLoader loader = getLoader(view);
             Platform.runLater(() -> {
-                Node content = loader.loadView(view.getPath(), view.getWidth(), view.getHeight());
+                Node content = loader.loadView(view, autoResizeEnabled);
                 window.getChildren().addAll(title, content);
             });
         }
 
-
-        window.setPrefSize(view.getWidth(), view.getHeight());
-
+        if (!autoResizeEnabled) {
+            window.setPrefSize(view.getWidth(), view.getHeight());
+        }
 
         return window;
     }
 
-    public void buildGrid(GridPane grid,boolean autoResizeEnabled, ObservableList<View> contentObservable) {
+    public void buildGrid(GridPane grid, boolean autoResizeEnabled, ObservableList<View> contentObservable) {
+        grid.getChildren().clear();
         new Thread(() -> {
-            Platform.runLater(() -> {
-                grid.getChildren().clear();
-            });
-
             for (View view : contentObservable) {
-                VBox vbox = getWindow(view);
-
+                VBox vbox = getWindow(view, autoResizeEnabled);
                 Platform.runLater(() -> {
-                    grid.add(vbox, view.getColumn(), view.getRow());
-                });
+                    grid.getRowConstraints().clear();
+                    grid.getColumnConstraints().clear();
 
+                    grid.add(vbox, view.getColumn(), view.getRow());
+
+                    if (autoResizeEnabled) {
+                        int rows = grid.getRowCount();
+                        int columns = grid.getColumnCount();
+                        ColumnConstraints columnConstraints = new ColumnConstraints(grid.getWidth()/columns);
+                        RowConstraints rowConstraints = new RowConstraints(grid.getHeight()/rows);
+
+                        for (int i = 0; i < rows; i++) {
+                            grid.getRowConstraints().add(rowConstraints);
+                        }
+
+                        for (int i = 0; i < columns; i++) {
+                            grid.getColumnConstraints().add(columnConstraints);
+                        }
+                    }
+
+                });
             }
         }).start();
     }

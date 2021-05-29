@@ -1,4 +1,5 @@
 package bll.vloader;
+import be.View;
 import bll.FileReader;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -20,9 +21,9 @@ public class CSVLoader implements IViewLoader {
         set to table view. After that the whole Table View is returned and displayed.
      */
     @Override
-    public Node loadView(String path,int width, int height) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         TableView<List<String>> tableView = new TableView();
-        List<String> lines = fileReader.loadData(path);
+        List<String> lines = fileReader.loadData(view.getPath());
         List<String> headerStrings = Arrays.asList(lines.get(0).split(","));
         for (int i = 0; i < headerStrings.size(); i++) {
             final int index = i;
@@ -37,11 +38,12 @@ public class CSVLoader implements IViewLoader {
             observableList.add(stringsInLine);
         }
         tableView.setItems(observableList);
-
-        tableView.setMinHeight(height);
-        tableView.setMaxHeight(height);
-        tableView.setMinWidth(width);
-        tableView.setMaxWidth(width);
+        if (!autoResizeEnabled) {
+            tableView.setMinHeight(view.getHeight());
+            tableView.setMaxHeight(view.getHeight());
+            tableView.setMinWidth(view.getWidth());
+            tableView.setMaxWidth(view.getWidth());
+        }
         return tableView;
     }
 }
