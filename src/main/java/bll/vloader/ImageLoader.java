@@ -1,5 +1,6 @@
 package bll.vloader;
 
+import be.View;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,17 +15,19 @@ public class ImageLoader implements IViewLoader{
         it adds it. The image is displayed inside of a Image View.
      */
     @Override
-    public Node loadView(String path,int width, int height) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         FileInputStream input = null;
         try {
-            input = new FileInputStream(path);
+            input = new FileInputStream(view.getPath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         Image image = new Image(input);
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(height);
-        imageView.setFitWidth(width);
+        if (!autoResizeEnabled) {
+            imageView.setFitHeight(view.getHeight());
+            imageView.setFitWidth(view.getWidth());
+        }
         return imageView;
     }
 }

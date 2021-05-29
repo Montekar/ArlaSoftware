@@ -1,5 +1,6 @@
 package bll.vloader;
 
+import be.View;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -23,16 +24,17 @@ import java.io.File;
 public class VideoLoader implements IViewLoader{
     private boolean isPlaying = false;
     @Override
-    public Node loadView(String path, int width, int height) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         Pane pane = new Pane();
-        Media media = new Media(new File(path).toURI().toString());
+        Media media = new Media(new File(view.getPath()).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
         Slider timeSlider = new Slider();
         mediaPlayer.play();
-
-        mediaView.setFitHeight(height);
-        mediaView.setFitWidth(width);
+        if (!autoResizeEnabled) {
+            mediaView.setFitHeight(view.getHeight());
+            mediaView.setFitWidth(view.getWidth());
+        }
         VBox vBox = new VBox();
 
         Button button = new Button();

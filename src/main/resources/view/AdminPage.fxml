@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="475.0" prefWidth="1586.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
+<BorderPane fx:id="borderPane" prefHeight="456.0" prefWidth="1586.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminPageController">
    <left>
       <VBox prefHeight="577.0" prefWidth="167.0" style="-fx-background-color: #1F1A24;" BorderPane.alignment="CENTER">
          <children>
@@ -99,11 +99,6 @@
                         <Insets left="5.0" right="5.0" />
                      </padding>
                   </HBox>
-                  <HBox prefHeight="142.0" prefWidth="167.0" VBox.vgrow="ALWAYS">
-                     <padding>
-                        <Insets left="5.0" top="200.0" />
-                     </padding>
-                  </HBox>
                   <HBox>
                      <children>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -146,7 +141,7 @@
                   </Label>
                </children>
             </HBox>
-            <GridPane fx:id="contentGrid" gridLinesVisible="true" prefHeight="610.0" prefWidth="1419.0" VBox.vgrow="ALWAYS">
+            <GridPane fx:id="contentGrid" VBox.vgrow="ALWAYS">
             </GridPane>
          </children>
       </VBox>
