@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -92,6 +93,9 @@ public class AdminEditContentController implements Initializable {
             contentModel.createContent(new View(departmentID, col, row, width, height, path, title));
             contentModel.buildGrid(contentGrid, departmentModel.isAutoResizeEnabled(departmentID));
             contentTable.getSelectionModel().selectLast();
+            Alert.displayAlert("Added","Content Added",(Stage)pathField.getScene().getWindow());
+        }else{
+            Alert.displayAlert("Error","enter title,path,column,row fields!",(Stage)pathField.getScene().getWindow());
         }
     }
 
@@ -111,6 +115,9 @@ public class AdminEditContentController implements Initializable {
             contentModel.editContent(oldView, newView);
             contentModel.buildGrid(contentGrid, departmentModel.isAutoResizeEnabled(departmentID));
             contentTable.getSelectionModel().select(selectedIndex);
+            Alert.displayAlert("Edited","Content Edited",(Stage)pathField.getScene().getWindow());
+        }else{
+            Alert.displayAlert("Error","Select an item or enter title,path,column,row fields!",(Stage)pathField.getScene().getWindow());
         }
     }
 
@@ -119,6 +126,9 @@ public class AdminEditContentController implements Initializable {
             View view = contentTable.getSelectionModel().getSelectedItem();
             contentModel.deleteContent(view);
             contentModel.buildGrid(contentGrid, departmentModel.isAutoResizeEnabled(departmentID));
+            Alert.displayAlert("Deleted","Content Deleted",(Stage)pathField.getScene().getWindow());
+        }else{
+            Alert.displayAlert("Error","Select an item!",(Stage)pathField.getScene().getWindow());
         }
     }
     private void setNumberListener(TextField textField){
