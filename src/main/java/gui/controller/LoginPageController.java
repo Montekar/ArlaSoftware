@@ -109,6 +109,13 @@ public class LoginPageController {
         }
     }
 
+    /**
+     *
+     * This method will authenticate the user and open department or admin view accordingly.
+     *
+     * @param username user username.
+     * @param password user password.
+     */
     private void authenticateUser(String username, String password) {
         new Thread(() -> {
             User user = authenticationManager.getAuthenticatedUser(username, password);

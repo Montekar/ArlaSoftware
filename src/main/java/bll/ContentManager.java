@@ -42,6 +42,14 @@ public class ContentManager {
         contentRepository.editContent(oldView, newView);
     }
 
+    /**
+     *
+     * This method will get a loader to load a specific type of content depending on the path.
+     *
+     * @param view content configuration entity.
+     * @return returns a content loader.
+     */
+
     public IViewLoader getLoader(View view) {
         ContentType contentType = pathManager.getType(view.getPath());
         if (contentType != null) {
@@ -71,6 +79,13 @@ public class ContentManager {
         return null;
     }
 
+    /**
+     *
+     * This method will get a chart loader to load a specific type of chart.
+     *
+     * @param chartView chart view configuration entity.
+     * @return returns a chart loader.
+     */
     public IChartLoader getChartLoader(ChartView chartView) {
         ChartType chartType = chartView.getChartType();
         if (chartType != null) {
@@ -92,6 +107,14 @@ public class ContentManager {
         return null;
     }
 
+    /**
+     *
+     * This method will get a single window with content inserted.
+     *
+     * @param view content configuration entity.
+     * @param autoResizeEnabled resizing mode, true = auto resize, false = custom size.
+     * @return returns a window with content in it.
+     */
     public VBox getWindow(View view, boolean autoResizeEnabled) {
         HBox title = new HBox(new Label(view.getTitle()));
         title.getStylesheets().add("/stylesheets/view.css");
@@ -118,7 +141,14 @@ public class ContentManager {
 
         return window;
     }
-
+    /**
+     *
+     * The code below will build/configure the grid with the provided content and grid itself.
+     *
+     * @param grid grid that you want to edit.
+     * @param autoResizeEnabled resizing mode, true = auto resize, false = custom size
+     * @param contentObservable a list of content to be inserted into grid pane.
+     */
     public void buildGrid(GridPane grid, boolean autoResizeEnabled, ObservableList<View> contentObservable) {
         grid.getChildren().clear();
         new Thread(() -> {

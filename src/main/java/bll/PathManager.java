@@ -6,7 +6,13 @@ import org.apache.commons.validator.routines.UrlValidator;
 import java.io.File;
 
 public class PathManager {
-
+    /**
+     *
+     * This method will get a type of content.
+     *
+     * @param path path is used to determine a type of content.
+     * @return returns content type enum.
+     */
     public ContentType getType(String path) {
         File file = new File(path);
 

@@ -61,6 +61,7 @@ public class AdminPageController implements Initializable {
         }
     }
 
+    // Logout and go back to login page
     public void logout(ActionEvent actionEvent) throws IOException {
         Stage mainStage = (Stage) choiceDepartment.getScene().getWindow();
         mainStage.close();
