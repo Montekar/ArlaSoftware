@@ -9,6 +9,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Alert {
+    /**
+     *
+     * Popup for the program.
+     *
+     * @param alert window title.
+     * @param message message inside the window.
+     * @param ownerStage stage to make sure the popup is on top.
+     */
     public static void displayAlert(String alert, String message, Stage ownerStage) {
         Stage window = new Stage();
         window.initOwner(ownerStage);
