@@ -96,7 +96,12 @@ public class AdminEditDepartmentController implements Initializable {
                 newDepartmentNameField.setText("");
                 newDepartmentPasswordField.setText("");
                 newRefreshField.setText("5");
+                Alert.displayAlert("Created","Content Department Created",(Stage)editCheckResizable.getScene().getWindow());
+            }else{
+                Alert.displayAlert("Error","Username not set or refresh 0 or less!",(Stage)editCheckResizable.getScene().getWindow());
             }
+        }else{
+            Alert.displayAlert("Error","Refresh is not set!",(Stage)editCheckResizable.getScene().getWindow());
         }
     }
 
@@ -106,6 +111,9 @@ public class AdminEditDepartmentController implements Initializable {
             int departmentID = choiceDepartment.getSelectionModel().getSelectedItem().getId();
             departmentModel.deleteDepartment(departmentID);
             choiceDepartment.getSelectionModel().selectFirst();
+            Alert.displayAlert("Deleted","Department deleted",(Stage)editCheckResizable.getScene().getWindow());
+        }else{
+            Alert.displayAlert("Error","Item not selected",(Stage)editCheckResizable.getScene().getWindow());
         }
     }
 
@@ -122,8 +130,14 @@ public class AdminEditDepartmentController implements Initializable {
                 departmentModel.editDepartment(departmentID, username, refreshTime,editCheckResizable.isSelected());
 
                 choiceDepartment.getSelectionModel().select(selectedIndex);
+                Alert.displayAlert("Edited","Department Edited",(Stage)editCheckResizable.getScene().getWindow());
+            }else{
+                Alert.displayAlert("Error","Username not set or refresh 0 or less!",(Stage)editCheckResizable.getScene().getWindow());
             }
+        }else{
+            Alert.displayAlert("Error","Refresh is not set or item not selected!",(Stage)editCheckResizable.getScene().getWindow());
         }
+
     }
     @FXML
     void onESCAPE(KeyEvent enter) throws IOException {

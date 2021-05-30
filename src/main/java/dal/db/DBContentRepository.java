@@ -6,6 +6,7 @@ import be.users.Admin;
 import bll.ChartType;
 import dal.IContentRepository;
 import error.ErrorHandler;
+import gui.controller.Alert;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
