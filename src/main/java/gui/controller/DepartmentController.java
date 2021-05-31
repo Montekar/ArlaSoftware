@@ -1,12 +1,9 @@
 package gui.controller;
 
-import be.users.Department;
-import bll.*;
 import gui.model.ContentModel;
 import gui.model.DepartmentModel;
 import gui.model.SessionModel;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,12 +13,9 @@ import java.util.*;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import refresh.RefreshManager;
@@ -32,13 +26,7 @@ public class DepartmentController implements Initializable {
     AnchorPane mainBox;
 
     @FXML
-    Label department;
-
-    @FXML
     GridPane mainGrid;
-
-    private final int zoomIn = 107;
-    private final int zoomOut = 109;
 
     private ArrayList<String> pathArrayList = new ArrayList<>();
     private ArrayList<Object> fileArrayList = new ArrayList<>();
@@ -61,7 +49,6 @@ public class DepartmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int departmentID = sessionModel.getUser().getId();
-        department.setText(sessionModel.getUser().getUsername());
         contentModel.updateContent(departmentID);
         contentModel.buildGrid(mainGrid, departmentModel.isAutoResizeEnabled(departmentID));
     }
@@ -105,6 +92,7 @@ public class DepartmentController implements Initializable {
     }
 
     // Opens the department menu
+    @FXML
     private void openDepartmentWindow(){
         try {
             if (menuStage == null){
@@ -123,34 +111,5 @@ public class DepartmentController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void min(ActionEvent actionEvent) {
-        Stage stage = (Stage) mainBox.getScene().getWindow();
-        if (stage.isIconified()){
-
-        }else{
-            stage.setIconified(true);
-        }
-    }
-
-    public void close(ActionEvent actionEvent) {
-        System.out.println("clicked");
-        Platform.exit();
-        System.exit(0);
-    }
-
-    public void full(ActionEvent actionEvent) {
-        Stage stage = (Stage) mainBox.getScene().getWindow();
-        if (stage.isFullScreen()){
-            stage.setWidth(stage.getWidth() / 2);
-            stage.setHeight(stage.getHeight() / 2);
-        }else{
-            stage.setFullScreen(true);
-        }
-    }
-
-    public void openMenu(MouseEvent event) {
-        openDepartmentWindow();
     }
 }

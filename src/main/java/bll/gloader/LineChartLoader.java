@@ -5,7 +5,6 @@ import com.google.common.collect.Iterables;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
 import java.util.List;
