@@ -4,6 +4,7 @@ import be.users.Admin;
 import be.users.Department;
 import be.users.User;
 import bll.AuthenticationManager;
+import bll.helper.HashingHelper;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import gui.model.SessionModel;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;

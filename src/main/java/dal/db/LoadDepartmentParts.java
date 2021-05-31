@@ -1,7 +1,9 @@
 package dal.db;
 
 import be.View;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ILoadDepartmentParts;
+import dal.db.DatabaseConnection;
 import error.ErrorHandler;
 
 import java.sql.Connection;
