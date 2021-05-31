@@ -22,7 +22,7 @@ class LoadDepartmentPartsTest {
     // Sets up the list for the test
     @BeforeEach
     void setUp() {
-      /*  try(Connection con = connection.getConnection()){
+       try(Connection con = connection.getConnection()){
             String sql = "SELECT * FROM Content WHERE DepartmentID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1,departmentId);
@@ -35,22 +35,22 @@ class LoadDepartmentPartsTest {
                             resultSet.getInt("Row"),
                             resultSet.getInt("Width"),
                             resultSet.getInt("Height"),
-                            resultSet.getString("Path"),
-                            resultSet.getString("Title")
+                            resultSet.getString("Title"),
+                            resultSet.getString("Path")
                     ));
                 }
             }
             //int departmentID, int column, int row, int width, int height, String path, String title
         }catch (SQLException sqlException){
             sqlException.printStackTrace();
-        }*/
+        }
     }
 
     // Checks if the lists are the same and if the data was retrieved correctly
     @DisplayName("Getting screen parts")
     @Test
     void getScreenParts() {
-        /*ArrayList<View> actualViewArrayList = new ArrayList<>();
+        ArrayList<View> actualViewArrayList = new ArrayList<>();
         try(Connection con = connection.getConnection()){
             String sql = "SELECT * FROM Content WHERE DepartmentID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -71,8 +71,8 @@ class LoadDepartmentPartsTest {
             }
         }catch (SQLException sqlException){
             sqlException.printStackTrace();
-        }*/
+        }
 
-      //  Assertions.assertEquals(expectedViewArrayList.size(), actualViewArrayList.size());
+        Assertions.assertEquals(expectedViewArrayList.size(), actualViewArrayList.size());
     }
 }

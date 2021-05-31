@@ -25,7 +25,7 @@ class DBAuthenticationRepositoryTest {
     public static void setUp() {
         try(Connection con = connection.getConnection()){
             String sqlAdmin = "INSERT INTO Admin Values(?, ?)";
-            String sqlDepartment = "INSERT INTO Department Values(?, ?,?)";
+            String sqlDepartment = "INSERT INTO Department Values(?, ?, ?, ?)";
 
             PreparedStatement adminStatement = con.prepareStatement(sqlAdmin);
             adminStatement.setString(1,adminUsername);
@@ -36,6 +36,7 @@ class DBAuthenticationRepositoryTest {
             departmentStatement.setString(1,departmentUsername);
             departmentStatement.setString(2,departmentPassword);
             departmentStatement.setInt(3,5);
+            departmentStatement.setInt(4,0);
             departmentStatement.execute();
         }catch (SQLException sqlException){
             sqlException.printStackTrace();
