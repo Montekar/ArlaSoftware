@@ -125,7 +125,8 @@ public class ContentManager {
         if (view instanceof ChartView) {
             IChartLoader loader = getChartLoader((ChartView) view);
             Platform.runLater(() -> {
-                window.getChildren().addAll(title, loader.loadChart(view.getPath(), ((ChartView) view).getNameColumn(), ((ChartView) view).getDataColumn()));
+                window.getChildren().addAll(title, loader.loadChart(view.getPath(),
+                        ((ChartView) view).getNameColumn(), ((ChartView) view).getDataColumn()));
             });
         } else {
             IViewLoader loader = getLoader(view);

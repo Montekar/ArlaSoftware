@@ -85,21 +85,6 @@ public class DepartmentController implements Initializable {
         listenerThread.start();
     }
 
-    // Zooming method not fully functional
-    private void zoomNode(ZoomPane selectedPane, int keyCode) {
-        double zoom = selectedPane.getZoom();
-        if (keyCode == zoomIn && zoom < 2){
-            selectedPane.setScaleX(zoom);
-            selectedPane.setScaleY(zoom);
-            selectedPane.setPrefWidth(selectedPane.getWidth() * zoom);
-            selectedPane.setZoom(selectedPane.getZoom()+0.1);
-        }else if(keyCode == zoomOut && zoom > 0.5){
-            selectedPane.setScaleX(zoom);
-            selectedPane.setScaleY(zoom);
-            selectedPane.setZoom(selectedPane.getZoom()-0.1);
-        }
-    }
-
     // Closing program method
     @FXML
     void close(Stage stage){ ;

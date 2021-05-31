@@ -31,6 +31,7 @@ class DBDepartmentRepositoryTest {
                     departmentList.add(new Department(
                             resultSet.getInt("ID"),
                             resultSet.getString("Username")
+
                     ));
                 }
             }
@@ -70,11 +71,12 @@ class DBDepartmentRepositoryTest {
     @Order(2)
     void createDepartment() {
         try (Connection con = connection.getConnection()) {
-            String sql = "INSERT INTO Department Values (? ,?, ?)";
+            String sql = "INSERT INTO Department Values (? ,?, ?, ?)";
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, departmentName);
             statement.setString(2, "Test123");
             statement.setInt(3, refreshTime);
+            statement.setInt(4,0);
             statement.execute();
 
             if (statement.getUpdateCount() > 0) {
