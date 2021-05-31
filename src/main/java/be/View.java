@@ -46,4 +46,12 @@ public class View {
     public String getTitle() {
         return title;
     }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 }
