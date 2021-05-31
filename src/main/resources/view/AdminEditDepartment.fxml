@@ -19,11 +19,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="523.0" prefWidth="396.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="523.0" prefWidth="396.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" onKeyReleased="#onESCAPE" prefHeight="503.0" prefWidth="374.0" style="-fx-background-color: white;">
          <children>
-            <Button layoutX="291.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/administrator.css" text="Button" />
+            <Button layoutX="335.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/administrator.css" text="Button" />
             <VBox layoutX="12.0" layoutY="61.0" prefHeight="211.0" prefWidth="353.0" style="-fx-border-color: black; -fx-border-width: 1;">
                <children>
                   <VBox alignment="CENTER" spacing="10.0">
@@ -125,19 +125,22 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox layoutX="67.0" prefHeight="54.0" prefWidth="196.0" spacing="10.0">
+            <HBox layoutX="39.0" prefHeight="54.0" prefWidth="281.0" spacing="10.0">
                <children>
                   <ImageView fitHeight="53.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/settings.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="53.0" prefWidth="181.0" text="Config.">
+                  <Label prefHeight="54.0" prefWidth="218.0" text="Configurations">
                      <font>
                         <Font size="33.0" />
                      </font>
                   </Label>
                </children>
+               <padding>
+                  <Insets top="4.0" />
+               </padding>
             </HBox>
          </children>
          <effect>
