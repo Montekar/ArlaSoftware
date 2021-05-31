@@ -29,7 +29,7 @@ import refresh.RefreshManager;
 public class DepartmentController implements Initializable {
 
     @FXML
-    Pane mainBox;
+    AnchorPane mainBox;
 
     @FXML
     Label department;
@@ -126,12 +126,28 @@ public class DepartmentController implements Initializable {
     }
 
     public void min(ActionEvent actionEvent) {
+        Stage stage = (Stage) mainBox.getScene().getWindow();
+        if (stage.isIconified()){
+
+        }else{
+            stage.setIconified(true);
+        }
     }
 
     public void close(ActionEvent actionEvent) {
+        System.out.println("clicked");
+        Platform.exit();
+        System.exit(0);
     }
 
     public void full(ActionEvent actionEvent) {
+        Stage stage = (Stage) mainBox.getScene().getWindow();
+        if (stage.isFullScreen()){
+            stage.setWidth(stage.getWidth() / 2);
+            stage.setHeight(stage.getHeight() / 2);
+        }else{
+            stage.setFullScreen(true);
+        }
     }
 
     public void openMenu(MouseEvent event) {
