@@ -60,7 +60,7 @@ public class DBDepartmentRepository implements IDepartmentRepository {
     }
 
     @Override
-    public void editDepartment(int departmentID, String username, int refresh,boolean isAutoResizable) {
+    public boolean editDepartment(int departmentID, String username, int refresh,boolean isAutoResizable) {
         try (Connection con = connection.getConnection()) {
             String sql = "UPDATE Department SET Username = ?, Refresh = ?, AutoResize = ? WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -69,36 +69,45 @@ public class DBDepartmentRepository implements IDepartmentRepository {
             statement.setBoolean(3, isAutoResizable);
             statement.setInt(4, departmentID);
             statement.execute();
+            return true;
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue changing department's name", ex);
         }
+        return false;
     }
 
     @Override
-    public void createDepartment(String username, String password, int refresh, boolean isAutoResizable) {
+    public int createDepartment(String username, String password, int refresh, boolean isAutoResizable) {
         try (Connection con = connection.getConnection()) {
             String sql = "INSERT INTO Department Values(?,?,?,?)";
-            PreparedStatement statement = con.prepareStatement(sql);
+            PreparedStatement statement = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setInt(3, refresh);
             statement.setBoolean(4,isAutoResizable);
             statement.execute();
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue creating a department", ex);
         }
+        return -1;
     }
 
     @Override
-    public void deleteDepartment(int departmentID) {
+    public boolean deleteDepartment(int departmentID) {
         try (Connection con = connection.getConnection()) {
             String sql = "DELETE FROM Department WHERE ID = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, departmentID);
             statement.execute();
+            return true;
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue deleting a department", ex);
         }
+        return false;
     }
 
     @Override

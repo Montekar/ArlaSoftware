@@ -1,4 +1,5 @@
 import bll.helper.HashingHelper;
+import dal.db.DBAdminRepository;
 import dal.db.DBReportRepository;
 import gui.model.ReportModel;
 import javafx.application.Application;
