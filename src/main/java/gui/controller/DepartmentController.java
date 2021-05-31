@@ -29,7 +29,7 @@ import refresh.RefreshManager;
 public class DepartmentController implements Initializable {
 
     @FXML
-    Pane mainBox;
+    AnchorPane mainBox;
 
     @FXML
     Label department;

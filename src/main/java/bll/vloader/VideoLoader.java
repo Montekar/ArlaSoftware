@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -25,15 +26,18 @@ public class VideoLoader implements IViewLoader{
     private boolean isPlaying = false;
     @Override
     public Node loadView(View view,boolean autoResizeEnabled) {
-        Pane pane = new Pane();
+        AnchorPane anchorPane = new AnchorPane();
         Media media = new Media(new File(view.getPath()).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
         Slider timeSlider = new Slider();
+        timeSlider.setMin(0);
+        mediaPlayer.totalDurationProperty().addListener((observableValue, duration, t1) -> timeSlider.setMax(t1.toMillis()));
+
         mediaPlayer.play();
         if (!autoResizeEnabled) {
-            mediaView.setFitHeight(view.getHeight());
-            mediaView.setFitWidth(view.getWidth());
+           mediaView.setFitWidth(view.getWidth());
+           mediaView.setFitHeight(view.getHeight());
         }
         VBox vBox = new VBox();
 
@@ -65,25 +69,24 @@ public class VideoLoader implements IViewLoader{
 
         mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
             if (!timeSlider.isValueChanging()) {
-                timeSlider.setValue(newTime.toSeconds());
+                timeSlider.setValue(newTime.toMillis());
             }
         });
-
 
         timeSlider.valueProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov)
             {
                 if (timeSlider.isPressed()) { // It would set the time
                     // as specified by user by pressing
-                    mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(timeSlider.getValue() / 100));
+                    mediaPlayer.seek(Duration.millis(timeSlider.getValue()));
                 }
             }
         });
 
 
         vBox.getChildren().addAll(mediaView,button, timeSlider);
-        pane.getChildren().addAll(vBox);
+        anchorPane.getChildren().addAll(vBox);
 
-        return pane;
+        return anchorPane;
     }
 }

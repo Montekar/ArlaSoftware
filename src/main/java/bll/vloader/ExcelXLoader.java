@@ -41,6 +41,7 @@ public class ExcelXLoader implements IViewLoader{
                         column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(cell.getColumnIndex())));
                         tableView.getColumns().add(column);
                     }
+                    isFirst = false;
                 }else{
                     List<String> rowData = new ArrayList<>();
                     Iterator<Cell> cellDataIterator = row.cellIterator();
