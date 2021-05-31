@@ -37,6 +37,44 @@ public class DBAdminRepository implements IAdminRepository {
         return null;
     }
 
+    /**
+     *
+     * @param username username assigned.
+     * @param password password assigned.
+     * @return id of a created admin.
+     */
+    @Override
+    public int createAdmin(String username, String password) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "INSERT INTO Admin Values(?,?)";
+            PreparedStatement statement = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.execute();
+                ResultSet rs = statement.getGeneratedKeys();
+                if (rs != null && rs.next()) {
+                    return rs.getInt(1);
+                }
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue creating an admin", ex);
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean deleteAdmin(int adminID) {
+        try (Connection con = connection.getConnection()) {
+            String sql = "DELETE FROM Admin WHERE ID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, adminID);
+            statement.execute();
+            return true;
+        } catch (SQLException ex) {
+            errorHandler.errorDevelopmentInfo("Issue deleting an admin", ex);
+        }
+        return false;
+    }
+
     @Override
     public List<Admin> getAllAdmins() {
         List<Admin> admins = new ArrayList<>();

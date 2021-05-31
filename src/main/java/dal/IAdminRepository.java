@@ -8,4 +8,6 @@ public interface IAdminRepository {
     Admin getAdmin(int adminID);
     List<Admin> getAllAdmins();
     void report(int departmentId, String title, String description);
+    int createAdmin(String username, String password);
+    boolean deleteAdmin(int adminID);
 }

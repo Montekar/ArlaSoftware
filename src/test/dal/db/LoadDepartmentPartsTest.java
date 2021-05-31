@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LoadDepartmentPartsTest {
     private DatabaseConnection connection = new DatabaseConnection();
     private final static int departmentId = 1;

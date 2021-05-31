@@ -45,12 +45,13 @@ public class ContentManager {
     /**
      *
      * This method will get a loader to load a specific type of content depending on the path.
+     * ContentType is a enum.
      *
      * @param view content configuration entity.
      * @return returns a content loader.
      */
 
-    public IViewLoader getLoader(View view) {
+    private IViewLoader getLoader(View view) {
         ContentType contentType = pathManager.getType(view.getPath());
         if (contentType != null) {
             switch (contentType) {
@@ -89,7 +90,7 @@ public class ContentManager {
      * @param chartView chart view configuration entity.
      * @return returns a chart loader.
      */
-    public IChartLoader getChartLoader(ChartView chartView) {
+    private IChartLoader getChartLoader(ChartView chartView) {
         ChartType chartType = chartView.getChartType();
         if (chartType != null) {
             switch (chartType) {
@@ -125,19 +126,17 @@ public class ContentManager {
 
         VBox window = new VBox();
         window.setAlignment(Pos.TOP_CENTER);
+        Platform.runLater(() -> {
         if (view instanceof ChartView) {
             IChartLoader loader = getChartLoader((ChartView) view);
-            Platform.runLater(() -> {
                 window.getChildren().addAll(title, loader.loadChart(view.getPath(),
                         ((ChartView) view).getNameColumn(), ((ChartView) view).getDataColumn()));
-            });
         } else {
             IViewLoader loader = getLoader(view);
-            Platform.runLater(() -> {
                 Node content = loader.loadView(view, autoResizeEnabled);
                 window.getChildren().addAll(title, content);
-            });
         }
+        });
 
         if (!autoResizeEnabled) {
             window.setPrefSize(view.getWidth(), view.getHeight());
@@ -153,6 +152,7 @@ public class ContentManager {
      * @param autoResizeEnabled resizing mode, true = auto resize, false = custom size
      * @param contentObservable a list of content to be inserted into grid pane.
      */
+
     public void buildGrid(GridPane grid, boolean autoResizeEnabled, ObservableList<View> contentObservable) {
         grid.getChildren().clear();
         new Thread(() -> {

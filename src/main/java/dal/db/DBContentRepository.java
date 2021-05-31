@@ -8,10 +8,7 @@ import dal.IContentRepository;
 import error.ErrorHandler;
 import gui.controller.Alert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,10 +78,10 @@ public class DBContentRepository implements IContentRepository {
     }
 
     @Override
-    public void createContent(View view) {
+    public int createContent(View view) {
         try (Connection con = connection.getConnection()) {
             String sql = "INSERT INTO Content Values(?,?,?,?,?,?,?,-1)";
-            PreparedStatement statement = con.prepareStatement(sql);
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, view.getId());
             statement.setInt(2, view.getColumn());
             statement.setInt(3, view.getRow());
@@ -93,13 +90,18 @@ public class DBContentRepository implements IContentRepository {
             statement.setString(6, view.getTitle());
             statement.setString(7, view.getPath());
             statement.execute();
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue adding content", ex);
         }
+        return -1;
     }
 
     @Override
-    public void deleteContent(View view) {
+    public boolean deleteContent(View view) {
         try (Connection con = connection.getConnection()) {
             String sql = "DELETE FROM Content WHERE DepartmentID = ? AND [Column] = ? AND Row = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -107,13 +109,15 @@ public class DBContentRepository implements IContentRepository {
             statement.setInt(2, view.getColumn());
             statement.setInt(3, view.getRow());
             statement.execute();
+            return true;
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue deleting content", ex);
         }
+        return false;
     }
 
     @Override
-    public void editContent(View oldView, View newView) {
+    public boolean editContent(View oldView, View newView) {
         try (Connection con = connection.getConnection()) {
             String sql = "UPDATE Content SET [Column] = ?, Row = ?, Width = ?, Height = ?, Title = ?, Path = ? WHERE DepartmentID = ? AND [Column] = ? AND Row = ?";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -127,8 +131,10 @@ public class DBContentRepository implements IContentRepository {
             statement.setInt(8, oldView.getColumn());
             statement.setInt(9, oldView.getRow());
             statement.execute();
+            return true;
         } catch (SQLException ex) {
             errorHandler.errorDevelopmentInfo("Issue editing content", ex);
         }
+        return false;
     }
 }

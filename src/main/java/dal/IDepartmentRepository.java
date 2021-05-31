@@ -10,7 +10,7 @@ public interface IDepartmentRepository {
     int getRefreshTime(int departmentID);
     boolean isAutoResizeEnabled(int departmentID);
 
-    void editDepartment(int departmentID, String username, int refresh, boolean isAutoResizable);
-    void createDepartment(String username, String password, int refresh, boolean isAutoResizable);
-    void deleteDepartment(int departmentID);
+    boolean editDepartment(int departmentID, String username, int refresh, boolean isAutoResizable);
+    int createDepartment(String username, String password, int refresh, boolean isAutoResizable);
+    boolean deleteDepartment(int departmentID);
 }
