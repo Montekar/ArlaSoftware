@@ -3,7 +3,6 @@ package gui.controller;
 import be.users.Department;
 import gui.model.ContentModel;
 import gui.model.DepartmentModel;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 
@@ -122,16 +119,6 @@ public class AdminPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(mainStage);
             stage.show();
-        }
-    }
-
-    @FXML
-    void onESCAPE(KeyEvent enter) throws IOException {
-        if (enter.getCode().equals(KeyCode.ESCAPE)) {
-            Stage stage = (Stage) departmentName.getScene().getWindow();
-            stage.close();
-            Platform.exit();
-            System.exit(0);
         }
     }
 }

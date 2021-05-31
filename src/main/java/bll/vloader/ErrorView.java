@@ -2,12 +2,9 @@ package bll.vloader;
 
 import be.View;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +17,7 @@ public class ErrorView implements IViewLoader{
         empty window.
      */
     @Override
-    public Node loadView(View view,boolean autoResizeEnabled) {
+    public Node loadView(View view) {
         try {
             ImageView imageView = new ImageView(new Image(new FileInputStream("src/main/resources/images/error.gif")));
             Pane pane = new Pane(imageView);

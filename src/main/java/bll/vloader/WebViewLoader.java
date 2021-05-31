@@ -2,7 +2,6 @@ package bll.vloader;
 
 import be.View;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 
 public class WebViewLoader implements IViewLoader {
@@ -12,7 +11,7 @@ public class WebViewLoader implements IViewLoader {
         has and engine method which loads the web page.
      */
     @Override
-    public Node loadView(View view, boolean autoResizeEnabled) {
+    public Node loadView(View view) {
         WebView webView = new WebView();
         webView.getEngine().load(view.getPath());
         webView.setPrefWidth(view.getWidth());

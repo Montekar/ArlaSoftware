@@ -19,10 +19,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,22 +75,24 @@ public class DepartmentMenu implements Initializable {
     }
 
     // Sets up the parent stage
-    public void setParentStage(Stage parentStage){
+    public void setParentStage(Stage parentStage) {
         this.parentStage = parentStage;
     }
 
     // Logout functionality redirects to the Login Page
     public void logOut(MouseEvent event) {
-        Stage stage = (Stage) this.menu.getScene().getWindow();
-        stage.close();
+        Stage currentStage = (Stage) this.menu.getScene().getWindow();
+        currentStage.close();
         this.parentStage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/LoginPage.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stageNew = new Stage();
-            stageNew.setScene(new Scene(root));
-            stageNew.show();
-        } catch (Exception e) {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -105,7 +109,7 @@ public class DepartmentMenu implements Initializable {
 
     // Method for getting the text out of the fields and sending them to the database
     public void sendReport(ActionEvent actionEvent) {
-        if ( !title.getText().isEmpty() && !description.getText().isEmpty()){
+        if (!title.getText().isEmpty() && !description.getText().isEmpty()) {
             adminManager.report(sessionModel.getUser().getId(), title.getText(), description.getText());
             title.setText("");
             description.setText("");
@@ -114,7 +118,7 @@ public class DepartmentMenu implements Initializable {
 
     // Method for closing the application
     public void closeScreen(MouseEvent event) {
-           Platform.exit();
-           System.exit(0);
+        Platform.exit();
+        System.exit(0);
     }
 }

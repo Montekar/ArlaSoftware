@@ -1,7 +1,6 @@
 package bll.vloader;
 
 import be.View;
-import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;
@@ -9,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -23,7 +21,7 @@ import java.io.File;
 public class VideoLoader implements IViewLoader{
     private boolean isPlaying = false;
     @Override
-    public Node loadView(View view,boolean autoResizeEnabled) {
+    public Node loadView(View view) {
         Media media = new Media(new File(view.getPath()).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
