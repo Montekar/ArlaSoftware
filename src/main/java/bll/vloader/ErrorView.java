@@ -2,9 +2,12 @@ package bll.vloader;
 
 import be.View;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,24 +21,16 @@ public class ErrorView implements IViewLoader{
      */
     @Override
     public Node loadView(View view,boolean autoResizeEnabled) {
-        FileInputStream input = null;
         try {
-            input = new FileInputStream("src/main/resources/images/error.gif");
+            ImageView imageView = new ImageView(new Image(new FileInputStream("src/main/resources/images/error.gif")));
+            Pane pane = new Pane(imageView);
+            imageView.fitWidthProperty().bind(pane.widthProperty());
+            imageView.fitHeightProperty().bind(pane.heightProperty());
+            return pane;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Pane pane = new Pane();
-        Image image = new Image(input);
-        ImageView imageView = new ImageView(image);
-        pane.getChildren().add(imageView);
 
-        pane.widthProperty().addListener((observableValue, number, t1) -> {
-            imageView.setFitWidth(t1.doubleValue());
-        });
-        pane.heightProperty().addListener((observableValue, number, t1) -> {
-            imageView.setFitHeight(t1.doubleValue());
-        });
-
-        return pane;
+        return new Pane();
     }
 }

@@ -1,15 +1,17 @@
 package bll.vloader;
 
 import be.View;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -22,7 +24,6 @@ public class VideoLoader implements IViewLoader{
     private boolean isPlaying = false;
     @Override
     public Node loadView(View view,boolean autoResizeEnabled) {
-        AnchorPane anchorPane = new AnchorPane();
         Media media = new Media(new File(view.getPath()).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -31,11 +32,6 @@ public class VideoLoader implements IViewLoader{
         mediaPlayer.totalDurationProperty().addListener((observableValue, duration, t1) -> timeSlider.setMax(t1.toMillis()));
 
         mediaPlayer.play();
-        if (!autoResizeEnabled) {
-           mediaView.setFitWidth(view.getWidth());
-           mediaView.setFitHeight(view.getHeight());
-        }
-        VBox vBox = new VBox();
 
         Button button = new Button();
         button.setText("||");
@@ -79,10 +75,19 @@ public class VideoLoader implements IViewLoader{
             }
         });
 
+        BorderPane borderPane = new BorderPane();
 
-        vBox.getChildren().addAll(mediaView,button, timeSlider);
-        anchorPane.getChildren().addAll(vBox);
+        borderPane.setCenter(mediaView);
 
-        return anchorPane;
+        mediaView.fitWidthProperty().bind(borderPane.widthProperty());
+
+
+
+
+        HBox hBox = new HBox(button,timeSlider);
+        hBox.setAlignment(Pos.CENTER);
+        borderPane.setBottom(hBox);
+
+        return borderPane;
     }
 }

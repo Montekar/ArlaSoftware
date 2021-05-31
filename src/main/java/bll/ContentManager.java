@@ -8,7 +8,9 @@ import dal.IContentRepository;
 import dal.db.DBContentRepository;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -138,10 +140,6 @@ public class ContentManager {
 
         if (!autoResizeEnabled) {
             window.setPrefSize(view.getWidth(), view.getHeight());
-            window.setMinWidth(view.getWidth());
-            window.setMaxWidth(view.getWidth());
-            window.setMinHeight(view.getHeight());
-            window.setMaxHeight(view.getHeight());
         }
 
         return window;

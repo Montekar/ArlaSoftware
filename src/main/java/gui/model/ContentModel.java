@@ -2,9 +2,11 @@ package gui.model;
 
 import be.View;
 import bll.ContentManager;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 

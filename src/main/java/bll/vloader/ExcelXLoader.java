@@ -58,12 +58,6 @@ public class ExcelXLoader implements IViewLoader{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!autoResizeEnabled) {
-            tableView.setMinHeight(view.getHeight());
-            tableView.setMaxHeight(view.getHeight());
-            tableView.setMinWidth(view.getWidth());
-            tableView.setMaxWidth(view.getWidth());
-        }
         tableView.setItems(observableList);
         return tableView;
     }
