@@ -124,4 +124,14 @@ public class AdminPageController implements Initializable {
             stage.show();
         }
     }
+
+    @FXML
+    void onESCAPE(KeyEvent enter) throws IOException {
+        if (enter.getCode().equals(KeyCode.ESCAPE)) {
+            Stage stage = (Stage) departmentName.getScene().getWindow();
+            stage.close();
+            Platform.exit();
+            System.exit(0);
+        }
+    }
 }
