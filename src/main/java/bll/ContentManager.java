@@ -123,9 +123,9 @@ public class ContentManager {
         HBox title = new HBox(new Label(view.getTitle()));
         title.getStylesheets().add("/stylesheets/view.css");
         title.setAlignment(Pos.CENTER);
-
         VBox window = new VBox();
         window.setAlignment(Pos.TOP_CENTER);
+
         Platform.runLater(() -> {
         if (view instanceof ChartView) {
             IChartLoader loader = getChartLoader((ChartView) view);
@@ -140,6 +140,10 @@ public class ContentManager {
 
         if (!autoResizeEnabled) {
             window.setPrefSize(view.getWidth(), view.getHeight());
+            window.setMinWidth(view.getWidth());
+            window.setMaxWidth(view.getWidth());
+            window.setMinHeight(view.getHeight());
+            window.setMaxHeight(view.getHeight());
         }
 
         return window;
@@ -157,16 +161,15 @@ public class ContentManager {
         grid.getChildren().clear();
         new Thread(() -> {
             for (View view : contentObservable) {
-                VBox vbox = getWindow(view, autoResizeEnabled);
                 Platform.runLater(() -> {
                     grid.getRowConstraints().clear();
                     grid.getColumnConstraints().clear();
-
-                    grid.add(vbox, view.getColumn(), view.getRow());
+                    grid.add(getWindow(view, autoResizeEnabled), view.getColumn(), view.getRow());
 
                     if (autoResizeEnabled) {
                         int rows = grid.getRowCount();
                         int columns = grid.getColumnCount();
+
                         ColumnConstraints columnConstraints = new ColumnConstraints(grid.getWidth()/columns);
                         RowConstraints rowConstraints = new RowConstraints(grid.getHeight()/rows);
 
