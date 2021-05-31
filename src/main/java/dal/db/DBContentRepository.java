@@ -2,11 +2,9 @@ package dal.db;
 
 import be.ChartView;
 import be.View;
-import be.users.Admin;
 import bll.ChartType;
 import dal.IContentRepository;
 import error.ErrorHandler;
-import gui.controller.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
