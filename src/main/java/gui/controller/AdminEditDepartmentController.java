@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.users.Department;
+import com.jfoenix.controls.JFXTextField;
 import gui.model.DepartmentModel;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -9,11 +10,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 
 public class AdminEditDepartmentController implements Initializable {

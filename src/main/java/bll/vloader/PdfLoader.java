@@ -3,6 +3,7 @@ package bll.vloader;
 import be.View;
 import com.dansoftware.pdfdisplayer.PDFDisplayer;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.IOException;

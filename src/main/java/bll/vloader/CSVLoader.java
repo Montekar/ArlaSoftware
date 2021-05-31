@@ -38,12 +38,6 @@ public class CSVLoader implements IViewLoader {
             observableList.add(stringsInLine);
         }
         tableView.setItems(observableList);
-        if (!autoResizeEnabled) {
-            tableView.setMinHeight(view.getHeight());
-            tableView.setMaxHeight(view.getHeight());
-            tableView.setMinWidth(view.getWidth());
-            tableView.setMaxWidth(view.getWidth());
-        }
         return tableView;
     }
 }
