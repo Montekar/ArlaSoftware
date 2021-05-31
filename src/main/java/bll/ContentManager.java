@@ -8,10 +8,7 @@ import dal.IContentRepository;
 import dal.db.DBContentRepository;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
@@ -43,7 +40,6 @@ public class ContentManager {
     }
 
     /**
-     *
      * This method will get a loader to load a specific type of content depending on the path.
      * ContentType is a enum.
      *
@@ -67,7 +63,7 @@ public class ContentManager {
                 case WEB -> {
                     return new WebViewLoader();
                 }
-                case XLS-> {
+                case XLS -> {
                     return new ExcelLoader();
                 }
                 case XLSX -> {
@@ -84,7 +80,6 @@ public class ContentManager {
     }
 
     /**
-     *
      * This method will get a chart loader to load a specific type of chart.
      *
      * @param chartView chart view configuration entity.
@@ -112,10 +107,9 @@ public class ContentManager {
     }
 
     /**
-     *
      * This method will get a single window with content inserted.
      *
-     * @param view content configuration entity.
+     * @param view              content configuration entity.
      * @param autoResizeEnabled resizing mode, true = auto resize, false = custom size.
      * @return returns a window with content in it.
      */
@@ -127,15 +121,14 @@ public class ContentManager {
         window.setAlignment(Pos.TOP_CENTER);
 
         Platform.runLater(() -> {
-        if (view instanceof ChartView) {
-            IChartLoader loader = getChartLoader((ChartView) view);
+            if (view instanceof ChartView) {
+                IChartLoader loader = getChartLoader((ChartView) view);
                 window.getChildren().addAll(title, loader.loadChart(view.getPath(),
                         ((ChartView) view).getNameColumn(), ((ChartView) view).getDataColumn()));
-        } else {
-            IViewLoader loader = getLoader(view);
-                Node content = loader.loadView(view, autoResizeEnabled);
-                window.getChildren().addAll(title, content);
-        }
+            } else {
+                IViewLoader loader = getLoader(view);
+                window.getChildren().addAll(title, loader.loadView(view));
+            }
         });
 
         if (!autoResizeEnabled) {
@@ -144,11 +137,11 @@ public class ContentManager {
 
         return window;
     }
+
     /**
-     *
      * The code below will build/configure the grid with the provided content and grid itself.
      *
-     * @param grid grid that you want to edit.
+     * @param grid              grid that you want to edit.
      * @param autoResizeEnabled resizing mode, true = auto resize, false = custom size
      * @param contentObservable a list of content to be inserted into grid pane.
      */
@@ -166,8 +159,8 @@ public class ContentManager {
                         int rows = grid.getRowCount();
                         int columns = grid.getColumnCount();
 
-                        ColumnConstraints columnConstraints = new ColumnConstraints(grid.getWidth()/columns);
-                        RowConstraints rowConstraints = new RowConstraints(grid.getHeight()/rows);
+                        ColumnConstraints columnConstraints = new ColumnConstraints(grid.getWidth() / columns);
+                        RowConstraints rowConstraints = new RowConstraints(grid.getHeight() / rows);
 
                         for (int i = 0; i < rows; i++) {
                             grid.getRowConstraints().add(rowConstraints);

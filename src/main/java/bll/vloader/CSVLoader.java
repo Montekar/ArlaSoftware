@@ -21,7 +21,7 @@ public class CSVLoader implements IViewLoader {
         set to table view. After that the whole Table View is returned and displayed.
      */
     @Override
-    public Node loadView(View view,boolean autoResizeEnabled) {
+    public Node loadView(View view) {
         TableView<List<String>> tableView = new TableView();
         List<String> lines = fileReader.loadData(view.getPath());
         List<String> headerStrings = Arrays.asList(lines.get(0).split(","));

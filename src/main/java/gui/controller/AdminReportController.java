@@ -1,7 +1,6 @@
 package gui.controller;
 
 import be.Report;
-import be.View;
 import gui.model.ReportModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

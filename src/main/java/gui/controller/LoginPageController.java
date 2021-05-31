@@ -4,7 +4,6 @@ import be.users.Admin;
 import be.users.Department;
 import be.users.User;
 import bll.AuthenticationManager;
-import bll.helper.HashingHelper;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import gui.model.SessionModel;
@@ -18,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -68,7 +66,14 @@ public class LoginPageController {
             sessionModel.setUser(user);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AdminPage.fxml"));
             Parent root = fxmlLoader.load();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.setOnKeyPressed(keyEvent -> {
+                switch (keyEvent.getCode()){
+                    case ESCAPE:exitProgram();
+
+                }
+            });
+            stage.setScene(scene);
             stage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,7 +85,15 @@ public class LoginPageController {
             sessionModel.setUser(user);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DepartmentView.fxml"));
             Parent root = fxmlLoader.load();
-            stage.setScene(new Scene(root));
+            DepartmentController dc = fxmlLoader.getController();
+            Scene scene = new Scene(root);
+            scene.setOnKeyPressed(keyEvent -> {
+                switch (keyEvent.getCode()){
+                    case ESCAPE:exitProgram();
+                    case SHIFT: dc.openDepartmentWindow();
+                }
+            });
+            stage.setScene(scene);
             DepartmentController deptCtrl = fxmlLoader.getController(); // Must be loaded AFTER fxmlloader.load()
             deptCtrl.setupListeners();
             stage.setFullScreen(true);
@@ -97,7 +110,7 @@ public class LoginPageController {
             message.setText("Please wait ...");
             message.setTextFill(colorOrange);
             authenticateUser(username, password);
-        } else if (username.isBlank() && password.isBlank()){
+        } else if (username.isBlank() && password.isBlank()) {
             message.setText("Fill the blank fields");
             message.setTextFill(colorRed);
         } else if (username.isEmpty()) {
@@ -110,7 +123,6 @@ public class LoginPageController {
     }
 
     /**
-     *
      * This method will authenticate the user and open department or admin view accordingly.
      *
      * @param username user username.
@@ -135,13 +147,8 @@ public class LoginPageController {
         }).start();
     }
 
-    @FXML
-    void onESCAPE(KeyEvent enter) throws IOException {
-        if (enter.getCode().equals(KeyCode.ESCAPE)) {
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.close();
-            Platform.exit();
-            System.exit(0);
-        }
+    private void exitProgram(){
+        Platform.exit();
+        System.exit(0);
     }
-}
+    }

@@ -3,7 +3,6 @@ package bll.vloader;
 import be.View;
 import com.dansoftware.pdfdisplayer.PDFDisplayer;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class PdfLoader implements IViewLoader{
         be displayed in a pdf viewer.
      */
     @Override
-    public Node loadView(View view,boolean autoResizeEnabled) {
+    public Node loadView(View view) {
         PDFDisplayer displayer = new PDFDisplayer();
         try {
             displayer.displayPdf(new File(view.getPath()));
