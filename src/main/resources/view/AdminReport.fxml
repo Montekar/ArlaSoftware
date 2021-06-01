@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="reportTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <TableView fx:id="reportTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
@@ -21,11 +21,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox alignment="BOTTOM_CENTER" VBox.vgrow="NEVER">
          <children>
             <Label fx:id="titleLabel" />
             <TextArea fx:id="descriptionText" editable="false" prefHeight="181.0" prefWidth="515.0" promptText="Select a report to see the issue." />
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" VBox.vgrow="NEVER">
                <children>
                   <Button mnemonicParsing="false" onAction="#solveAction" text="Solve" />
                </children>

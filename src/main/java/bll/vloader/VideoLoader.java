@@ -21,7 +21,7 @@ import java.io.File;
 public class VideoLoader implements IViewLoader{
     private boolean isPlaying = false;
     @Override
-    public Node loadView(View view) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         Media media = new Media(new File(view.getPath()).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -84,6 +84,7 @@ public class VideoLoader implements IViewLoader{
 
         HBox hBox = new HBox(button,timeSlider);
         hBox.setAlignment(Pos.CENTER);
+        hBox.setMaxHeight(50);
         borderPane.setBottom(hBox);
 
         return borderPane;
