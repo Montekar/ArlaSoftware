@@ -17,7 +17,7 @@ public class ErrorView implements IViewLoader{
         empty window.
      */
     @Override
-    public Node loadView(View view) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         try {
             ImageView imageView = new ImageView(new Image(new FileInputStream("src/main/resources/images/error.gif")));
             Pane pane = new Pane(imageView);

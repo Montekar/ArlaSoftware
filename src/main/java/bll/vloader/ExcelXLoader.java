@@ -23,7 +23,7 @@ public class ExcelXLoader implements IViewLoader{
     private boolean isFirst = true;
 
     @Override
-    public Node loadView(View view) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         TableView<List<String>> tableView = new TableView<>();
         try {
             FileInputStream fileInputStream = new FileInputStream(view.getPath());

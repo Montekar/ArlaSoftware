@@ -16,7 +16,7 @@ public class ImageLoader implements IViewLoader{
         it adds it. The image is displayed inside of a Image View.
      */
     @Override
-    public Node loadView(View view) {
+    public Node loadView(View view,boolean autoResizeEnabled) {
         try {
             ImageView imageView = new ImageView(new Image(new FileInputStream(view.getPath())));
             Pane pane = new Pane(imageView);

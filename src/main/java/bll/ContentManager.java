@@ -9,6 +9,7 @@ import dal.db.DBContentRepository;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
@@ -113,7 +114,7 @@ public class ContentManager {
      * @param autoResizeEnabled resizing mode, true = auto resize, false = custom size.
      * @return returns a window with content in it.
      */
-    public VBox getWindow(View view, boolean autoResizeEnabled) {
+    public Node getWindow(View view, boolean autoResizeEnabled) {
         HBox title = new HBox(new Label(view.getTitle()));
         title.getStylesheets().add("/stylesheets/view.css");
         title.setAlignment(Pos.CENTER);
@@ -127,14 +128,13 @@ public class ContentManager {
                         ((ChartView) view).getNameColumn(), ((ChartView) view).getDataColumn()));
             } else {
                 IViewLoader loader = getLoader(view);
-                window.getChildren().addAll(title, loader.loadView(view));
+                window.getChildren().addAll(title, loader.loadView(view,autoResizeEnabled));
             }
         });
 
         if (!autoResizeEnabled) {
             window.setPrefSize(view.getWidth(), view.getHeight());
         }
-
         return window;
     }
 

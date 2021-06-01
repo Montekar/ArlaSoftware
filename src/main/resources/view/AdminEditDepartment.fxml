@@ -19,9 +19,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="523.0" prefWidth="396.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="523.0" prefWidth="396.0" stylesheets="@../stylesheets/administrator.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" onKeyReleased="#onESCAPE" prefHeight="503.0" prefWidth="374.0" style="-fx-background-color: white;">
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="503.0" prefWidth="374.0" style="-fx-background-color: white;">
          <children>
             <Button layoutX="335.0" layoutY="14.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="close" stylesheets="@../stylesheets/administrator.css" text="Button" />
             <VBox layoutX="12.0" layoutY="61.0" prefHeight="211.0" prefWidth="353.0" style="-fx-border-color: black; -fx-border-width: 1;">
